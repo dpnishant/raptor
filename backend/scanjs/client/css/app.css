@@ -1,0 +1,117 @@
+@import url("bootstrap.css");
+@import url("dashboard.css");
+@import url("codemirror.css");
+@import url("codemirror-mdn.css");
+@import url("prettify.css");
+@import url("font-awesome.css");
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+pre.prettyprint{
+    width: auto;
+    max-width: 600px;
+    overflow: auto;
+    font-size: x-small;
+}
+
+.navbar {
+  background: #4D4E53;
+}
+
+.nav > li > a:hover,
+.nav > li > a:focus {
+  background-color: #0095DD;
+}
+
+a {
+  cursor:pointer;
+}
+
+.sidebar {
+  background-color: #EAEFF2;
+}
+
+.jumbotron {
+  background: #D4DDE4;
+}
+
+.table {
+  border: 1px solid #EAEFF2;
+}
+
+.table-striped > tbody > tr:nth-child(odd) > td,
+.table-striped > tbody > tr:nth-child(odd) > th {
+  background-color: #EAEFF2;
+}
+
+.sidebar-inputfiles{
+  font-size: x-small;
+}
+
+.CodeMirror {
+  border: 1px solid #EAEFF2;
+  height:500px;
+}
+
+.badge {
+  margin: 3px 3px 3px 3px;
+}
+
+@-webkit-keyframes rotating {
+    0% {
+      -webkit-transform: rotate(0deg); 
+      color: #333;
+    }
+    25% {
+      -webkit-transform: rotate(90deg);
+      color: #70706F;
+    }
+    50% {
+      -webkit-transform: rotate(180deg);
+      color: #ADADAB;
+    }
+    75% {
+      -webkit-transform: rotate(270deg);
+      color: #EAEAE7;
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      color: #333;
+    }
+}
+
+@keyframes rotating {
+    0% {
+      transform: rotate(0deg); 
+      color: #333;
+    }
+    25% {
+      transform: rotate(90deg);
+      color: #70706F;
+    }
+    50% {
+      transform: rotate(180deg);
+      color: #ADADAB;
+    }
+    75% {
+      transform: rotate(270deg);
+      color: #EAEAE7;
+    }
+    100% {
+      transform: rotate(360deg);
+      color: #333;
+    }
+}
+
+.rotating {
+  margin: 5px 3px 0 3px;
+  -webkit-animation: rotating 1s linear infinite;
+  animation: rotating 1s linear infinite;
+}
+.fixed {
+    position: fixed;
+    min-width: 45%;
+}

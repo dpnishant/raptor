@@ -1,0 +1,253 @@
+[{
+    "name": "eval",
+    "source": "eval()",
+    "testhit": "eval('jsCode'+usercontrolledVal )",
+    "testmiss": "eval",
+    "desc": "Controlling of the first argument to eval(...) results in direct script execution.",
+    "threat": "Execution Sink"
+}, {
+    "name": "global.eval",
+    "source": "$_any.eval()",
+    "testhit": "window.eval('jsCode'+usercontrolledVal )",
+    "testmiss": "eval",
+    "desc": "Controlling of the first argument to eval(...) results in direct script execution.",
+    "threat": "Execution Sink"
+}, {
+    "name": "new Function",
+    "source": "new Function()",
+    "testhit": "new Function('jsCode'+usercontrolledVal ) ;\n new Function('arg','arg2','jsCode'+usercontrolledVal )",
+    "testmiss": "Function",
+    "desc": "Controlling of the first argument to Function(...) results in direct script execution.",
+    "threat": "Execution Sink"
+}, {
+    "name": "call Function",
+    "source": "Function()",
+    "testhit": "Function('jsCode'+usercontrolledVal ) ;\n Function('arg','arg2','jsCode'+usercontrolledVal )",
+    "testmiss": "Function",
+    "desc": "Controlling of the first argument to Function(...) results in direct script execution.",
+    "threat": "Execution Sink"
+}, {
+    "name": "setTimeout",
+    "source": "setTimeout()",
+    "testhit": "setTimeout('jsCode'+usercontrolledVal ,timeMs)",
+    "testmiss": "setTimeout",
+    "desc": "Calling setTimeout with a first argument as string (or string concatenation) with user input may lead to XSS",
+    "threat": "Execution Sink"
+}, {
+    "name": "global.setTimeout",
+    "source": "$_any.setTimeout()",
+    "testhit": "global.setTimeout('jsCode'+usercontrolledVal ,timeMs)",
+    "testmiss": "setTimeout",
+    "desc": "Calling setTimeout with a first argument as string (or string concatenation) with user input may lead to XSS",
+    "threat": "Execution Sink"
+}, {
+    "name": "setInterval",
+    "source": "setInterval()",
+    "testhit": "setInterval('jsCode'+usercontrolledVal ,timMs)",
+    "testmiss": "setInterval",
+    "desc": "Calling setInterval with a first argument as string (or string concatenation) with user input may lead to XSS",
+    "threat": "Execution Sink"
+}, {
+    "name": "global.setInterval",
+    "source": "$_any.setInterval()",
+    "testhit": "global.setInterval('jsCode'+usercontrolledVal ,timMs)",
+    "testmiss": "setInterval",
+    "desc": "Calling setInterval with a first argument as string (or string concatenation) with user input may lead to XSS",
+    "threat": "Execution Sink"
+}, {
+    "name": "setImmediate",
+    "source": "setImmediate()",
+    "testhit": "setImmediate('jsCode'+usercontrolledVal )",
+    "testmiss": "setImmediate",
+    "desc": "Calling setImmediate with a first argument as string (or string concatenation) with user input may lead to XSS",
+    "threat": "Execution Sink"
+}, {
+    "name": "global.setImmediate",
+    "source": "$_any.setImmediate()",
+    "testhit": "global.setImmediate('jsCode'+usercontrolledVal )",
+    "testmiss": "setImmediate",
+    "desc": "Calling setImmediate with a first argument as string (or string concatenation) with user input may lead to XSS",
+    "threat": "Execution Sink"
+}, {
+    "name": "execScript",
+    "source": "execScript()",
+    "testhit": "execScript('jsCode'+usercontrolledVal ,'JScript')",
+    "testmiss": "execSript",
+    "desc": "Using execScript with user input leads to Cross Site Scripting (Internet Explorer only)",
+    "threat": "Execution Sink"
+}, {
+    "name": "crypto.generateCRMFRequest",
+    "source": "crypto.generateCRMFRequest()",
+    "testhit": "crypto.generateCRMFRequest('CN=0',0,0,null,'jsCode'+usercontrolledVal,384,null,'rsa-dual-use')",
+    "testmiss": "crypto.generateCRMFRequest",
+    "desc": "Due to a bug in Firefox, this function may be used as an obfuscated way to call execute scripts from strings (like eval). This may lead to Cross-Site-Scripting.",
+    "threat": "Execution Sink"
+}, {
+    "name": "document.write ",
+    "source": "document.write()",
+    "testhit": "document.write('test')",
+    "testmiss": "document.write",
+    "desc": "Writing user specified HTML to the DOM may lead to Cross-Site Scripting",
+    "threat": "HTMLElement Sink"
+}, {
+    "name": "document.writeln",
+    "source": "document.writeln()",
+    "testhit": "document.writeln('test')",
+    "testmiss": "document.writeln",
+    "desc": "Writing user specified HTML to the DOM may lead to Cross-Site Scripting",
+    "threat": "HTMLElement Sink"
+}, {
+    "name": ".innerHTML ",
+    "source": "$_any.innerHTML=$_unsafe",
+    "testhit": "a.innerHTML=foo;a.innerHTML=foo+'bar'",
+    "testmiss": "a.innerHTML='foo';a.innerHTML='foo'+'bar'",
+    "desc": "Writing user specified HTML to the DOM may lead to Cross-Site Scripting",
+    "threat": "HTMLElement Sink"
+}, {
+    "name": ".outerHTML ",
+    "source": "$_any.outerHTML=$_unsafe",
+    "testhit": "a.outerHTML=foo",
+    "testmiss": "outerHTML",
+    "desc": "Writing user specified HTML to the DOM may lead to Cross-Site Scripting",
+    "threat": "HTMLElement Sink"
+}, {
+    "name": "insertAdjacentHTML()",
+    "source": "insertAdjacentHTML()",
+    "testhit": "insertAdjacentHTML(foo)",
+    "testmiss": "insertAdjacentHTML",
+    "desc": "Writing user specified HTML to the DOM may lead to Cross-Site Scripting",
+    "threat": "HTMLElement Sink"
+}, {
+    "name": "$_any.createContextualFragment",
+    "source": "$_any.createContextualFragment",
+    "testhit": "foo.createContextualFragment",
+    "testmiss": "createContextualFragment",
+    "desc": "",
+    "threat": "HTMLElement Sink"
+}, {
+    "name": "$_any.location=",
+    "source": "$_any.location=$_unsafe",
+    "testhit": "foo.location=bar",
+    "testmiss": "foo.location==bar",
+    "desc": "Assignments to the document's location may lead to spoofing and unexpected redirects. Furthermore, it can cause Cross-Site Scripting, when javascipt: URIs are used",
+    "threat": "Location Sink"
+}, {
+    "name": "$_any.href=",
+    "source": "$_any.href=$_unsafe",
+    "testhit": "foo.href=bar",
+    "testmiss": "foo.href==bar",
+    "desc": "Assignments to the document's location may lead to spoofing and unexpected redirects. Furthermore, it can cause Cross-Site Scripting, when javascipt: URIs are used",
+    "threat": "Location Sink"
+}, {
+    "name": "$_any.pathname=",
+    "source": "$_any.pathname=$_unsafe",
+    "testhit": "foo.pathname=bar",
+    "testmiss": "foo.pathname==bar",
+    "desc": "Assignments to the document's location may lead to spoofing and unexpected redirects.",
+    "threat": "Location Sink"
+}, {
+    "name": "$_any.search=",
+    "source": "$_any.search=$_unsafe",
+    "testhit": "foo.search=bar",
+    "testmiss": "foo.search==bar",
+    "desc": "Assignments to the document's location may lead to spoofing and unexpected redirects.",
+    "threat": "Location Sink"
+}, {
+    "name": "$_any.protocol=",
+    "source": "$_any.protocol=$_unsafe",
+    "testhit": "foo.protocol=bar",
+    "testmiss": "foo.protocol==bar",
+    "desc": "Assignments to the document's location may lead to spoofing and unexpected redirects.",
+    "threat": "Location Sink"
+}, {
+    "name": "$_any.hostname=",
+    "source": "$_any.hostname=$_unsafe",
+    "testhit": "foo.hostname=bar",
+    "testmiss": "foo.hostname==bar",
+    "desc": "Assignments to the document's location may lead to spoofing and unexpected redirects.",
+    "threat": "Location Sink"
+}, {
+    "name": "$_any.src=",
+    "source": "$_any.src=$_unsafe",
+    "testhit": "bar.src=foo",
+    "testmiss": "src.bar",
+    "desc": "Assignments to the document's location may lead to spoofing and unexpected redirects. It may also lead to script execution, depending on the affected HTML Tag (i.e. object)",
+    "threat": "Location Sink"
+}, {
+    "name": "addEventListener()",
+    "source": "$_any.addEventListener()",
+    "testhit": "foo.addEventListener(bar+'bar')",
+    "testmiss": "addEventListener",
+    "desc": "Certain events (like message) may cause untrusted third party data",
+    "threat": "Input Sink"
+}, {
+    "name": "message handler",
+    "source": "$_any.addEventListener('message')",
+    "testhit": "window.addEventListener('message', receiveMessage, false); ",
+    "testmiss": "window.addEventListener('notmessage', receiveMessage, false); ",
+    "desc": "Check to make sure message handler validates to protect against malicious cross-origin message.",
+    "threat": "Input Validation"
+}, {
+    "name": "onmessage=",
+    "source": "onmessage=$_any",
+    "testhit": "onmessage=bar",
+    "testmiss": "onmessage",
+    "desc": "Check to make sure message handler validates to protect against malicious cross-origin message.",
+    "threat": "Input Validation"
+}, {
+    "name": "Indexeddb",
+    "source": "indexedDB",
+    "testhit": "indexedDB.open('MyTestDatabase');",
+    "testmiss": " 'indexeddb'",
+    "desc": "Client-side data storage.",
+    "threat": ""
+}, {
+    "name": "localStorage",
+    "source": "localStorage",
+    "testhit": "localStorage.setItem('name', 'user1'); ",
+    "testmiss": " 'localStorage'",
+    "desc": "Client-side data storage.",
+    "threat": ""
+}, {
+    "name": "sessionStorage",
+    "source": "sessionStorage",
+    "testhit": "sessionStorage.setItem('name', 'user1'); ",
+    "testmiss": " 'sessionStorage'",
+    "desc": "Client-side data storage.",
+    "threat": ""
+}, {
+    "name": "Indexeddb",
+    "source": "$_any.indexedDB",
+    "testhit": "window.indexedDB.open('MyTestDatabase');",
+    "testmiss": " 'indexeddb'",
+    "desc": "Client-side data storage.",
+    "threat": ""
+}, {
+    "name": "localStorage",
+    "source": "$_any.localStorage",
+    "testhit": "window.localStorage.setItem('name', 'user1'); ",
+    "testmiss": " 'localStorage'",
+    "desc": "Client-side data storage.",
+    "threat": ""
+}, {
+    "name": "sessionStorage",
+    "source": "$_any.sessionStorage",
+    "testhit": "window.sessionStorage.setItem('name', 'user1'); ",
+    "testmiss": " 'sessionStorage'",
+    "desc": "Client-side data storage.",
+    "threat": ""
+}, {
+    "name": "DomParser",
+    "source": "$_any.parseFromString()",
+    "testhit": "window.doc = parser.parseFromString(someVar, 'text/html'); ",
+    "testmiss": "parseFromString()",
+    "desc": "Writing user specified HTML to the DOM may lead to Cross-Site Scripting",
+    "threat": ""
+}, {
+    "name": "assignment typo",
+    "source": "if($_contains('AssignmentExpression'));",
+    "testhit": "if(x=y){};",
+    "testmiss": "if(x==y){x=0;}",
+    "desc": "Unintended use of AssignmentExpression in If Statement",
+    "threat": "Typo"
+}]

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app='scanjs' ng-csp>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="content-security-policy" content="default-src 'self'; object-src 'none'; img-src 'self' data:; script-src 'self' 'unsafe-eval'">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>ScanJS</title>
+    <link href='css/app.css' rel='stylesheet' media='screen'>
+    <link href='css/angular-csp.css' rel='stylesheet' media='screen'>
+    <!-- Third-party libs -->
+    <!--<script src='js/lib/jquery-2.1.0.min.js'></script>-->
+    <script src='js/lib/angular-1.2.13.min.js'></script>
+    <script src="js/lib/angular-route-1.2.13.min.js"></script>
+    <script src='js/lib/ui-bootstrap-tpls-0.3.0.js'></script>
+    <script src='js/lib/codemirror-compressed.js'></script>
+    <script src='js/lib/jszip.min.js'></script>
+    <script src='js/lib/localforage.min.js'></script>
+    <script src='js/lib/acorn.js'></script>
+    <script src='js/lib/utils.js'></script>
+    <script src='js/lib/walk.js'></script>
+
+
+    <!-- CommonJS modules -->
+    <script src='../common/scan.js'></script>
+    <!-- Client specific files -->
+    <script src='js/main.js'></script>
+      <script src='js/locationctrl.js'></script>
+    <script src='js/scanctrl.js'></script>
+    <script src='js/experimentctrl.js'></script>
+    <script src='js/scanservice.js'></script>
+    <!-- rules ctrl MUST be loaded after scan service-->
+    <script src='js/rulesctrl.js'></script>
+  </head>
+
+  <body>
+
+  <div id="header" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="navbar-brand">ScanJS
+    </div>
+    <ul id="header-links" class="nav navbar-nav navbar-left" ng-controller="LocationCtrl">
+      <li ng-class="tabBtnClass('scan')"><a id="scan-header" href="#/scan">Scan</a></li>
+      <li ng-class="tabBtnClass('rules')"><a id="rules-header" href="#/rules">Rules</a></li>
+      <li ng-class="tabBtnClass('experiment')"><a id="experiment-header" href="#/experiment">Experiment</a></li>
+    </ul>
+  </div>
+  <!-- header -->
+
+  <div ng-view></div>
+
+
+
+
+
+
+
+
+
+  </body>
+</html>

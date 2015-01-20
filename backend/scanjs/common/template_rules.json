@@ -1,0 +1,98 @@
+[
+  {
+    "name": "identifier",
+    "source": "foo",
+    "testhit": "foo;",
+    "testmiss": "'foo';",
+    "desc": "Matches identifier with same name.",
+    "threat": "example"
+  },
+  {
+    "name": "property",
+    "source": "$_any.foo",
+    "testhit": "a.foo; a.b.foo; this['foo'];this['bar'].foo;",
+    "testmiss": "foo;",
+    "desc": "Matches object with property of same name.",
+    "threat": "example"
+  },
+  {
+    "name": "objectproperty",
+    "source": "foo.bar",
+    "testhit": "foo.bar; a.foo.bar; foo['bar'];",
+    "testmiss": "foo.foo;bar.bar;",
+    "desc": "Matches object name and property name.",
+    "threat": "example"
+  },
+  {
+    "name": "call",
+    "source": "foo()",
+    "testhit": "foo();",
+    "testmiss": "foo;",
+    "desc": "Matches funtion where callee has a given name.",
+    "threat": "example"
+  },
+  {
+    "name": "propertycall",
+    "source": "$_any.foo()",
+    "testhit": "a.foo(); a.b.foo(); this['foo']();",
+    "testmiss": "foo();foo;a.foo;",
+    "desc": "Find function, where callee is a member object, matching property name only",
+    "threat": "example"
+  },
+  {
+    "name": "objectpropertycall",
+    "source": "foo.bar()",
+    "testhit": "foo.bar(); a.foo.bar(); foo['bar']();",
+    "testmiss": "foo.foo();bar.bar();foo.bar;",
+    "desc": "Match function, where callee is a member object, matching object name and propertyname",
+    "threat": "example"
+  },
+  {
+    "name": "callargs",
+    "source": "foo('test',ignored,42)",
+    "testhit": "foo('test',foo,42); foo('test',foo,42,'extra'); ",
+    "testmiss": "foo; foo(); a.foo('test',foo,42); foo('wrong',foo,42); foo('test',foo,41); foo('test',41); foo(foo,'test', foo,42)",
+    "desc": "Same as for call, expect this allow makes sure that any supplied literal arguments are matching (both in value, and in position)",
+    "threat": "example"
+  },
+  {
+    "name": "propertycallargs",
+    "source": "$_any.foo('test',ignored,42)",
+    "testhit": "$_any.foo('test',foo,42); $_any.foo('test',foo,42,'extra'); $_any.a.foo('test',foo,42); $_any.a[foo]('test',foo,42); $_any.a['b'].foo('test',bar,42);",
+    "testmiss": "foo('test',foo,42); a.foo('miss',foo,42); a.foo('test',foo); a[foo]('test',foo,41); a['b'].foo('test',42); foo('miss');   a[foo](foo,41);",
+    "desc": "Same as for propertycall, expect this allow makes sure that any supplied literal arguments are matching (both in value, and in position)",
+    "threat": "example"
+  },
+  {
+    "name": "objectpropertycallargs",
+    "source": "foo.bar('test',ignored,42)",
+    "testhit": "foo.bar('test',foo,42); foo.bar('test',foo,42,'extra'); a.foo.bar('test',foo,42); a[foo]['bar']('test',foo,42); a['b'].foo.bar('test',bar,42);",
+    "testmiss": "foo; foo(); foo('miss',foo,42); foo.foo('test',foo,42); bar.bar('test',foo,42)",
+    "desc": "Same as for objectpropoertycall, expect this allow makes sure that any supplied literal arguments are matching (both in value, and in position)",
+    "threat": "example"
+  },
+  {
+    "name": "assignment",
+    "source": "foo=$_any",
+    "testhit": "foo=bar;",
+    "testmiss": "foo; foo",
+    "desc": "Assigning to identifier with given name",
+    "threat": "example"
+  },
+  {
+    "name": "propertyassignment",
+    "source": "$_any.foo=$_any",
+    "testhit": "a.foo=bar; a.b.foo=bar; this['foo']=bar;",
+    "testmiss": "foo=bar",
+    "desc": "Assigning to a object property with a given name",
+    "threat": "example"
+  },
+  {
+    "name": "objectpropertyassignment",
+    "source": "foo.bar=$_any",
+    "testhit": "foo.bar=a; a.foo.bar=b; foo['bar']=c;a.foo['bar']=c;",
+    "testmiss": "bar.bar=a;foo.foo=b;",
+    "desc": "Assigning to a object property matching both object name and property name",
+    "threat": "example"
+  }
+]

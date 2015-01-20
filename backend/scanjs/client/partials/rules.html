@@ -1,0 +1,36 @@
+<div id="rules-wrapper" class="panel container-fluid">
+    <div id="rules-div" class="col-md-12">
+        <div ng-controller='RuleListCtrl'>
+
+
+            <div class="jumbotron">
+                <h4>Load new rules</h4>
+                Load a JSON rules file to change rules:
+                <input type="file" id="rule-file-input" accept="application/json">
+                <h4>Current rules</h4>
+                <span class="badge pull-right">Number of Rules: {{rules.length}}</span>
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Rule Name</th>
+                            <th>Rule Description</th>
+                            <th>Rule Definition</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat='rule in rules' title={{rule.name}} id={{rule.name}}>
+                            <td>{{rule.name}}</td>
+                            <td>{{rule.desc}}</td>
+
+                            <td>
+                                <pre class="prettyprint lang-js">{{rule.source}}</pre>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,130 @@
+<div ng-controller="ScanCtrl" id="scan-wrapper" class="ng-scope panel panel-default">
+    <!-- sidebar -->
+    <div class="col-md-2 sidebar">
+        <ul class="nav nav-sidebar">
+            <li id="scan-input-nav" ng-click="navShowInput()" class="active">
+                <a>Input
+                    <span class="badge pull-right">{{inputFiles.length}}</span>
+	    <span ng-show="throbInput" class="pull-right">
+	      <i class="rotating fa fa-spinner icon-throb"></i>
+	    </span>
+                </a>
+            </li>
+            <li id="scan-output-nav">
+                <a ng-click="navShowOutput()">Output
+                    <span class="badge pull-right">{{results.length}}</span>
+	    <span ng-show="throbOutput" class="pull-right">
+	      <i class="rotating fa fa-spinner icon-throb"></i>
+	    </span>
+                </a>
+                <div id="scan-output-rules" class="hidden">
+                    <div class="bg-info">Rules</div>
+                    <ul>
+                        <li ng-repeat="issue in issueList">
+                            <a ng-click="navShowOutput(issue)">{{issue}}</a>
+                        </li>
+                    </ul>
+                </div>
+                <div id="scan-output-files" class="hidden">
+                    <p class="bg-info">Files</p>
+                    <ul>
+                        <li ng-repeat="file in inputFiles">
+                            <a title="{{file.name}}" ng-click="navShowOutput(file)">{{file.name}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div> <!-- sidebar -->
+
+    <div class="col-md-4 col-md-offset-2">
+
+        <div id="scan-input">
+            <div id="scan-intro" >
+                <h4>Choose files to scan</h4>
+                <p>Select a list of .js files, or a zip file containing .js files.</p>
+                <input type="file" id="scan-file-input" multiple></p>
+
+                <div id="scan-files-selected" class="hidden">
+                    <p>
+                        Select files below, then <button class="btn btn-primary left-block" ng-click='run()'>Scan</button>
+                    </p>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th>Filename</th>
+                            <th>Enable (<a class="small" ng-click="selectAll()">Select All </a>,
+                                <a class="small" ng-click="selectNone()"> Select
+                                    None</a>)
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="file in inputFiles track by $index">
+                            <td><a href="#" ng-click="showFile($index)" title="Examine file in preview">{{file.name}}</a>
+                            </td>
+                            <td><input type="checkbox" id="doScan_{{ $index }}"
+                                       title="Set this checkbox if you want the file included in your scans" checked/></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="scan-results" class="hidden">
+            <h4>Results <span class="badge pull-right">{{filteredResults.length}}</span></h4>
+            <div id="results-wrapper" ng-show="((results.length == 0) && (errors.length == 0))">
+                Scan results will be loaded here.
+            </div>
+            <div id="results-wrapper" ng-show="results">
+                <table id="results-table" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><a href="" ng-click="predicate = 'filename'; reverse=!reverse">Filename</a></th>
+                        <th><a href="" ng-click="predicate = 'line'; reverse=!reverse">Line</a></th>
+                        <th><a href="" ng-click="predicate = 'rule.name'; reverse=!reverse">Rule</a></th>
+                        <!--<th>Description of Issue</th>-->
+                    </tr>
+                    </thead>
+                    <tr ng-repeat='result in filteredResults| orderBy:predicate:reverse' title={{result.rule.rec}}>
+                        <td>{{result.filename}}</td>
+                        <td><a ng-click="showResult(result.filename,result.line, result.col)">Line {{result.line}}</a></td>
+                        <td>{{result.rule.name }}</td>
+                        <!-- <td>{{result.rule.desc}}</a>-->
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <h4>Errors <span class="badge pull-right">{{errors.length}}</span></h4>
+            <div id="error-wrapper" ng-show="(errors.length > 0)">
+                <table id="error-table" class="table table-striped">
+                    <thead>
+                    <tr>
+                        <th><a href="" ng-click="predicate_e = 'filename'; reverse=!reverse">Filename</a></th>
+                        <th><a href="" ng-click="predicate_e = 'loc.line'; reverse=!reverse">Line</a></th>
+                        <th><a href="" ng-click="predicate_e = 'name'; reverse=!reverse">Name</a></th>
+                        <th><a href="" ng-click="predicate_e = 'message'; reverse=!reverse">Message</a></th>
+                    </tr>
+                    </thead>
+                    <tr ng-repeat='error in errors| orderBy:predicate_e:reverse'>
+                        <td>{{ error.filename }}</td>
+                        <td><a ng-click="showResult(error.filename, error.loc.line, error.loc.col)">Line {{error.loc.line }}</a></td>
+                        <td>{{ error.name }}</td>
+                        <td>{{ error.message }}</td>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+    <div id="code-mirror-wrapper" class="col-md-6">
+        <div class="fixed">
+        <h4>File Viewer <span id="filename-badge" class="badge pull-right"></span></h4>
+        <div class="codeMirrorDiv" id="codeMirrorDiv"></div>
+        </div>
+    </div>
+
+</div>

@@ -1,0 +1,38 @@
+{
+  "name": "scanjs",
+  "version": "0.0.2",
+  "description": "Static analysis tool for javascript codebases",
+  "main": "scanner.js",
+  "bin": {
+    "scanjs": "./scanner.js",
+    "scanjs-server": "./server.js"
+  },
+  "preferGlobal": true,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mozilla/scanjs.git"
+  },
+  "keywords": [
+    "scanjs",
+    "code-analysis",
+    "javascript",
+    "static-analysis"
+  ],
+  "author": "Paul Theriault, Frederik Braun, Rob Fletcher",
+  "license": "MPL",
+  "dependencies": {
+    "acorn": "~0.3.0",
+    "tern": "~0.5.0",
+    "optimist": "~0.5.2",
+    "jszip": "~2.2.0",
+    "node-static": "~0.7.3",
+    "js-beautify":"~1.4.2"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  },
+  "scripts": {
+    "test": "cd tests && mocha -r mocha-includes cases/placeholders.js cases/test_ruletests.js cases/production_ruletests.js && mocha -r mocha-includes cases/innerhtml.js cases/CustomEvent.js cases/addIdleObserver.js cases/createContextualFragment.js cases/crypto.generateCRMFRequest.js cases/document.write.js cases/document.writeln.js cases/eval.js cases/geolocation.js cases/href.js cases/indexedDB.js cases/localStorage.js cases/message.js cases/newFunction.js cases/outerHTML.js cases/parseFromString.js cases/sessionStorage.js cases/setInterval.js cases/setTimeout.js cases/src.js cases/getDeviceStorage.js cases/moz/moz.js"
+  }
+}

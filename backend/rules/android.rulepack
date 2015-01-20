@@ -1,0 +1,129 @@
+{
+  "plugin_type": "android",
+  "file_types": [
+    ".java"
+  ],
+  "rules": [
+    {
+      "id": "DRD00-J",
+      "severity": "High",
+      "title": "External Storage Enabled",
+      "description": "Do not store sensitive information on external storage (SD card) unless encrypted first",
+      "remediation": "Use the openFileOutput() method to create \"myfile\" in an application data directory with permission set to MODE PRIVATE so that other apps cannot access the file. Also if possible securely encrypt the data first, prior to storing it on external storage such as an SD card",
+      "link": "http://bit.ly/DRD00-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "Z2V0RXh0ZXJuYWwoRmlsZXNEaXJ8U3RvcmFnZURpcmVjdG9yeXxDYWNoZURpcilcKC4qXCk="
+    },
+    {
+      "id": "DRD02-J",
+      "severity": "High",
+      "title": "WebView is being used",
+      "description": "Do not allow WebView to access sensitive local resource through file scheme",
+      "remediation": "Any URI received via an intent from outside a trust-boundary should be validated before rendering it with WebView. For example, check if a received URI is not a file: scheme URI unless your application really uses it.",
+      "link": "http://bit.ly/DRD02-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "KHNldChKYXZhU2NyaXB0RW5hYmxlZHxBbGxvd0ZpbGVBY2Nlc3N8QWxsb3dGaWxlQWNjZXNzRnJvbUZpbGVVUkxzfEFsbG93VW5pdmVyc2FsQWNjZXNzRnJvbUZpbGVVUkxzKXxsb2FkVXJsKVwoLipcKQ=="
+    },
+    {
+      "id": "DRD04-J",
+      "severity": "High",
+      "title": "Application Logging Enabled",
+      "description": "It is important that applications do not send sensitive information to log output because in some Android versions any application with READ_LOGS permissions or by connecting an Android device to a PC, log output from other applications can be obtained",
+      "remediation": "Declare and use a custom log class, so that log output is automatically turned on/off based on Debug/Release. Developers can use ProGuard to delete specific method calls provided the methods have no side-effects",
+      "link": "http://bit.ly/DRD04-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "TG9nXC5bdmlkd2VdXCguKlwp"
+    },
+    {
+      "id": "DRD08-J",
+      "severity": "High",
+      "title": "some_title_placeholder",
+      "description": "Always canonicalize a URL received by a content provider",
+      "remediation": "Always decode a received path with Uri.decode() before use and after the File object is created, canonicalized the path by calling File.getCanonicalPath() and check that it is included in the expected directory.",
+      "link": "http://bit.ly/DRD08-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "Z2V0TGFzdFBhdGhTZWdtZW50XCguKlwp"
+    },
+    {
+      "id": "DRD11-J",
+      "severity": "High",
+      "title": "Data is read-able for everyone",
+      "description": "Ensure that sensitive data is kept secure",
+      "remediation": "Always create sensitive files using MODE PRIVATE permissions, so that it cannot be accessed other than by apps with the same userid as the app that created the file.",
+      "link": "http://bit.ly/DRD11-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "TU9ERV9XT1JMRF9SRUFEQUJMRQ=="
+    },
+    {
+      "id": "DRD13-J",
+      "severity": "High",
+      "title": "JavaScript Interface is used in WebView",
+      "description": "Do not provide addJavascriptInterface method access in a WebView which could contain untrusted content. (API level JELLY BEAN or below)",
+      "remediation": "If you cannot simply refrain from calling the addJavascriptInterface(), specify that the app is only for API levels JELLY BEAN MR1 and above in the app's manifest file so that only public methods that are annotated with JavascriptInterface can be accessed from JavaScript.",
+      "link": "http://bit.ly/DRD13-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "YWRkSmF2YXNjcmlwdEludGVyZmFjZVwoLipcKQ=="
+    },
+    {
+      "id": "DRD15-J",
+      "severity": "High",
+      "title": "Potential Privacy Risk",
+      "description": "Using Geolocation API without proper care may lead to privacy concerns of the users.",
+      "remediation": "Check if the user setting of geolocation is enabled, the code will show a UI to ask for the user's permission. If the setting is disabled, it will not transmit the geolocation data.",
+      "link": "http://bit.ly/DRD15-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "c2V0R2VvbG9jYXRpb25FbmFibGVkXCh0cnVlXCk="
+    },
+    {
+      "id": "DRD17-J",
+      "severity": "High",
+      "title": "Insecure Cryptography",
+      "description": "The Android cryptographic security provider encryption default for AES is insecure by default as it uses ECB block cipher mode for AES encryption",
+      "remediation": "some_remediation_placeholder",
+      "link": "http://bit.ly/DRD17-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "Q2lwaGVyXC5nZXRJbnN0YW5jZVwoXCJBRVNcIlwp"
+    },
+    {
+      "id": "DRD18-J",
+      "severity": "High",
+      "title": "Insecure Cryptography",
+      "description": "It is insecure to use AES block cipher encryption algorithm via ECB mode.",
+      "remediation": "some_remediation_placeholder",
+      "link": "http://bit.ly/DRD18-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "Q2lwaGVyXC5nZXRJbnN0YW5jZVwoXCJBRVNcL0VDQlwiXCk="
+    },
+    {
+      "id": "DRD19-J",
+      "severity": "High",
+      "title": "Insecure Communication",
+      "description": "SSL/TLS certificate check has been either turned-off or is set to be overly permissive",
+      "remediation": "Always verify that the subject (CN) of X.509 certificate and the URL matches. Always verify that the certificate is signed by the trusted CA. Always verify that the signature is correct. Always verify that the certificate is not expired",
+      "link": "http://bit.ly/DRD19-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "U1NMU29ja2V0RmFjdG9yeVwuKEFMTE9XX0FMTF9IT1NUTkFNRV9WRVJJRklFUnxBbGxvd0FsbEhvc3RuYW1lVmVyaWZpZXIpXCguKlwp"
+    },
+    {
+      "id": "DRD20-J",
+      "severity": "High",
+      "title": "Insecure usage of NDK API",
+      "description": "Specify permissions when creating files via the NDK",
+      "remediation": "Always force the permissions of newly created files to match those of the SDK by changing the process's umask using the umask() C library call. Or you may explicitly specify the newly created file's permissions using the open() system call.",
+      "link": "http://bit.ly/DRD20-J",
+      "platform_version": "all",
+      "enabled": "true",
+      "signature": "KGZvcGVufGZwcmludGYpXCguKlwp"
+    }
+  ]
+}

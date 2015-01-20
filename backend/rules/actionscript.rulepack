@@ -1,0 +1,78 @@
+{
+  "plugin_type": "actionscript",
+  "file_types": [
+    ".as"
+  ],
+  "rules": [
+    {
+      "id": "FASXSSSI",
+      "severity": "High",
+      "title": "Possible remote code execution/XSS",
+      "description": "It seems your are passing dynamic content, which might contain untrusted user input, as argument to a function which can lead to code execution. If the user input is not properly sanitized/escaped it might lead to unexpected code execution e.g. Cross Site Scripting",
+      "remediation": "Always avoid to pass dynamic user controlled value to ExternalInterface.call API but if you really need to make sure you have properly escaped.",
+      "link": "https://www.owasp.org/index.php/Testing_for_Cross_site_flashing_(OTG-CLIENT-008)",
+      "example_insecure": "",
+      "example_secure": "",
+      "platform_version": "all",
+      "enabled": "true",
+      "logic": "Find patterns of methods/APIs that lead to code execution with possibly untrusted dynamic content.",
+      "signature": "KEV4dGVybmFsSW50ZXJmYWNlXC5jYWxsfFwubG9hZHxYTUxcLmxvYWR8TG9hZFZhcnNcLihsb2FkfHNlbmQpfFNvdW5kXC5sb2FkU291bmR8TmV0U3RyZWFtXC5wbGF5fEZTY3JvbGxQYW5lXC5sb2FkU2Nyb2xsQ29udGVudClcKChbXlwnXCJdW1xzXHddKlteXClcbl0qfFtcJ1wiXS4qXCtbXHNcd10qKQ=="
+    },
+    {
+      "id": "FASRDRSI",
+      "severity": "High",
+      "title": "Possible open-redirect/XSS",
+      "description": "It seems your are passing dynamic content, which might contain untrusted user input, as argument to a method that can lead to a client side redirection. If the user input is not properly sanitized/escaped it might lead to redirection to a malicious site or may lead to unexpected code execution e.g. Cross Site Scripting via 'javascript:' or 'data:' URI handlers.",
+      "remediation": "Always avoid to pass dynamic user controlled value to ExternalInterface.call API but if you really need to make sure you have properly escaped.",
+      "link": "https://www.owasp.org/index.php/Testing_for_Cross_site_flashing_(OTG-CLIENT-008)",
+      "example_insecure": "",
+      "example_secure": "",
+      "platform_version": "all",
+      "enabled": "true",
+      "logic": "Find patterns of methods/APIs that lead to client-side redirection with possibly untrusted dynamic content.",
+      "signature": "KG5hdmlnYXRlVG9Vcmx8Z2V0VVJMfGxvYWRNb3ZpZXxsb2FkTW92aWVOdW18bG9hZFZhcmlhYmxlcylcKChbXlwnXCJdW1xzXHddKlteXClcbl0qfFtcJ1wiXS4qXCtbXHNcd10qKQ=="
+    },
+    {
+      "id": "FASXSSSO",
+      "severity": "High",
+      "title": "Possible untrusted user-input source",
+      "description": "It seems you are reading an untrusted user input source which might contain malicious payload.",
+      "remediation": "Always avoid to pass dynamic user controlled value to use in risky APIs but if you really need to make sure you have properly escaped.",
+      "link": "https://www.owasp.org/index.php/Testing_for_Cross_site_flashing_(OTG-CLIENT-008)",
+      "example_insecure": "navgiateToUrl(location.hash);",
+      "example_secure": "navigateToUrl(encodeURIComponent(location.hash));",
+      "platform_version": "all",
+      "enabled": "true",
+      "logic": "Finds patterns of location.hash",
+      "signature": "PShbXHNcdF0qbG9jYXRpb25cLmhhc2h8bG9jYXRpb25cLmhhc2gp"
+    },
+    {
+      "id": "FASXSSSI",
+      "severity": "High",
+      "title": "Possible risky HTML creation",
+      "description": "It seems you are reading an untrusted user input source which might contain malicious payload.",
+      "remediation": "Always avoid to pass dynamic user controlled value to use in risky API e.g. htmlText but if you really need to make sure you have properly escaped.",
+      "link": "https://www.owasp.org/index.php/Testing_for_Cross_site_flashing_(OTG-CLIENT-008)",
+      "example_insecure": "element.htmlText = a;",
+      "example_secure": "element.htmlText = a.replace(/[><\\\"'/`]/gi, '');",
+      "platform_version": "all",
+      "enabled": "true",
+      "logic": "Finds patterns of assignment to .htmlText",
+      "signature": "XC5odG1sVGV4dC4qPS4qXCs="
+    },
+    {
+      "id": "FASXSSSI",
+      "severity": "High",
+      "title": "Untrusted Input via SharedObject",
+      "description": "It seems you are reading an untrusted user input source which might contain malicious payload.",
+      "remediation": "Always avoid to read dynamic user controlled value from risky API e.g. SharedObject but if you really need to make sure you have properly escaped.",
+      "link": "https://www.owasp.org/index.php/Testing_for_Cross_site_flashing_(OTG-CLIENT-008)",
+      "example_insecure": "var mySo:SharedObject = SharedObject.getLocal(hostName); mySo.data.username = username;",
+      "example_secure": "var mySo:SharedObject = encodeURIComponent(SharedObject.getLocal(hostName)); mySo.data.username = username;",
+      "platform_version": "all",
+      "enabled": "true",
+      "logic": "Finds patterns of input source via SharedObject",
+      "signature": "PShbXHNcdF0qU2hhcmVkT2JqZWN0XC5nZXR8U2hhcmVkT2JqZWN0XC5nZXQp"
+    }
+  ]
+}

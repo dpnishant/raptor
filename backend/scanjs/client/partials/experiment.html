@@ -1,0 +1,53 @@
+<div id="experiment-wrapper" class="panel" ng-controller="ExperimentCtrl">
+    <div class="col-md-5">
+        <br>
+        <div class="codeMirror" id="experiment-mirror" ng-keyup="lastScan()"></div>
+        <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input placeholder="custom rule: e.g., eval()" ng-model="rule" class="ng-pristine ng-valid form-control" ng-keyup="runManualScan()" type="text">
+            <span class="input-group-btn">
+                <button class="btn btn-default" ng-click="add_placeholder_char()"><span title="Paste a placeholder char to the form field.">$_any</span></button>
+                <button class="btn btn-default" ng-click="runManualScan()">Scan with Custom Rule</button>
+            </span>
+                </div>
+            </div>
+            <div class="col-md-4 pull-right">
+                <button class="btn btn-primary" ng-click="runScan()">Scan with Default Ruleset</button>
+            </div>
+        </div>
+    </div>
+    <div id="manual-results-wrapper" class="col-md-6" >
+        <h4>
+            Results
+        </h4>
+        <div ng-if="error" id="parse-error">
+            <div class="alert alert-danger" role="alert">
+                <h4>
+                    <a href="" ng-click="showResult('', error.loc.line, error.loc.column)">line {{error.loc.line}}</a>
+                    ::
+                    {{error.name}}
+                </h4>
+                {{error.message}}
+            </div>
+        </div>
+        <table class="table table-striped" >
+            <thead>
+            <tr>
+                <th><a href="" ng-click="predicate = 'line'; reverse=!reverse">Line</a></th>
+                <th><a href="" ng-click="predicate = 'rule.name'; reverse=!reverse">Rule</a></th>
+                <th>Source</th>
+                <th>Description of Issue</th>
+            </tr>
+            </thead>
+            <tr ng-repeat='result in results| orderBy:predicate:reverse' title={{result.rule.rec}}>
+                <td><a ng-click="showResult(result.filename,result.line, result.col)">Line {{result.line}}</a>
+                <td>{{result.rule.name }}</td>
+                <td>{{result.rule.source }}</td>
+                <td>{{result.rule.desc}}</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

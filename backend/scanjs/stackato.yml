@@ -1,0 +1,10 @@
+name: ScanJS
+framework:
+        type: node
+        runtime: node010
+           
+url:
+        - scanjs.paas.allizom.org
+
+processes:
+        web: node server.js

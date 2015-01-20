@@ -1,0 +1,31 @@
+{
+  "plugin_type": "common",
+  "file_types": [
+    ".java",
+    ".php",
+    ".py",
+    ".js",
+    ".rb",
+    ".pl",
+    ".sh",
+    ".ini",
+    ".cls",
+    ".yaml"
+  ],
+  "rules": [
+    {
+      "id": "COMM_CRED",
+      "severity": "High",
+      "title": "Possibly hard coded credential",
+      "description": "It seems you have possibly hard-coded some sort secret/credential in the source code, for accessing a local/remote resource. This is not a good practice because in event of a source-code disclosure/access to unauthorized people may leak additional information which otherwise should not be possible.",
+      "remediation": "Please use a secure credential store which has the least possible access privileges for unauthorized users.",
+      "link": "http://cwe.mitre.org/data/definitions/259.html",
+      "example_insecure": "var oauth_token = '5af0nhg48672a",
+      "example_secure": "var oauth_token = env.getkey('oauth_token'); doSomeWork(); flush(oauth_token);",
+      "platform_version": "all",
+      "enabled": "true",
+      "logic": "Find patterns of hardcoded credentials.",
+      "signature": "KChhdXRoKHRva2VufHNlY3JldHxrZXkpKXxwYXNzd2R8cGFzd2R8cGFzc3xwd2R8cGFzc3dvcmR8LipzZWNyZXQuKnwuKmxvZ2luLip8Lip0b2tlbi4qfC4qY3JlZC4qfHVzZXJuYW1lfHVzZXJfbmFtZXx1c3J8Lipzc2guKnwuKmFwaS4qfC4qb2F1dGguKnwuKm9wZW5pZC4qfCgobG9naW58YXBpfHNlY3JldHxzc2h8b2F1dGh8YXBwfHVzZXIpa2V5KSkuKig9fDopLipbXCdcIl0uKltcJ1wiXG5d"
+    }
+  ]
+}
