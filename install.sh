@@ -30,7 +30,7 @@ cd $raptor_path
 rm -rf libgit2-0.22.0.tar.gz
 rm -rf libgit2-0.22.0/
 mkdir -p /var/raptor/scan_results
-chmod -R 777 /var/raptor/scan_results
+chmod -R 777 /var/raptor/scan_results #development purpose only
 mkdir -p /var/www/html/raptor
 cp -r frontend/* /var/www/html/raptor
 service apache2 restart
