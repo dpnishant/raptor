@@ -7,8 +7,8 @@ Some of the features of the Raptor:
   - Web-service can be leveraged for custom automation (without the need of the UI) 
   - Easy to create/edit/delete signatures for new vulnerabilities and/or programming languages.
 
-> This tool is not attempt to help the community and start-up companies to 
-> emphasize on secure-coding. This tool may or may not match the features of commercial alternatives, nothing is guaranteed and you have been warned.
+> This tool is an attempt to help the community and start-up companies to 
+> emphasize on secure-coding. This tool may or may not match the features/quality of commercial alternatives, nothing is guaranteed and you have been warned. This tool is targetted to be used by security code-reviewers and/or developers with secure-coding experience to find vulnerability entrypoints during code-audits or peer reviews. Please DO NOT trust the tool's output blindly.
 > This is best-used if you plug Raptor into your CI/CD pipeline.
 
 ### Version
