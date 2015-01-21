@@ -28,7 +28,7 @@ Avaiables Rulepacks (_currently_):
 
 ### Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)
 
-Installation Video: 
+Installation & Demo Video: [YouTube Demo]
 
 ```sh
 $ wget https://github.com/dpnishant/raptor/archive/master.zip -O raptor.zip
@@ -68,3 +68,4 @@ GNU GPL v2.0
 [Brakeman]:http://brakemanscanner.org/
 [RIPS]:http://rips-scanner.sourceforge.net/
 [Anant Shrivastava]:https://twitter.com/anantshri
+[YouTube Demo]:https://www.youtube.com/watch?v=0KneQwJiUFk
