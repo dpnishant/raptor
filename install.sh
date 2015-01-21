@@ -6,6 +6,8 @@
 # brakeman
 # beautifulsoup for parsing php-rips html report
 raptor_path="$(pwd)"
+echo "gem: --no-rdoc --no-ri" >> ~/.gemrc
+echo "gem: --no-document" >> ~/.gemrc
 apt-get update
 apt-get upgrade
 apt-get install -y git apache2 php5 php5-curl php5-common libapache2-mod-php5 php5-mcrypt libffi-dev ruby php5-cli cmake libssh-4 libssl-dev linux-headers-generic build-essential autoconf libtool pkg-config python-pip python-opengl python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 qt4-dev-tools qt4-designer libqtgui4 libqtcore4 libqt4-xml libqt4-test libqt4-script libqt4-network libqt4-dbus python-qt4 python-qt4-gl libgle3 python-dev python-dateutil python-docutils python-feedparser python-gdata python-jinja2 python-ldap python-libxslt1 python-lxml python-mako python-mock python-openid python-psycopg2 python-psutil python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-unittest2 python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi
