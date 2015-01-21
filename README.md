@@ -37,13 +37,13 @@ $ wget https://github.com/dpnishant/raptor/archive/master.zip -O raptor.zip
 ```sh
 $ unzip raptor.zip
 $ cd raptor-master
-$ sh install.sh
+$ sudo sh install.sh
 ```
 
 ###Usage
 ```sh
 cd raptor-master
-sh start.sh #starts the backend web-service
+sudo sh start.sh #starts the backend web-service
 ```
 Now point your browser to http://127.0.0.1/raptor/
 
