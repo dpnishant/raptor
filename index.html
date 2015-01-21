@@ -1,0 +1,126 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Raptor by dpnishant</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Raptor</h1>
+        <p>Hosted Source Code Vulnerability Scanner</p>
+
+        <p class="view"><a href="https://github.com/dpnishant/raptor">View the Project on GitHub <small>dpnishant/raptor</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/dpnishant/raptor/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/dpnishant/raptor/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/dpnishant/raptor">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="raptor" class="anchor" href="#raptor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Raptor</h1>
+
+<p>Raptor is a web-based (web-serivce + UI) github centric source-vulnerability scanner i.e. it scans a repository with just the github repo url. You can setup webhooks to ensure automated scans everytime you commit or merge a pull request. The scan is done asynchonously and the results are available only to the user who initiated the scan.</p>
+
+<p>Some of the features of the Raptor:</p>
+
+<ul>
+<li>Plug-in architecture (plug and play external tools and generate unified reports)</li>
+<li>Web-service can be leveraged for custom automation (without the need of the UI) </li>
+<li>Easy to create/edit/delete signatures for new vulnerabilities and/or programming languages.</li>
+</ul>
+
+<blockquote>
+<p>This tool is an attempt to help the community and start-up companies to 
+emphasize on secure-coding. This tool may or may not match the features/quality of commercial alternatives, nothing is guaranteed and you have been warned. This tool is targetted to be used by security code-reviewers and/or developers with secure-coding experience to find vulnerability entrypoints during code-audits or peer reviews. Please DO NOT trust the tool's output blindly.
+This is best-used if you plug Raptor into your CI/CD pipeline.</p>
+</blockquote>
+
+<h3>
+<a id="version" class="anchor" href="#version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version</h3>
+
+<p>0.1 beta</p>
+
+<h3>
+<a id="tech" class="anchor" href="#tech" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tech</h3>
+
+<p>Integrated Plugins (<em>currently</em>):</p>
+
+<ul>
+<li>
+<a href="https://github.com/mozilla/scanjs">Mozilla ScanJS</a> - for client-Side JavaScript, Node.JS, FireFox OS support</li>
+<li>
+<a href="http://brakemanscanner.org/">Brakeman</a> - for Ruby On Rails support</li>
+<li>
+<a href="http://rips-scanner.sourceforge.net/">RIPS</a> - for PHP support</li>
+<li>[Android] - for insecure permissions</li>
+</ul>
+
+<p>Avaiables Rulepacks (<em>currently</em>):</p>
+
+<ul>
+<li>ActionScript - supports ActionScript 2.0 &amp; 3.0 source/sinks</li>
+<li>Java - partial support for Android. J2EE and JSP support yet to be added.</li>
+</ul>
+
+<h3>
+<a id="installation-tested-on-a-ubuntu-1404-x64-lamp-instance" class="anchor" href="#installation-tested-on-a-ubuntu-1404-x64-lamp-instance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)</h3>
+
+<p>Installation &amp; Demo Video: <a href="https://www.youtube.com/watch?v=0KneQwJiUFk">YouTube Demo</a></p>
+
+<div class="highlight highlight-sh"><pre>$ wget https://github.com/dpnishant/raptor/archive/master.zip -O raptor.zip</pre></div>
+
+<div class="highlight highlight-sh"><pre>$ unzip raptor.zip
+$ <span class="pl-s3">cd</span> raptor-master
+$ sh install.sh</pre></div>
+
+<h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<div class="highlight highlight-sh"><pre><span class="pl-s3">cd</span> raptor-master
+sh start.sh <span class="pl-c">#starts the backend web-service</span></pre></div>
+
+<p>Now point your browser to <a href="http://127.0.0.1/raptor/">http://127.0.0.1/raptor/</a></p>
+
+<p>Login with <em>any</em> username and <em>any</em> password (but remember the username to view scan history)</p>
+
+<h3>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h3>
+
+<p>Want to contribute? Great! 
+Get in touch with me if you have an idea or else feel free to fork and improve. :)</p>
+
+<h3>
+<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributors</h3>
+
+<ul>
+<li><a href="https://twitter.com/anantshri">Anant Shrivastava</a></li>
+</ul>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+
+<p>GNU GPL v2.0</p>
+
+<p><strong>Free Software, Hell Yeah!</strong></p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/dpnishant">dpnishant</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
