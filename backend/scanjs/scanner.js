@@ -112,7 +112,7 @@ if( typeof process != 'undefined' && process.argv[2]) {
         delete(results[testedFile]);
       }
     }
-    writeReport(results, reportname + '.JSON');
+    writeReport(results, reportname + '.json');
   }
 } else {
   console.log('usage: $ node scan.js path/to/app ')
