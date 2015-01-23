@@ -97,7 +97,7 @@ if( typeof process != 'undefined' && process.argv[2]) {
         //console.log('scanning: ' + file);
         var content = fs.readFileSync(fullpath, 'utf8');
         //beautify source so result snippet is meaningful
-        var content = beautify(content, { indent_size: 2 });
+        //var content = beautify(content, { indent_size: 2 });
 
         var ast = parser.parse(content, { locations: true });
         var scanresult = ScanJS.scan(ast, fullpath);
