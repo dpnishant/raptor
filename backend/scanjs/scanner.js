@@ -17,6 +17,26 @@ ScanJS.loadRules(signatures);
 
 var argv = require('optimist').usage('Usage: $node scan.js -t [path/to/app] -o [resultFile.json]').demand(['t']).argv;
 
+var jslibs = [
+  /bootstrap/,
+  /jquery/,
+  /uglify/,
+  /knockout/,
+  /angular/,
+  /backbone/,
+  /ember/,
+  /yui/
+];
+
+function matchInArray(filename, jslibs) {
+    for (var i=0; i<jslibs.length;i++) {
+      if (filename.match(jslibs[i])) {
+        console.log("SKIPPING FILE: Whitelisted " + filename);
+        return true;
+    }}
+    return false;
+  };
+
 var dive = function(dir, action) {
   if( typeof action !== 'function') {
     action = function(error, file) {
@@ -25,51 +45,27 @@ var dive = function(dir, action) {
   }
   list = fs.readdirSync(dir);
   list.forEach(function(file) {
-    
     var fullpath = dir + '/' + file;
     
-    var jslibs = [ //filename patterns of known JS libraries to ignore while scanning
-      /bootstrap/, 
-      /jquery/, 
-      /uglify/,
-      /knockout/,
-      /angular/,
-      /backbone/,
-      /ember/,
-      /yui/
-    ]; 
-    
-    function matchInArray(filename, arr_jslibs) {
-      for (i = 0; i < arr_jslibs.length; i++) {
-        if (filename.match(arr_jslibs[i]))
-          console.log("SKIPPINNG (library): " + fullpath);
-          return true;
-        }
-      return false;
-    };
-
-    if (!matchInArray(file, jslibs)) {
-
-      try {
-        var stat = fs.statSync(fullpath);
-      } catch(e) {
-        console.log("SKIPPING FILE: Could not stat " + fullpath);
+    try {
+      var stat = fs.statSync(fullpath);
+    } catch(e) {
+      console.log("SKIPPING FILE: Could not stat " + fullpath);
+    }
+    if(stat && stat.isDirectory()) {
+      try { 
+        dive(fullpath, action);
+      } catch (e) {
+        console.log("SKIPPING FILE: Couldn't parse " + fullpath);
       }
-      if(stat && stat.isDirectory()) {
-        try {
-          dive(fullpath, action);
-        } catch (err) {
-          //intentionally doing nothing; just to skip erroneous files 
-          console.log('Skipping file: ' + fullpath);
-        }
-      } else {
-        try {
-          action(file, fullpath);  
-        } catch (err) {}
-          //intentionally doing nothing; just to skip erroneous files
-        }}
+    } else {
+      try { 
+        action(file, fullpath);
+      } catch (e) {}
+    }
   });
 };
+
 var writeReport = function(results, name) {
   if(fs.existsSync(name)) {
     console.log("Error:output file already exists (" + name + "). Supply a different name using: -o [filename]")
@@ -97,20 +93,13 @@ if( typeof process != 'undefined' && process.argv[2]) {
     dive(argv.t, function(file, fullpath) {
       var ext = path.extname(file.toString());
 
-      if(ext == '.js') {
+      if(ext == '.js' && !matchInArray(file, jslibs)) {
+        //console.log('scanning: ' + file);
         var content = fs.readFileSync(fullpath, 'utf8');
-  
         //beautify source so result snippet is meaningful
-        //var content = beautify(content, { indent_size: 2 });
-        try {
-            var ast = parser.parse(content, { locations: true });
-        } catch(err) {
-          //intentionally doing nothing; just to skip erroneous files
-          console.log('Parser Error! Skipping: ' + fullpath);
-        }
+        var content = beautify(content, { indent_size: 2 });
 
-        //var ast = parser.parse(content, { locations: true });
-
+        var ast = parser.parse(content, { locations: true });
         var scanresult = ScanJS.scan(ast, fullpath);
         if (scanresult.type == 'error') {
           console.log("SKIPPING FILE: Error in "+ fullpath+", at Line "+ scanresult.error.loc.line +", Column "+scanresult.error.loc.column+ ": " + scanresult.error.message);
