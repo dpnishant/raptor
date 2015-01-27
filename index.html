@@ -77,7 +77,7 @@ This is best-used if you plug Raptor into your CI/CD pipeline.</p>
 <h3>
 <a id="installation-tested-on-a-ubuntu-1404-x64-lamp-instance" class="anchor" href="#installation-tested-on-a-ubuntu-1404-x64-lamp-instance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)</h3>
 
-<p>Installation &amp; Demo Video: <a href="https://www.youtube.com/watch?v=0KneQwJiUFk">YouTube Demo</a></p>
+<p>Installation Video: <a href="https://www.youtube.com/v/0KneQwJiUFk?start=0&amp;end=537">YouTube Install</a></p>
 
 <div class="highlight highlight-sh"><pre>$ wget https://github.com/dpnishant/raptor/archive/master.zip -O raptor.zip</pre></div>
 
@@ -88,12 +88,24 @@ $ sudo sh install.sh</pre></div>
 <h3>
 <a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
 
+<h5>
+<a id="scanner" class="anchor" href="#scanner" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scanner</h5>
+
+<p>Installation Video: <a href="https://www.youtube.com/v/0KneQwJiUFk?start=550">YouTube Usage</a></p>
+
 <div class="highlight highlight-sh"><pre><span class="pl-s3">cd</span> raptor-master
 sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre></div>
 
-<p>Now point your browser to <a href="http://127.0.0.1/raptor/">http://127.0.0.1/raptor/</a></p>
+<p>Now point your browser to <a href="http://127.0.0.1/raptor/">Raptor Home</a></p>
 
 <p>Login with <em>any</em> username and <em>any</em> password (but remember the username to view scan history)</p>
+
+<h5>
+<a id="rules-editor" class="anchor" href="#rules-editor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rules Editor</h5>
+
+<p>You can use a light-weight, GUI client-side rules editor for adding any new/custom rule(s) for specific purpose(s). You can use your browser to open rules located in 'backend/rules'. Once you save your new rules file. Put it in same directory and do a minor edit in this file: <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor_init.py#L9">Init Script</a>. Append your new rulepack file to this array without the '.rulepack' extension. Restart the backend server and you are all set to go.</p>
+
+<p>You can access it here: <a href="http://127.0.0.1/raptor/editrules.php">Rules Editor</a></p>
 
 <h3>
 <a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h3>
