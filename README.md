@@ -52,7 +52,7 @@ Now point your browser to [Raptor Home]
 Login with *any* username and *any* password (but remember the username to view scan history)
 
 #####Rules Editor
-You can use a light-weight, GUI client-side rules editor for adding any new/custom rule(s) for specific purpose(s). You can use your browser to open rules located in 'backend/rules'. Once you save your new rules file. Put it in same directory and do a minor edit in this file: [Init Script]. Append your new rulepack file to this array without the '.rulepack' extension. Restart the backend server and you are all set to go.
+You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: [Init Script]. Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set!
 
 You can access it here: [Rules Editor]
 
