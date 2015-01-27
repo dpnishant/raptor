@@ -28,7 +28,7 @@ Avaiables Rulepacks (_currently_):
 
 ### Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)
 
-Installation & Demo Video: [YouTube Demo]
+Installation Video: [YouTube Install]
 
 ```sh
 $ wget https://github.com/dpnishant/raptor/archive/master.zip -O raptor.zip
@@ -41,13 +41,21 @@ $ sudo sh install.sh
 ```
 
 ###Usage
+#####Scanner
+Installation Video: [YouTube Usage]
 ```sh
 cd raptor-master
 sudo sh start.sh #starts the backend web-service
 ```
-Now point your browser to http://127.0.0.1/raptor/
+Now point your browser to [Raptor Home]
 
 Login with *any* username and *any* password (but remember the username to view scan history)
+
+#####Rules Editor
+You can use a light-weight, GUI client-side rules editor for adding any new/custom rule(s) for specific purpose(s). You can use your browser to open rules located in 'backend/rules'. Once you save your new rules file. Put it in same directory and do a minor edit in this file: [Init Script]. Append your new rulepack file to this array without the '.rulepack' extension. Restart the backend server and you are all set to go.
+
+You can access it here: [Rules Editor]
+
 ### Development
 
 Want to contribute? Great! 
@@ -68,4 +76,8 @@ GNU GPL v2.0
 [Brakeman]:http://brakemanscanner.org/
 [RIPS]:http://rips-scanner.sourceforge.net/
 [Anant Shrivastava]:https://twitter.com/anantshri
-[YouTube Demo]:https://www.youtube.com/watch?v=0KneQwJiUFk
+[YouTube Install]:https://www.youtube.com/v/0KneQwJiUFk?start=0&end=537
+[YouTube Usage]:https://www.youtube.com/v/0KneQwJiUFk?start=550
+[Init Script]:https://github.com/dpnishant/raptor/blob/master/backend/raptor_init.py#L9
+[Rules Editor]:http://127.0.0.1/raptor/editrules.php
+[Raptor Home]:http://127.0.0.1/raptor/
