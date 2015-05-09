@@ -1,5 +1,8 @@
 <?php
+
 session_start();
+
+$timeout_duration = 600;
 
 if(!empty($_POST['username']) && !empty($_POST['password'])) {
 
@@ -7,10 +10,11 @@ if(!empty($_POST['username']) && !empty($_POST['password'])) {
   @$password = $_POST['password'];
   
   $_SESSION['user_name'] = $username;
+  $_SESSION['LAST_ACTIVITY'] = $_SERVER['REQUEST_TIME']; 
   $_SESSION['current_scan_report'] = '';
   header('Location: index.php');
 
-} else if (!empty($_SESSION['user_name'])) {
+} else if (!empty($_SESSION['user_name']) && $_SESSION['LAST_ACTIVITY'] > $timeout_duration) {
   header('Location: index.php');
 }
 

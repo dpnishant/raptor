@@ -1,10 +1,7 @@
 <?php
 
-session_start();
+include_once("session.php");
 
-if(empty($_SESSION['user_name'])) {
- header('Location: login.php'); 
-}
 
 @$scan_name = $_POST['scan_name'];
 @$git_repo = $_POST['git_repo'];
@@ -89,13 +86,13 @@ if (!empty($scan_name) && !empty($git_repo)) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Raptor</a>
+          <a class="navbar-brand" href="/">Raptor: Source Code Scanner</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html#">Dashboard</a></li>
-            <li><a href="index.html#">Settings</a></li>
-            <li><a href="index.html#">Profile</a></li>
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/">Settings</a></li>
+            <li><a href="/"><?php echo $_SESSION['user_name']; ?></a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
           <form class="navbar-form navbar-right">
@@ -109,11 +106,11 @@ if (!empty($scan_name) && !empty($git_repo)) {
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="/scan/">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="scan.php">Scan</a></li>
+            <li class="active"><a href="scan.php">Scan <span class="sr-only">(current)</span></a></li>
             <li><a href="issues.php">Issues</a></li>
             <li><a href="analytics.php">Analytics</a></li>
             <li><a href="history.php">History</a></li>
+            <li><a href="editrules.php">Rules Editor</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <!--

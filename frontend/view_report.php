@@ -1,10 +1,6 @@
 <?php
 
-session_start();
-
-if(empty($_SESSION['user_name'])) {
- header('Location: login.php'); 
-}
+include_once("session.php");
 
 @$report_id = $_GET['id'];
 

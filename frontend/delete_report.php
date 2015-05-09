@@ -1,10 +1,7 @@
 <?php
 
-session_start();
+include_once("session.php");
 
-if(empty($_SESSION['user_name'])) {
- header('Location: login.php'); 
-}
 
 function rrmdir($dir) { 
   foreach(glob($dir . '/*') as $file) { 
@@ -40,8 +37,8 @@ function deleteDirectory($dir) {
 if(!empty($report_id)) {
 	$delete_dir = $_SESSION['delete_id'][$report_id];
 //print_r($delete_dir);	
-print_r(deleteDirectory($delete_dir));
-	//header('Location: history.php');
+//print_r(deleteDirectory($delete_dir));
+	header('Location: history.php');
 }
 
 ?>

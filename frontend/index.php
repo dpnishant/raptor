@@ -1,9 +1,7 @@
 <?php
-session_start();
+include_once("session.php");
 
-if(empty($_SESSION['user_name'])) {
- header('Location: login.php'); 
-}
+header('Location: scan.php');
 
 ?>
 <!DOCTYPE html>
@@ -66,11 +64,11 @@ if(empty($_SESSION['user_name'])) {
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="/scan/">Overview <span class="sr-only">(current)</span></a></li>
-            <li><a href="scan.php">Scan</a></li>
+            <li class="active"><a href="scan.php">Scan <span class="sr-only">(current)</span></a></li>
             <li><a href="issues.php">Issues</a></li>
             <li><a href="analytics.php">Analytics</a></li>
             <li><a href="history.php">History</a></li>
+            <li><a href="editrules.php">Rules Editor</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <!--

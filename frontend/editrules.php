@@ -1,185 +1,137 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-  <title>Raptor: Rules Editor (Client-Side)</title>
-  <!--
-  <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="http://getbootstrap.com/dist/css/bootstrap-theme.min.css" rel="stylesheet">
-  -->
-  <link rel="stylesheet" type="text/css" href="jsoneditor/core/jsoneditor.css">
-  
-  <style>
+<?php
+
+include_once("session.php");
+
+@$scan_name = $_POST['scan_name'];
+@$git_repo = $_POST['git_repo'];
+
+function normalize_git_path($git_repo) {
+
+    $git_repo = str_ireplace('https://github.com/', '', $git_repo = str_ireplace('.git', '', $git_repo));
     
-    html, body {
-      font: 10pt Verdana;
-    }
-
-    #jsoneditor {
-      width: 100%;
-      height: 500px;
-      margin-top: 10px;
-    }
-
-    .btn-file {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .btn-file input[type=file] {
-      position: absolute;
-      top: 0;
-      right: 0;
-      min-width: 100%;
-      min-height: 100%;
-      font-size: 100px;
-      text-align: right;
-      filter: alpha(opacity=0);
-      opacity: 0;
-      outline: none;
-      background: white;
-      cursor: inherit;
-      display: block;
-    }
-
-    .btn-success {
-      background-image: -webkit-linear-gradient(top,#5cb85c 0,#419641 100%);
-      background-image: -o-linear-gradient(top,#5cb85c 0,#419641 100%);
-      background-image: -webkit-gradient(linear,left top,left bottom,from(#5cb85c),to(#419641));
-      background-image: linear-gradient(to bottom,#5cb85c 0,#419641 100%);
-      filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff5cb85c', endColorstr='#ff419641', GradientType=0);
-      filter: progid:DXImageTransform.Microsoft.gradient(enabled=false);
-      background-repeat: repeat-x;
-      border-color: #3e8f3e;
-      color: #fff;
-      background-color: #5cb85c;
-      border-color: #4cae4c;
-      text-shadow: 0 -1px 0 rgba(0,0,0,.2);
-      -webkit-box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,.15),0 1px 1px rgba(0,0,0,.075);
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 6px 12px;
-      margin-bottom: 0;
-      font-size: 14px;
-      font-weight: 400;
-      line-height: 1.42857143;
-      text-align: center;
-      white-space: nowrap;
-      vertical-align: middle;
-      -ms-touch-action: manipulation;
-      touch-action: manipulation;
-      cursor: pointer;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-      background-image: none;
-      border: 1px solid transparent;
-      border-radius: 4px;
-    }
-
-    .iomenu {
-      float: right;
-      margin-bottom: 10px;
-    }
-  </style>
-
-</head>
-<body>
-  <h1> Rules Editor </h1>
-  <p> A handy rules editor to view/edit rules, locally! </p>
-  <div id="io_menu" class="iomenu">
-    <span class="btn btn-success btn-file">Open <input type="file" id="loadDocument" value="Load"/></span>
-    <input class="btn btn-success" type="button" id="saveDocument" value="Save"/>
-  </div>
-
-<div id="jsoneditor" ></div>
+    if ($git_repo[strlen($git_repo)-1] === '/')
+      $git_repo[strlen($git_repo)-1] = '';
   
-  <!-- require.js -->
-  <script src="jsoneditor/require/require.js"></script>
+    return $git_repo;
+}
 
-  <!-- ace editor -->
-  <script type="text/javascript" src="jsoneditor/ace/ace.js"></script>
-  <!-- json lint -->
-  <script type="text/javascript" src="jsoneditor/jsonlint/jsonlint.js"></script>
+if (!empty($scan_name) && !empty($git_repo)) {
 
-  <script src="jsoneditor/io/filereader.js"></script>
-  <script src="jsoneditor/io/FileSaver.js"></script>
+  $git_repo = normalize_git_path($git_repo);
 
-  <script>
-    require.config({
-      packages: [
-        {
-          name: 'JSONEditor',
-          location: 'jsoneditor/core',
-          main: 'JSONEditor'
-        }
-      ],
-      paths: {
-        'theme-jsoneditor.js': 'jsoneditor/ace/theme-jsoneditor.js'
-      }
-    });
-  </script>
+  if (empty($_SESSION['git_repo'])) {
 
-  <script type="text/javascript">
-  // Load a JSON document
-  FileReaderJS.setupInput(document.getElementById('loadDocument'), {
-    readAsDefault: 'Text',
-    on: {
-      load: function (event, file) {
-        editor.setText(event.target.result);
-      }
+    $_SESSION['git_repo'] = $git_repo;
+
+    if (!empty($scan_name)) {
+      $_SESSION['scan_name'] = $scan_name;
+    } else {
+      $_SESSION['scan_name'] = 'default';
     }
-  });
 
-  // Save a JSON document
-  document.getElementById('saveDocument').onclick = function () {
-    var blob = new Blob([editor.getText()], {type: 'application/json;charset=utf-8'});
-    saveAs(blob, 'new.rulepack');
-  };
+    $success = true;
+    $message = 'Success! Scan started: ' . $git_repo;
 
-  // JSON Editor
-  var container, options, json, editor;
+  } else if ($_SESSION['scan_active'] === true && $_SESSION['git_repo'] === $git_repo) {
+      $success = false;
+      $message = 'Warning! This scan is already in progress: ' . $git_repo;
 
-  require(['JSONEditor'], function (JSONEditor) {
-    container = document.getElementById('jsoneditor');
+  } else if (!empty($_SESSION['scan_active'] === true)) {
+      $success = false;
+      $message = 'Warning! A scan is already in progress: ' . $_SESSION['git_repo'];
+  }
 
-    options = {
-      mode: 'view',
-      modes: ['code', 'form', 'text', 'tree', 'view'], // allowed modes
-      
-      error: function (err) {
-        console.trace();
-        alert(err.toString());
-      },
-      
-      editable: function (node) {
-        //console.log(node);
-        switch(node.field) {
-          /*
-          case '_id':
-            return false;
+}
 
-          case '_field':
-            return {
-              field: false,
-              value: true
-            };
-          */
-          default:
-            return true;
-        }
-      }
-    };
+?>
 
-    json = {};
+<!DOCTYPE html>
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="assets/css/glyphicons.css" rel="stylesheet">
+    <link rel="icon" href="/favicon.ico">
 
-    editor = new JSONEditor(container, options, json);
-});
-</script>
-</body>
-</html>
+    <title>Raptor: Source Vulnerability Scanner</title>
 
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
 
+    <!-- Custom styles for this template -->
+    <link href="assets/css/dashboard.css" rel="stylesheet">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="assets/js/ie-emulation-modes-warning.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/">Raptor: Source Code Scanner</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="/">Dashboard</a></li>
+            <li><a href="/">Settings</a></li>
+            <li><a href="/"><?php echo $_SESSION['user_name'];?></a></li>
+            <li><a href="logout.php">Logout</a></li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-3 col-md-2 sidebar">
+          <ul class="nav nav-sidebar">
+            <li><a href="scan.php">Scan</span></a></li>
+            <li><a href="issues.php">Issues</a></li>
+            <li><a href="analytics.php">Analytics</a></li>
+            <li><a href="history.php">History</a></li>
+            <li class="active"><a href="editrules.php">Rules Editor <span class="sr-only">(current)</a></li>
+          </ul>
+          <ul class="nav nav-sidebar">
+            <!--
+            <li><a href="">Nav item</a></li>
+            <li><a href="">Nav item again</a></li>
+            -->
+          </ul>
+        </div>
+          <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+          <h1 class="page-header">Rules Editor</h1>
+          <iframe src="rules.php" style="border: 0px; height: 580px; width: 100%"></iframe>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="dist/js/jquery-1.11.1.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+    <script src="assets/js/docs.min.js"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="assets/js/ie10-viewport-bug-workaround.js"></script>
+  
+
+<div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;">      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">         <param name="movie" value="assets/flash/ZeroClipboard.swf?noCache=1417502908088">         <param name="allowScriptAccess" value="never">         <param name="scale" value="exactfit">         <param name="loop" value="false">         <param name="menu" value="false">         <param name="quality" value="best">         <param name="bgcolor" value="#ffffff">         <param name="wmode" value="transparent">         <param name="flashvars" value="">         <embed src="assets/flash/ZeroClipboard.swf?noCache=1417502908088" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="never" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="" scale="exactfit">                </object></div><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg></body></html>

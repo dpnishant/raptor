@@ -2,7 +2,7 @@ import os, sys, subprocess, shutil, json, linecache, base64, fnmatch, traceback
 import BeautifulSoup as bs
 
 bin_paths = {}
-bin_paths['nodejs'] = '/usr/bin/nodejs' if os.path.isfile('/usr/bin/nodejs') else '/usr/local/Cellar/node/0.10.32/bin/node'
+bin_paths['nodejs'] = '/usr/bin/nodejs' if os.path.isfile('/usr/bin/nodejs') else '/usr/local/bin/node'
 bin_paths['brakeman'] = '/usr/local/bin/brakeman' if os.path.isfile('/usr/local/bin/brakeman') else '/usr/bin/brakeman'
 bin_paths['scanjs'] = os.getcwd() + '/scanjs/scanner.js'
 bin_paths['php'] = '/usr/bin/php'

@@ -1,10 +1,7 @@
 <?php
 
-session_start();
+include_once("session.php");
 
-if(empty($_SESSION['user_name'])) {
- header('Location: login.php'); 
-}
 
 $_SESSION['current_scan_report'] = '';
 
@@ -26,6 +23,9 @@ function write_to_file($data, $username, $scan_name) {
 		$filename = $path . $timestamp . '.json';
 		$fp = fopen($filename, 'w');
 		fwrite($fp, $data);
+		if (!chmod($filename, 0777)) {
+			error_log('0774 failed: ' . $filename, 0);
+		}
 		fclose($fp);
 		$_SESSION['current_scan_report'] = $filename;
 		return true;

@@ -13,7 +13,7 @@ def server_error(e):
 
 @app.route('/', methods=['GET'])
 def help():
-	return '<h1>Usage</h1><h3>/scan/?r=&lt;git-repo-path&gt;</h3>'
+	return '<h1>Usage</h1><h3>/scan/?r=&lt;git-repo-path&gt;&amp;p=&lt;report-save-directory&gt;</h3>'
 
 @app.route('/internal/scan/', methods=['GET'])
 def internal_repo_scan():

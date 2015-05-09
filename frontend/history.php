@@ -1,14 +1,7 @@
 <?php
 
-session_start();
+include_once("session.php");
 
-if(empty($_SESSION['user_name'])) {
- header('Location: login.php'); 
-}
-
-if(empty($_SESSION['user_name'])) {
-  header('Location: index.php');
-}
 
 $GLOBALS['report_base']  = '/var/raptor/scan_results/';  
 $new_user = true;
@@ -120,12 +113,12 @@ try {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Raptor</a>
+          <a class="navbar-brand" href="/">Raptor: Source Code Scanner</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="index.html#">Settings</a></li>
-            <li><a href="index.html#">Profile</a></li>
+            <li><a href="/">Settings</a></li>
+            <li><a href="/"><?php echo $_SESSION['user_name']; ?></a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
           <form class="navbar-form navbar-right">
@@ -139,11 +132,11 @@ try {
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
           <ul class="nav nav-sidebar">
-            <li class="active"><a href="/scan/">Overview <span class="sr-only">(current)</span></a></li>
             <li><a href="scan.php">Scan</a></li>
             <li><a href="issues.php">Issues</a></li>
             <li><a href="analytics.php">Analytics</a></li>
-            <li><a href="history.php">History</a></li>
+            <li class="active"><a href="history.php">History <span class="sr-only">(current)</span></a></li>
+            <li><a href="editrules.php">Rules Editor</a></li>
           </ul>
           <ul class="nav nav-sidebar">
             <!--
@@ -156,22 +149,24 @@ try {
           <h1 class="page-header">Previous Scans</h1>
 
           <!--<h2 class="sub-header">some/thing</h2>-->
-          <div class="table-responsive">
-            <table class="table table-striped">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>Scan Name</th>
-                  <th>Repository</th>
-                  <th>Date</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody>
                 <?php
                   $reports = previous_scans($_SESSION['user_name']);
                   $id = 1;
                   //if ($new_user === false) {
+                  if(isset($reports)){
+                      echo '<div class="table-responsive">' .
+                           '<table class="table table-striped">' .
+                           '<thead>' .
+                           '<tr>' .
+                           '<th>#</th>' .
+                           '<th>Scan Name</th>' .
+                           '<th>Repository</th>' .
+                           '<th>Date</th>' .
+                           '<th>Action</th>' .
+                           '</tr>' .
+                           '</thead>' .
+                           '<tbody>';
+
                       foreach($reports as $key => $value) {
                       $_SESSION['report_id'][$id] = $value['report_path'];
                       $_SESSION['delete_id'][$id] = $GLOBALS['report_base'] . $_SESSION['user_name'] . '/' . $key;
@@ -185,6 +180,10 @@ try {
                            '</tr>';
                         $id++;
                     }
+                    echo '</tbody></table>';
+                  } else {
+                    echo '<div>No previous reports available.</div>';
+                  }
                  /* } else {
                           echo '<tr>' .
                            '<td>'. $id .'</td>' . 
@@ -196,9 +195,6 @@ try {
                            '</tr>';
                     } */
                 ?>
-
-              </tbody>
-            </table>
           </div>
         </div>
       </div>
