@@ -250,7 +250,7 @@ $chart_vulntype_metrics = Array();
            '<td>' . $data['warnings'][$i]['severity'] . '</td>' .
            '<td>' . $data['warnings'][$i]['link'] . '</td>'; 
 
-      if (gettype($data['warnings'][$i]['location']) === 'array') {
+      if (gettype(@$data['warnings'][$i]['location']) === 'array') {
         echo '<td>';
         for($loc=0; $loc < count($data['warnings'][$i]['location']); $loc++) {
         
@@ -262,10 +262,10 @@ $chart_vulntype_metrics = Array();
 
         echo '</td>';
       } else {
-          echo '<td>' . $data['warnings'][$i]['location'] . '</td>';    
+          echo '<td>' . @$data['warnings'][$i]['location'] . '</td>';    
       }
 
-      if (gettype($data['warnings'][$i]['user_input']) === 'array') {
+      if (gettype(@$data['warnings'][$i]['user_input']) === 'array') {
         $usrinput = '';
         foreach($data['warnings'][$i]['user_input'] as $value) {
           $usrinput .= '<a target="_blank" href="' . 'https://github.com/' . $data['scan_info']['app_path'] . 
@@ -273,10 +273,10 @@ $chart_vulntype_metrics = Array();
         }
         echo '<td>' . substr($usrinput, 0, strlen($usrinput)-1) . '</td>';
         } else {
-          echo '<td>' . $data['warnings'][$i]['user_input'] . '</td>';    
+          echo '<td>' . @$data['warnings'][$i]['user_input'] . '</td>';    
         }
 
-    echo '<td>' . $data['warnings'][$i]['render_path'] . '</td>' .'</tr>';
+    echo '<td>' . @$data['warnings'][$i]['render_path'] . '</td>' .'</tr>';
     $_SESSION['scan_active'] = false;
     $_SESSION['git_repo'] = '';
 
