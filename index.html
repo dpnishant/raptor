@@ -6,8 +6,10 @@
     <title>Raptor by dpnishant</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <link rel="stylesheet" href="stylesheets/github-dark.css">
+    <script src="javascripts/scale.fix.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
     <!--[if lt IE 9]>
     <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
@@ -17,10 +19,7 @@
       <header>
         <h1>Raptor</h1>
         <p>Hosted Source Code Vulnerability Scanner</p>
-
         <p class="view"><a href="https://github.com/dpnishant/raptor">View the Project on GitHub <small>dpnishant/raptor</small></a></p>
-
-
         <ul>
           <li><a href="https://github.com/dpnishant/raptor/zipball/master">Download <strong>ZIP File</strong></a></li>
           <li><a href="https://github.com/dpnishant/raptor/tarball/master">Download <strong>TAR Ball</strong></a></li>
@@ -64,7 +63,8 @@ This is best-used if you plug Raptor into your CI/CD pipeline.</p>
 <a href="http://brakemanscanner.org/">Brakeman</a> - for Ruby On Rails support</li>
 <li>
 <a href="http://rips-scanner.sourceforge.net/">RIPS</a> - for PHP support</li>
-<li>[Android] - for insecure permissions</li>
+<li>
+<a href="https://github.com/antitree/manitree/">Manitree</a> - for AndroidManifest.xml insecurities</li>
 </ul>
 
 <p>Avaiables Rulepacks (<em>currently</em>):</p>
@@ -82,7 +82,7 @@ This is best-used if you plug Raptor into your CI/CD pipeline.</p>
 <div class="highlight highlight-sh"><pre>$ wget https://github.com/dpnishant/raptor/archive/master.zip -O raptor.zip</pre></div>
 
 <div class="highlight highlight-sh"><pre>$ unzip raptor.zip
-$ <span class="pl-s3">cd</span> raptor-master
+$ <span class="pl-c1">cd</span> raptor-master
 $ sudo sh install.sh</pre></div>
 
 <h3>
@@ -93,7 +93,7 @@ $ sudo sh install.sh</pre></div>
 
 <p>Installation Video: <a href="https://www.youtube.com/v/0KneQwJiUFk?start=550">YouTube Usage</a></p>
 
-<div class="highlight highlight-sh"><pre><span class="pl-s3">cd</span> raptor-master
+<div class="highlight highlight-sh"><pre><span class="pl-c1">cd</span> raptor-master
 sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre></div>
 
 <p>Now point your browser to <a href="http://127.0.0.1/raptor/">Raptor Home</a></p>
@@ -127,12 +127,22 @@ Get in touch with me if you have an idea or else feel free to fork and improve. 
 
 <p><strong>Free Software, Hell Yeah!</strong></p>
       </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/dpnishant">dpnishant</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
     </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
+    <footer>
+      <p>Project maintained by <a href="https://github.com/dpnishant">dpnishant</a></p>
+      <p>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></p>
+    </footer>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-63042518-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
   </body>
 </html>
