@@ -20,7 +20,7 @@ Integrated Plugins (_currently_):
 * [Mozilla ScanJS] - for client-Side JavaScript, Node.JS, FireFox OS support
 * [Brakeman] - for Ruby On Rails support
 * [RIPS] - for PHP support
-* [Android] - for insecure permissions
+* [Manitree] - for AndroidManifest.xml insecurities
 
 Avaiables Rulepacks (_currently_):
 * ActionScript - supports ActionScript 2.0 & 3.0 source/sinks
@@ -81,3 +81,4 @@ GNU GPL v2.0
 [Init Script]:https://github.com/dpnishant/raptor/blob/master/backend/raptor_init.py#L9
 [Rules Editor]:http://127.0.0.1/raptor/editrules.php
 [Raptor Home]:http://127.0.0.1/raptor/
+[Manitree]:https://github.com/antitree/manitree/
