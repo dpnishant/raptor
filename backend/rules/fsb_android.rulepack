@@ -1,0 +1,155 @@
+{
+  "plugin_type": "fsb_android",
+  "file_types": [
+    ".java"
+  ],
+  "rules": [
+    {
+      "id": "FSB_ANDROID_GEOLOCATION",
+      "severity": "High",
+      "title": "Identity usage of Geolocation API.",
+      "description": "WebView with Geolocation Activated (Android)",
+      "remediation": "Limit the sampling of geolocation and ask the user for confirmation.\n[CODE]\n\nwebView.setWebChromeClient(new WebChromeClient() {    @Override\n    public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {\n        callback.invoke(origin, true, false);\n\n        //Ask the user for confirmation\n    }\n});[/CODE]",
+      "signature": "b25HZW9sb2NhdGlvblBlcm1pc3Npb25zU2hvd1Byb21wdFwoW15cKV0qXCk=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC53ZWJraXRcLldlYkNocm9tZUNsaWVudDs=",
+          "description": "check if it imports android.webkit.WebChromeClient"
+        }
+      ],
+      "link": "https://github.com/h3xstream/find-sec-bugs/blob/master/plugin/src/main/resources/metadata/messages.xml",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ANDROID_BROADCAST",
+      "severity": "High",
+      "title": "Broadcast being sent",
+      "description": "<p>\n    Broadcast intents can be listen by any application with the appropriate permission. It is suggest to avoid transmitting\n    sensitive information when possible.\n</p>\n<p>\n    <b>Code at risk:</b><br/>\n<pre>\nIntent i = new Intent();\ni.setAction(\"com.insecure.action.UserConnected\");\ni.putExtra(\"username\", user);\ni.putExtra(\"email\", email);\ni.putExtra(\"session\", newSessionId);\n\nthis.sendBroadcast(v1);\n</pre>\n</p>\n<br/>\n<p>",
+      "remediation": "<pre>\nIntent i = new Intent();\ni.setAction(\"com.secure.action.UserConnected\");\n\nsendBroadcast(v1);\n</pre>\n</p>\n<br/>\n<p>\n    <b>Configuration (receiver)<sup>[1] Source: StackOverflow</sup>:</b><br/>\n<pre>\n<manifest ...>\n\n    <!-- Permission declaration -->\n    <permission android:name=\"my.app.PERMISSION\" />\n\n    <receiver\n        android:name=\"my.app.BroadcastReceiver\"\n        android:permission=\"com.secure.PERMISSION\"> <!-- Permission enforcement -->\n        <intent-filter>\n            <action android:name=\"com.secure.action.UserConnected\" />\n        </intent-filter>\n    </receiver>\n\n    ...\n</manifest>\n</pre>\n</p>",
+      "signature": "c2VuZEJyb2FkY2FzdFwoW15cKV0qXCk7",
+      "condition": [
+        {
+          "signature": "bmV3XHNJbnRlbnRcKFteXCldKlwpOw==",
+          "description": "check if it creates a new intent with new Intent();"
+        },
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC5jb250ZW50XC5JbnRlbnQ7",
+          "description": "check if it imports android.content.Intent"
+        }
+      ],
+      "link": "https://github.com/h3xstream/find-sec-bugs/blob/master/plugin/src/main/resources/metadata/messages.xml",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ANDROID_RECEIVE",
+      "severity": "High",
+      "title": "Broadcast being received",
+      "description": "Receiving broadcasts",
+      "remediation": "Always perform contextual input validation on any incoming unstrusted broadcast content",
+      "signature": "b25SZWNlaXZlXChbXlwpXSpcKQ==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC5jb250ZW50XC5Ccm9hZGNhc3RSZWNlaXZlcjs=",
+          "description": "check if it imports android.content.BroadcastReceiver;"
+        },
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC5jb250ZW50XC5Db250ZXh0Ow==",
+          "description": "check if it imports android.content.Context"
+        }
+      ],
+      "link": "https://github.com/h3xstream/find-sec-bugs/blob/master/plugin/src/main/resources/metadata/messages.xml",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ANDROID_EXTERNAL_FILE_ACCESS",
+      "severity": "High",
+      "title": "External File System Access",
+      "description": "Files could be saved to external storage.",
+      "remediation": "<p>\n    The application write data to external storage (potentially SD card). There are multiple security implication to this\n    action. First, file store on SD card will be accessible to the application having the\n    <a href=\"http://developer.android.com/reference/android/Manifest.permission.html#READ_EXTERNAL_STORAGE\"><code>READ_EXTERNAL_STORAGE</code></a> permission.\n    Also, if the data persisted contains confidential information about the user, encryption would be needed.\n</p>\n<p>\n    <b>Code at risk:</b><br/>\n<pre>\nfile file = new File(getExternalFilesDir(TARGET_TYPE), filename);\nfos = new FileOutputStream(file);\nfos.write(confidentialData.getBytes());\nfos.flush();\n</pre>\n</p>\n<p>\n    <b>Better alternative:</b><br/>\n<pre>\nfos = openFileOutput(filename, Context.MODE_PRIVATE);\nfos.write(string.getBytes());\n</pre>\n</p>",
+      "signature": "XC4oZ2V0RXh0ZXJuYWxDYWNoZURpcnxnZXRFeHRlcm5hbENhY2hlRGlyc3xnZXRFeHRlcm5hbEZpbGVzRGlyc3xnZXRFeHRlcm5hbEZpbGVzRGlyc3xnZXRFeHRlcm5hbE1lZGlhRGlycylcKFteXCldKlwp",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC5jb250ZW50XC5Db250ZXh0Ow==",
+          "description": "check if it imports android.content.Context;"
+        }
+      ],
+      "link": "https://github.com/h3xstream/find-sec-bugs/blob/master/plugin/src/main/resources/metadata/messages.xml",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ANDROID_EXTERNAL_FILE_ACCESS",
+      "severity": "High",
+      "title": "External File System Access",
+      "description": "Files could be saved to external storage.\n<p>\n    The application write data to external storage (potentially SD card). There are multiple security implication to this\n    action. First, file store on SD card will be accessible to the application having the\n    <a href=\"http://developer.android.com/reference/android/Manifest.permission.html#READ_EXTERNAL_STORAGE\"><code>READ_EXTERNAL_STORAGE</code></a> permission.\n    Also, if the data persisted contains confidential information about the user, encryption would be needed.\n</p>\n<p>\n    <b>Code at risk:</b><br/>\n<pre>\nfile file = new File(getExternalFilesDir(TARGET_TYPE), filename);\nfos = new FileOutputStream(file);\nfos.write(confidentialData.getBytes());\nfos.flush();\n</pre>\n</p>\n",
+      "remediation": "<p>\n<b>Secure Alternative</b><br/>\n<pre>\nfos = openFileOutput(filename, Context.MODE_PRIVATE);\nfos.write(string.getBytes());\n</pre>\n</p>",
+      "signature": "XC4oZ2V0RXh0ZXJuYWxTdG9yYWdlRGlyZWN0b3J5fGdldEV4dGVybmFsU3RvcmFnZVB1YmxpY0RpcmVjdG9yeSlcKFteXCldKlwp",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC5vc1wuRW52aXJvbm1lbnQ7",
+          "description": "check if it imports android.os.Environment;"
+        }
+      ],
+      "link": "https://github.com/h3xstream/find-sec-bugs/blob/master/plugin/src/main/resources/metadata/messages.xml",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ANDROID_WEB_VIEW_JAVASCRIPT",
+      "severity": "High",
+      "title": "WebView with JavaScript Enabled",
+      "description": "<p>\n    Enabling JavaScript for the WebView means that it is now susceptible to XSS. The page render should be inspected\n    for potential reflected XSS, stored XSS and DOM XSS.<br/>\n<pre>\nWebView myWebView = (WebView) findViewById(R.id.webView);\nWebSettings webSettings = myWebView.getSettings();\nwebSettings.setJavaScriptEnabled(true);\n</pre>\n</p>\n\n<p>\n    <b>Code at risk:</b><br/>\nEnabling is JavaScript is not a bad practice. It just means that the backend code need to be audit for potential XSS.\nThe XSS can also be introduce client-side with DOM XSS.\n<pre>\nfunction updateDescription(newDescription) {\n    $(\"#userDescription\").html(\"<p>\"+newDescription+\"</p>\");\n}\n</pre>\n</p>",
+      "remediation": "",
+      "signature": "XC5zZXRKYXZhU2NyaXB0RW5hYmxlZFwodHJ1ZVwp",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC53ZWJraXRcLldlYlNldHRpbmdzOw==",
+          "description": "check if it imports android.webkit.WebSettings"
+        },
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC53ZWJraXRcLldlYlZpZXc7",
+          "description": "check if it imports android.webkit.WebView;"
+        },
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC53ZWJraXRcLldlYkNocm9tZUNsaWVudDs=",
+          "description": "check if it imports android.webkit.WebChromeClient;"
+        }
+      ],
+      "link": "https://github.com/h3xstream/find-sec-bugs/blob/master/plugin/src/main/resources/metadata/messages.xml",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ANDROID_WEB_VIEW_JAVASCRIPT_INTERFACE",
+      "severity": "High",
+      "title": "WebView with Javascript Interface",
+      "description": "The use Javascript Interface could expose the WebView to risky API. If an XSS is trigger in the WebView, the class could be call by the malicious JavaScript code.\n\n<p>\n    <b>Code at risk:</b><br/>\n    <pre>\nWebView myWebView = (WebView) findViewById(R.id.webView);\n\nmyWebView.addJavascriptInterface(new FileWriteUtil(this), \"fileWriteUtil\");\n\nWebSettings webSettings = myWebView.getSettings();\nwebSettings.setJavaScriptEnabled(true);\n\n[...]\nclass FileWriteUtil {\n    Context mContext;\n\n    FileOpenUtil(Context c) {\n        mContext = c;\n    }\n\n    public void writeToFile(String data, String filename, String tag) {\n        [...]\n    }\n}\n    </pre>\n</p>",
+      "remediation": "",
+      "signature": "XC5zZXRKYXZhU2NyaXB0RW5hYmxlZFwodHJ1ZVwp",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC53ZWJraXRcLldlYlZpZXc7",
+          "description": "check if it imports android.webkit.WebView;"
+        },
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC52aWV3XC5WaWV3Ow==",
+          "description": "check if it imports android.view.View"
+        },
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC52aWV3XC5WaWV3R3JvdXA7",
+          "description": "check if it imports android.view.ViewGroup;"
+        },
+        {
+          "signature": "aW1wb3J0XHNhbmRyb2lkXC53aWRnZXRcLkFic29sdXRlTGF5b3V0Ow==",
+          "description": "check if it imports android.widget.AbsoluteLayout;"
+        }
+      ],
+      "link": "https://github.com/h3xstream/find-sec-bugs/blob/master/plugin/src/main/resources/metadata/messages.xml",
+      "platform_version": "all",
+      "enabled": "true"
+    }
+  ]
+}

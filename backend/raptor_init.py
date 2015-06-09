@@ -5,8 +5,9 @@ import hashlib, shutil, keyring
 import json as jsoner
 from raptor_codescan import *
 from raptor_externalscan import *
+from raptor_fsb import *
 
-rulepacks = ['common', 'android', 'php', 'actionscript']
+rulepacks = ['common', 'android', 'php', 'actionscript', 'fsb_android']
 
 json = { 
 		"scan_info": {
@@ -33,15 +34,27 @@ def scan_all(scan_path, repo_path):
 
 	start_time = time.strftime("%a, %d %b %Y %I:%M:%S %p", time.localtime())
 
-	for index in range(0,len(rulepacks)):
-		rule_path = 'rules/%s.rulepack' % rulepacks[index]
-		report_path = scan_path + '/%s_report.json' % rulepacks[index]
-		result = Scanner(scan_path, rule_path, report_path)
+	for rulepack in rulepacks:
+		if not rulepack.startswith('fsb_'):
+			rule_path = 'rules/%s.rulepack' % rulepack
+			report_path = scan_path + '/%s_report.json' % rulepack
+			result = Scanner(scan_path, rule_path, report_path)
 
 		if len(result.issues) > 0:
 			for issue in result.issues:
 				results.append(issue)
 				total_issues += 1
+
+	print "[INFO] Started fsb plugin"
+	for rulepack in rulepacks:
+		if rulepack.startswith('fsb_'):
+			rule_path = 'rules/%s.rulepack' % rulepack
+			fsb_results = fsb_scan(scan_path, rule_path)
+
+			if len(fsb_results) > 0:
+				for issue in fsb_results:
+					results.append(issue)
+					total_issues += 1
 
 	print "[INFO] Started scanjs plugin"
 	js_results = scanjs(scan_path)
