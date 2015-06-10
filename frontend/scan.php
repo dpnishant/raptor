@@ -140,25 +140,58 @@ if (!empty($scan_name) && !empty($git_repo)) {
             echo $div_data;
           }
           ?>
-          <div class="container" style="padding-right: 300px;">
-            <form method="POST" action="" role="form"> 
-              <div class="form-group has-feedback">
+<!--- container start -->
+    <div class="container" style="margin-top: 5%">
+        <div id="content">
+            <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+                <li class="active"><a href="#github" data-toggle="tab">Github</a></li>
+                <li><a href="#upload" data-toggle="tab">Upload</a></li>
+            </ul>
+            <div id="my-tab-content" class="tab-content">
+            <div class="tab-pane active" id="github">
+            <form method="POST" action="" role="form" style="margin-top: 2%"> 
               <label class="control-label">Scan Name</label>
-              <input type="text" class="form-control" name="scan_name" placeholder="Scan Name" />
-              <i class="form-control-feedback"></i>
-              <br />
-              <div class="form-group has-feedback">
-              <label class="control-label">Git Repository</label>
-              <input type="text" class="form-control" name="git_repo" placeholder="Git Repository" />
-              <i class="form-control-feedback glyphicon icon-github"></i>
-              </div><br />
-              <div class="form-group has-feedback">
+              <input type="text" class="form-control" name="scan_name" placeholder="Scan Name" /><br />
+              <label class="control-label">Git Repository URL</label>
+              <input type="text" class="form-control" name="git_repo" placeholder="Git Repository" /><br />
               <button type="submit" class="btn btn-default btn-primary">Scan</button>
-              </div>
-              
           </form>
-        </div>
       </div>
+                <div class="tab-pane" id="upload">
+                    <p>
+                        <!-Upload Form Start-->
+                        <div class="container" style="margin-top: 2%">
+                            <div class="panel panel-default">
+                                <div class="panel-heading"><strong>Upload</strong> <small>a zip archive</small></div>
+                                <div class="panel-body">
+                                    <!-- Standard Form -->
+                                    <h4>Select files from your computer</h4>
+                                    <form action="/raptor/upload" method="POST" enctype="multipart/form-data" id="js-upload-form">
+                                        <div class="form-inline">
+                                            <div class="form-group">
+                                                <input type="file" name="files[]" id="js-upload-files" multiple>
+                                            </div>
+                                            <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
+                                        </div>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                        <!-- /container -->
+                        <!----Upload From End---->
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            jQuery(document).ready(function($) {
+                $('#tabs').tab();
+            });
+        </script>
+    </div>
+    <!-- container -->
     </div>
 
     <!-- Bootstrap core JavaScript
