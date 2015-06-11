@@ -165,11 +165,15 @@ if (!empty($scan_name) && !empty($git_repo)) {
                                 <div class="panel-heading"><strong>Upload</strong> <small>a zip archive</small></div>
                                 <div class="panel-body">
                                     <!-- Standard Form -->
-                                    <h4>Select files from your computer</h4>
+                                    
                                     <form action="/raptor/upload" method="POST" enctype="multipart/form-data" id="js-upload-form">
                                         <div class="form-inline">
+                                        <input type="hidden" name="usr" value="<?php echo $_SESSION['user_name']; ?>" />
+                                        <label class="control-label">Scan Name</label>
+                                        <input type="text" class="form-control" name="scan_name" placeholder="Scan Name" /><br />
+                                            <h4>Select files from your computer</h4>
                                             <div class="form-group">
-                                                <input type="file" name="files[]" id="js-upload-files" multiple>
+                                                <input type="file" name="file" id="js-upload-files" multiple>
                                             </div>
                                             <button type="submit" class="btn btn-sm btn-primary" id="js-upload-submit">Upload files</button>
                                         </div>
