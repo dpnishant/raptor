@@ -9,7 +9,7 @@ $time = $_SERVER['REQUEST_TIME'];
 /**
  * for a 30 minute timeout, specified in seconds
  */
-$timeout_duration = 600;
+$timeout_duration = 60;
 
 /**
  * Here we look for the user’s LAST_ACTIVITY timestamp. If

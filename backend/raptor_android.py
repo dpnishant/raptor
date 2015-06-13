@@ -20,7 +20,7 @@ def reportIssue(warning_type, warning_code, message, severity, path, node):
     xml_issue["warning_type"] = warning_type
     xml_issue["warning_code"] = warning_code
     xml_issue["message"] = message
-    xml_issue["file"] = re.sub('/clones/[a-zA-Z0-9]{56}/', '', path.replace(os.getcwd(),''))
+    xml_issue["file"] = re.sub('/(clones|uploads)/[a-zA-Z0-9]{56}/', '', path.replace(os.getcwd(),''))
     xml_issue["line"] = node.sourceline
     xml_issue["link"] = "http://developer.android.com/guide/topics/security/permissions.html"
     xml_issue["code"] = xml2str(node)

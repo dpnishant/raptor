@@ -238,12 +238,18 @@ $chart_vulntype_metrics = Array();
           $chart_vulntype_metrics[$data['warnings'][$i]['warning_type']] = 0;
       }
 
+      if ( strstr(ltrim($data['warnings'][$i]['file']), '.zip') ) {
+          $line_content = '<td><a target="_blank" href="#">' . ltrim($data['warnings'][$i]['file'], '/') . '#L' . $data['warnings'][$i]['line'] . '</a></td>';
+      } else {
+         $line_content = '<td><a target="_blank" href="' . 'https://github.com/' . $data['scan_info']['app_path'] . 
+           '/blob/master/' . ltrim($data['warnings'][$i]['file'], '/') . '#L' . $data['warnings'][$i]['line'] . '">' . 
+           ltrim($data['warnings'][$i]['file'], '/') . '#L' . $data['warnings'][$i]['line'] . '</a></td>';
+      }
+      
       echo '<tr>' . 
            '<td>' . $rule_id . '</td>' .
            '<td>' . $data['warnings'][$i]['warning_type'] . '</td>' . 
-           '<td><a target="_blank" href="' . 'https://github.com/' . $data['scan_info']['app_path'] . 
-           '/blob/master/' . ltrim($data['warnings'][$i]['file'], '/') . '#L' . $data['warnings'][$i]['line'] . '">' . 
-           ltrim($data['warnings'][$i]['file'], '/') . '#L' . $data['warnings'][$i]['line'] . '</a></td>' .
+           $line_content .
            '<td>' . $data['warnings'][$i]['message'] . '</td>' .
            '<td>' . htmlentities($data['warnings'][$i]['code']) . '</td>' .
            '<td>' . $data['warnings'][$i]['plugin'] . '</td>' .

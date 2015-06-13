@@ -3,8 +3,10 @@
 include_once("session.php");
 
 
-@$scan_name = $_POST['scan_name'];
-@$git_repo = $_POST['git_repo'];
+@$scan_name = $_REQUEST['scan_name'];
+@$git_repo = $_REQUEST['git_repo'];
+@$upload_id = $_REQUEST['upload_id'];
+@$zip_name = $_REQUEST['zip_name'];
 
 function normalize_git_path($git_repo) {
 
@@ -23,25 +25,38 @@ if (!empty($scan_name) && !empty($git_repo)) {
   if (empty($_SESSION['git_repo'])) {
 
     $_SESSION['git_repo'] = $git_repo;
-
-    if (!empty($scan_name)) {
-      $_SESSION['scan_name'] = $scan_name;
-    } else {
-      $_SESSION['scan_name'] = 'default';
-    }
-
+    $_SESSION['scan_name'] = $scan_name;
     $success = true;
     $message = 'Success! Scan started: ' . $git_repo;
 
   } else if ($_SESSION['scan_active'] === true && $_SESSION['git_repo'] === $git_repo) {
       $success = false;
-      $message = 'Warning! This scan is already in progress: ' . $git_repo;
+      $message = 'Warning! This scan is already in progress: ' . $_SESSION['git_repo'];
 
   } else if (!empty($_SESSION['scan_active'] === true)) {
       $success = false;
       $message = 'Warning! A scan is already in progress: ' . $_SESSION['git_repo'];
   }
 
+}
+
+if (!empty($scan_name) && !empty($upload_id) && !empty($zip_name)) {
+  if (empty($_SESSION['upload_id'])) {
+
+    $_SESSION['upload_id'] = $upload_id;
+    $_SESSION['scan_name'] = $scan_name;
+    $_SESSION['zip_name'] = $zip_name;
+    $success = true;
+    $message = 'Success! Scan started: ' . $zip_name;
+
+  } else if ($_SESSION['scan_active'] === true && $_SESSION['zip_name'] === $zip_name) {
+      $success = false;
+      $message = 'Warning! This scan is already in progress: ' . $_SESSION['zip_name'];
+
+  } else if (!empty($_SESSION['scan_active'] === true)) {
+      $success = false;
+      $message = 'Warning! A scan is already in progress: ' . $_SESSION['zip_name'];
+  }
 }
 
 ?>
@@ -90,9 +105,9 @@ if (!empty($scan_name) && !empty($git_repo)) {
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/">Settings</a></li>
-            <li><a href="/"><?php echo $_SESSION['user_name']; ?></a></li>
+            <li><a href="">Dashboard</a></li>
+            <li><a href="">Settings</a></li>
+            <li><a href=""><?php echo $_SESSION['user_name']; ?></a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
           <form class="navbar-form navbar-right">
@@ -136,7 +151,7 @@ if (!empty($scan_name) && !empty($git_repo)) {
                         location.href="status.php";
                       },2000);</script>'; 
 
-          if (!empty($scan_name) && !empty($git_repo)) {
+          if ( !empty($scan_name) && ( !empty($git_repo) || !empty($zip_name) ) ) {
             echo $div_data;
           }
           ?>

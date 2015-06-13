@@ -2,8 +2,7 @@
 include_once("session.php");
 
 
-if(!empty($_SESSION['git_repo']) && empty($_SESSION['scan_active']))
-{
+if ( ( !empty($_SESSION['git_repo']) || !empty($_SESSION['zip_name']) ) && empty($_SESSION['scan_active']) ) {
   $_SESSION['scan_active'] = true;
 }
 
@@ -49,9 +48,9 @@ if(!empty($_SESSION['git_repo']) && empty($_SESSION['scan_active']))
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/">Settings</a></li>
-            <li><a href="/"><?php echo $_SESSION['user_name']; ?></a></li>
+            <li><a href="">Dashboard</a></li>
+            <li><a href="">Settings</a></li>
+            <li><a href=""><?php echo $_SESSION['user_name']; ?></a></li>
             <li><a href="logout.php">Logout</a></li>
           </ul>
           <form class="navbar-form navbar-right">
@@ -82,9 +81,14 @@ if(!empty($_SESSION['git_repo']) && empty($_SESSION['scan_active']))
           <h1 class="page-header">
             <?php
               $loader_html = '';
-              if (!empty($_SESSION['scan_active']) && !empty($_SESSION['git_repo'])) {
-                if ($_SESSION['scan_active'] === true)
-                  echo "Scanning: " . htmlentities($_SESSION['git_repo']);
+              if (!empty($_SESSION['scan_active']) && ( !empty($_SESSION['git_repo']) || !empty($_SESSION['zip_name']) ) ) { 
+                  if (!empty($_SESSION['git_repo'])) {
+                    $scan_type  =  $_SESSION['git_repo'];
+                  } else {
+                    $scan_type = $_SESSION['zip_name'];
+                  }
+                    
+                  echo "Scanning: " . htmlentities($scan_type);
                   $loader_html = '<center><img src="assets/img/loader.gif" id="loader_img" style="margin-bottom: 10%; margin-top: 5%;" ><br />
                   <div style="width: 50%;" class="alert alert-danger" role="alert" id="notify">
                   <strong>please do not close this window, till scan job finishes</strong></div></center>';
@@ -105,7 +109,7 @@ if(!empty($_SESSION['git_repo']) && empty($_SESSION['scan_active']))
       </div>
     </div>
         <?php
-          if(!empty($_SESSION['git_repo']) && !empty($_SESSION['scan_active'])) {
+          if( (!empty($_SESSION['git_repo']) || !empty($_SESSION['zip_name']) ) && !empty($_SESSION['scan_active']) ) {
               $ajax_element = '<script>
               
               function start_scan() {

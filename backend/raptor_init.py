@@ -30,6 +30,7 @@ def scan_all(scan_path, repo_path):
 	js_results = []
 	ror_results = []
 	php_results = []
+	fsb_results = []
 	total_issues = 0
 
 	start_time = time.strftime("%a, %d %b %Y %I:%M:%S %p", time.localtime())
@@ -77,6 +78,10 @@ def scan_all(scan_path, repo_path):
 			results.append(php_result)
 			total_issues += 1
 
+	if repo_path[-4:len(repo_path)] == '.zip':
+		for result in results:
+			result['file'] = result['file'].replace(repo_path.rstrip('.zip'), repo_path)
+
 	counter_end = time.clock()
 	json["scan_info"]["app_path"] = repo_path
 	json["scan_info"]["security_warnings"] = total_issues
@@ -121,12 +126,24 @@ def delete_residue(path, report_files):
 	shutil.rmtree(path)
 
 def start(repo_path, report_dir, internal):
-	print "==============New Scan==================="
+	print "==============New Scan: [github] ==================="
 	print "[INFO] Now cloning: %s" % (repo_path)
 	cloned_path = clone(repo_path, internal)
 	if os.path.isdir(cloned_path):
 		print "[INFO] Now scanning: %s" % repo_path
 		results = scan_all(cloned_path, repo_path)
-		print "[INFO] Scan complete! Deleting repo..."
+		print "[INFO] Scan complete! Deleting ..."
 		delete_residue(cloned_path, rulepacks)
 		return results
+
+def scan_zip(upload_id, zip_name, report_dir):
+	print "==============New Scan: [zip] ==================="
+	extracted_path = os.path.join(os.path.abspath('./uploads'), upload_id)
+	print "scan_zip():raptor_init.py"
+	if os.path.exists(extracted_path):
+		print "[INFO] Now scanning: %s" % zip_name
+		results = scan_all(extracted_path, zip_name)
+		print "[INFO] Scan complete! Deleting ..."
+		delete_residue(extracted_path, zip_name)
+		return results
+		

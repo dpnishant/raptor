@@ -2,7 +2,7 @@
 
 session_start();
 
-$timeout_duration = 600;
+$timeout_duration = 60;
 
 if(!empty($_POST['username']) && !empty($_POST['password'])) {
 
