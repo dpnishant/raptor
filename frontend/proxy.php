@@ -53,7 +53,7 @@ if( !empty($_SESSION['git_repo']) && !empty($_SESSION['scan_active']) ) {
 
 	if ($json) {
 		header('Content-Type: text/html');
-		echo "OK";	
+		echo "Success";	
 	} else {
 		header('Content-Type: text/html');
 		echo "Failed";

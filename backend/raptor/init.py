@@ -138,7 +138,6 @@ def start(repo_path, report_dir, internal):
 def scan_zip(upload_id, zip_name, report_dir):
 	print "==============New Scan: [zip] ==================="
 	extracted_path = os.path.join(os.path.abspath('./uploads'), upload_id)
-	print "scan_zip():raptor_init.py"
 	if os.path.exists(extracted_path):
 		print "[INFO] Now scanning: %s" % zip_name
 		results = scan_all(extracted_path, zip_name)

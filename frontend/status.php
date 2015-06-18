@@ -119,7 +119,7 @@ if ( ( !empty($_SESSION['git_repo']) || !empty($_SESSION['zip_name']) ) && empty
                 xhr.onreadystatechange = function(e) {
                   if (this.readyState == 4 && this.status == 200) {
                     var resp = this.responseText;
-                    console.log(resp);
+                    console.log("proxy.php: Scan " + resp);
                     var notify_div = document.getElementById("notify");
                     var loader_img = document.getElementById("loader_img");
                     loader_img.parentNode.removeChild(loader_img);

@@ -8,7 +8,7 @@ if (!empty($_SESSION['current_scan_report'])) {
 $data = json_decode(file_get_contents($_SESSION['current_scan_report']), true);
 
 } else {
-error_log('no report path in session');
+error_log("[ERROR] session: current_scan_report is null.");
 }
 
 $chart_plugin_metrics = Array();
@@ -283,10 +283,11 @@ $chart_vulntype_metrics = Array();
         }
 
     echo '<td>' . @$data['warnings'][$i]['render_path'] . '</td>' .'</tr>';
-    $_SESSION['scan_active'] = false;
-    $_SESSION['git_repo'] = '';
-
     }
+      $_SESSION['scan_active'] = false;
+      $_SESSION['git_repo'] = '';
+      $_SESSION['zip_name'] = '';
+      $_SESSION['upload_id'] = '';
   } else {
       for($i=0; $i < 11; $i++) {
         echo '<td></td>';
