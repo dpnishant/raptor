@@ -1,4 +1,5 @@
-from raptor_init import *
+#!usr/bin/python
+from raptor import init as init
 from flask import Flask, request, jsonify, Response, redirect, url_for
 from werkzeug.contrib.fixers import ProxyFix
 from werkzeug import secure_filename
@@ -20,7 +21,7 @@ def help():
 def internal_repo_scan():
     repo = request.args.get('r')
     report_directory = request.args.get('p')
-    json_results = start(repo, report_directory, internal=True)
+    json_results = init.start(repo, report_directory, internal=True)
     
     if not os.path.exists(os.path.dirname(report_directory)):
         os.makedirs(os.path.dirname(report_directory), mode=0777)
@@ -38,7 +39,7 @@ def internal_repo_scan():
 def external_repo_scan():
     repo = request.args.get('r')
     report_directory = request.args.get('p')
-    json_results = start(repo, report_directory, internal=False)
+    json_results = init.start(repo, report_directory, internal=False)
 
     if not os.path.exists(os.path.dirname(report_directory)):
         os.makedirs(os.path.dirname(report_directory), mode=0777)
@@ -107,7 +108,7 @@ def zip_scan():
     upload_id = request.args.get('upload_id')
     zip_name = request.args.get('zip_name')
     report_directory = request.args.get('p')
-    json_results = scan_zip(upload_id, zip_name, report_directory)
+    json_results = init.scan_zip(upload_id, zip_name, report_directory)
 
     if not os.path.exists(os.path.dirname(report_directory)):
         os.makedirs(os.path.dirname(report_directory), mode=0777)
