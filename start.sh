@@ -1,3 +1,3 @@
 #!/bin/sh
 cd backend
-gunicorn -c gunicorn_config.py server:app
+gunicorn -c config.py server:app
