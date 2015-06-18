@@ -39,6 +39,7 @@ rm -rf /etc/apache2/sites-available/raptor.conf
 rm -rf /etc/apache2/sites-enabled/raptor.conf
 rm -rf /etc/nginx/sites-available/raptor
 rm -rf /etc/nginx/sites-enabled/raptor
+rm -rf /etc/nginx/sites-enabled/default
 cp -r confs/apache2/* /etc/apache2
 cp -r confs/nginx/* /etc/nginx
 ln -s /etc/apache2/sites-available/raptor.conf /etc/apache2/sites-enabled/raptor.conf
