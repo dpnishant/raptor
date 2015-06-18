@@ -1,5 +1,5 @@
 #!usr/bin/python
-# Sample Gunicorn configuration file.
+# Raptor Gunicorn configuration file.
 
 #
 # Server socket
