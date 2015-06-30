@@ -83,7 +83,7 @@ GNU GPL v2.0
 [Anant Shrivastava]:https://twitter.com/anantshri
 [YouTube Install]:https://www.youtube.com/v/0KneQwJiUFk?start=0&end=537
 [YouTube Usage]:https://www.youtube.com/v/0KneQwJiUFk?start=550
-[Init Script]:https://github.com/dpnishant/raptor/blob/master/backend/raptor_init.py#L9
+[Init Script]:https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L9
 [Rules Editor]:http://127.0.0.1/raptor/editrules.php
 [Raptor Home]:http://127.0.0.1/raptor/
 [Manitree]:https://github.com/antitree/manitree/
