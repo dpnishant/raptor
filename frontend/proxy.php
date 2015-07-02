@@ -46,7 +46,7 @@ if( !empty($_SESSION['git_repo']) && !empty($_SESSION['scan_active']) ) {
 	error_log($path);
 
 	$ch = curl_init();
-	curl_setopt($ch, CURLOPT_URL, ENDPOINT . '/external/scan/?r=' . $_SESSION['git_repo'] . '&p=' . $path);
+	curl_setopt($ch, CURLOPT_URL, ENDPOINT . '/' . $_SESSION['git_type'] . '/scan/?r=' . $_SESSION['git_repo'] . '&p=' . $path);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
 	$json = curl_exec($ch);
 	curl_close($ch);

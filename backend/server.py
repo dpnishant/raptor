@@ -52,6 +52,24 @@ def external_repo_scan():
     print "[INFO] Report created at %s" % (report_directory)
     return jsonify(json_results)
 
+@app.route('/purge/', methods=['GET'])
+def delete_report():
+    resp_content = 'null'
+    report_path = os.path.abspath(request.args.get('path'))
+    if os.path.exists(report_path) and report_path.startswith('/var/raptor/scan_results'):
+        try:
+            if os.path.isdir(report_path):
+                shutil.rmtree(report_path)
+                resp_content = "Success"
+            elif os.path.isfile(report_path):
+                os.remove(report_path)
+                resp_content = "Success"
+        except Exception as e:
+            print "[ERROR] %s: %s" % (report_path, str(e))
+            resp_content = "Failure"
+    else:
+        resp_content = "Failure"
+    return resp_content
 
 UPLOAD_FOLDER = os.path.abspath('./uploads')
 ALLOWED_EXTENSIONS = set(['zip'])

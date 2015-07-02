@@ -8,9 +8,22 @@ include_once("session.php");
 @$upload_id = $_REQUEST['upload_id'];
 @$zip_name = $_REQUEST['zip_name'];
 
-function normalize_git_path($git_repo) {
+function normalize_git_path($git_repo) {  
 
-    $git_repo = str_ireplace('https://github.com/', '', $git_repo = str_ireplace('.git', '', $git_repo));
+#point your github server endpoints here, and do NOT forget the trailing slash
+$git_endpoint = array(
+  'internal' => 'https://github.dummycorp.com/',
+  'external' => 'https://github.com/'
+  );
+
+if ( strstr($git_repo, $git_endpoint['internal']) ) {
+      $_SESSION['git_type'] = 'internal';
+    } else if ( strstr($git_repo, $git_endpoint['external']) ) {
+      $_SESSION['git_type'] = 'external';
+    }
+
+    $git_repo = str_ireplace($git_endpoint['external'], '', $git_repo = str_ireplace('.git', '', $git_repo));
+    $git_repo = str_ireplace($git_endpoint['internal'], '', $git_repo);
     
     if ($git_repo[strlen($git_repo)-1] === '/')
       $git_repo[strlen($git_repo)-1] = '';
