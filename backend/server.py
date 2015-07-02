@@ -3,7 +3,7 @@ from raptor import init as init
 from flask import Flask, request, jsonify, Response, redirect, url_for
 from werkzeug.contrib.fixers import ProxyFix
 from werkzeug import secure_filename
-import sys, os, json, threading, hashlib, shutil, zipfile, keyring
+import sys, os, json, threading, hashlib, shutil, zipfile, keyring, requests
 
 
 app = Flask(__name__)
