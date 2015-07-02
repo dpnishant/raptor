@@ -22,9 +22,6 @@ json = {
     "errors": []
 }
 
-#Do NOT add the trailing slash after the endpoints.
-github_endpoints = { 'internal': 'https://github.dummycorp.com', 'external': 'https://github.com' }
-
 def scan_all(scan_path, repo_path):
     counter_start = time.clock()
     
@@ -104,9 +101,9 @@ def clone(repo_name, internal):
         shutil.rmtree(os.getcwd() + '/clones/' + uniq_path)
 
     if internal:
-        repo_url = '%s/%s.git' % (github_endpoints['internal'], repo_name)
+        repo_url = '%s/%s.git' % (str(keyring.get_password('int_github', 'endpoint')), repo_name)
     else:
-        repo_url = '%s/%s.git' % (github_endpoints['external'], repo_name)
+        repo_url = '%s/%s.git' % (str(keyring.get_password('ext_github', 'endpoint')), repo_name)
 
     try:
         clone_dir = os.getcwd() + '/clones/'

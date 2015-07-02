@@ -3,7 +3,7 @@ from raptor import init as init
 from flask import Flask, request, jsonify, Response, redirect, url_for
 from werkzeug.contrib.fixers import ProxyFix
 from werkzeug import secure_filename
-import sys, os, json, threading, hashlib, shutil, zipfile
+import sys, os, json, threading, hashlib, shutil, zipfile, keyring
 
 
 app = Flask(__name__)
@@ -74,8 +74,13 @@ def delete_report():
 UPLOAD_FOLDER = os.path.abspath('./uploads')
 ALLOWED_EXTENSIONS = set(['zip'])
 
-if not os.path.exists(UPLOAD_FOLDER):
+try:
     os.makedirs(UPLOAD_FOLDER)
+except Exception as e:
+    if ' File exists: ' in str(e):
+        print "[INFO] %s" % str(e)
+    else:
+        raise e
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -139,6 +144,39 @@ def zip_scan():
     print "[INFO] Report created at %s" % (report_directory)
     return jsonify(json_results)
 
+@app.route('raptor/githook', methods=['POST'])
+def gitHook():
+    try:
+        parsed = json.loads(request.form['payload'])
+        repo = parsed['repository']['full_name']
+        head_commitId = parsed['head_commit']['id']
+        user = parsed['repository']['owner']['name']
+        url = parsed['repository']['html_url']
+
+        if url.startswith(str(keyring.get_password('ext_github', 'api_endpoint'))):
+            internal = False
+            r = requests.get('%s/repos/%s/git/commits/%s?access_token=%s' % (str(keyring.get_password('ext_github', 'api_endpoint')), repo, head_commitId, str(keyring.get_password('ext_github', 'token'))))
+        elif url.startswith(str(keyring.get_password('int_github', 'api_endpoint'))):
+            internal = True
+            r = requests.get('%s/repos/%s/git/commits/%s?access_token=%s' % (str(keyring.get_password('int_github', 'api_endpoint')), repo, head_commitId, str(keyring.get_password('ext_github', 'token'))))
+
+        if r.json()['message'] == parsed['head_commit']['message']:
+            report_directory = '%s/commit-%s/%s' % (user, head_commitId, repo)
+            json_results = init.start(repo, report_directory, internal=True)
+            
+            if not os.path.exists(os.path.dirname(report_directory)):
+                os.makedirs(os.path.dirname(report_directory), mode=0777)
+            
+            results = str(json.dumps(json_results))
+            fhandle = open(report_directory, "w")
+            content = fhandle.write(results)
+            fhandle.close()
+
+            print "[INFO] Report created at %s" % (report_directory)
+            return jsonify(json_results)
+    except Exception as e:
+        print str(e)
+    return ""
 
 app.wsgi_app = ProxyFix(app.wsgi_app)
 
