@@ -144,7 +144,7 @@ def zip_scan():
     print "[INFO] Report created at %s" % (report_directory)
     return jsonify(json_results)
 
-@app.route('raptor/githook', methods=['POST'])
+@app.route('/raptor/githook', methods=['POST'])
 def gitHook():
     try:
         parsed = json.loads(request.form['payload'])
