@@ -3,7 +3,7 @@ from raptor import init as init
 from flask import Flask, request, jsonify, Response, redirect, url_for
 from werkzeug.contrib.fixers import ProxyFix
 from werkzeug import secure_filename
-import sys, os, json, threading, hashlib, shutil, zipfile, keyring, requests
+import sys, os, json, threading, hashlib, shutil, zipfile, requests, time
 
 
 app = Flask(__name__)
@@ -147,22 +147,23 @@ def zip_scan():
 @app.route('/raptor/githook', methods=['POST'])
 def gitHook():
     try:
+    	filename = '%s.json' % (str(int(time.time())))
         parsed = json.loads(request.form['payload'])
         repo = parsed['repository']['full_name']
         head_commitId = parsed['head_commit']['id']
         user = parsed['repository']['owner']['name']
         url = parsed['repository']['html_url']
 
-        if url.startswith(str(keyring.get_password('ext_github', 'api_endpoint'))):
+        if url.startswith(os.environ['ext_git_url']):
             internal = False
-            r = requests.get('%s/repos/%s/git/commits/%s?access_token=%s' % (str(keyring.get_password('ext_github', 'api_endpoint')), repo, head_commitId, str(keyring.get_password('ext_github', 'token'))))
-        elif url.startswith(str(keyring.get_password('int_github', 'api_endpoint'))):
+            r = requests.get('%s/repos/%s/git/commits/%s?access_token=%s' % (os.environ['ext_git_apiurl'], repo, head_commitId, os.environ['ext_git_token']))
+        elif url.startswith(os.environ['int_git_url']):
             internal = True
-            r = requests.get('%s/repos/%s/git/commits/%s?access_token=%s' % (str(keyring.get_password('int_github', 'api_endpoint')), repo, head_commitId, str(keyring.get_password('ext_github', 'token'))))
+            r = requests.get('%s/repos/%s/git/commits/%s?access_token=%s' % (os.environ['int_git_apiurl'], repo, head_commitId, os.environ['int_git_apiurl']))
 
         if r.json()['message'] == parsed['head_commit']['message']:
-            report_directory = '%s/commit-%s/%s' % (user, head_commitId, repo)
-            json_results = init.start(repo, report_directory, internal=True)
+            report_directory = '%s/%s/commit-%s/%s/%s' % (os.environ['reportpath'], user, head_commitId, repo, filename)
+            json_results = init.start(repo, report_directory, internal)
             
             if not os.path.exists(os.path.dirname(report_directory)):
                 os.makedirs(os.path.dirname(report_directory), mode=0777)

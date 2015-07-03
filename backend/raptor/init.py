@@ -1,10 +1,11 @@
 #!/usr/bin/python
-import os, sys, hashlib, shutil, keyring
+import os, sys, hashlib, shutil
 import pygit2 as git
 import json as jsoner
 from codescan import *
 from externalscan import *
 from fsb import *
+
 
 rulepacks = ['common', 'android', 'php', 'actionscript', 'fsb_android']
 
@@ -101,9 +102,9 @@ def clone(repo_name, internal):
         shutil.rmtree(os.getcwd() + '/clones/' + uniq_path)
 
     if internal:
-        repo_url = '%s/%s.git' % (str(keyring.get_password('int_github', 'endpoint')), repo_name)
+        repo_url = '%s/%s.git' % (os.environ['int_git_url'], repo_name)
     else:
-        repo_url = '%s/%s.git' % (str(keyring.get_password('ext_github', 'endpoint')), repo_name)
+        repo_url = '%s/%s.git' % (os.environ['ext_git_url'], repo_name)
 
     try:
         clone_dir = os.getcwd() + '/clones/'
@@ -112,11 +113,11 @@ def clone(repo_name, internal):
         repo_path = clone_dir + uniq_path
 
         if internal==True:
-            username = str(keyring.get_password('int_github', 'username'))
-            password = str(keyring.get_password('int_github', 'token'))
+            username = os.environ['int_git_user']
+            password = os.environ['int_git_token']
         else:
-            username = str(keyring.get_password('ext_github', 'username'))
-            password = str(keyring.get_password('ext_github', 'token'))
+            username = os.environ['ext_git_user']
+            password = os.environ['ext_git_token']
 
         login_info = git.UserPass(username, password)
         git_obj = git.clone_repository(repo_url, repo_path, credentials=login_info)            
