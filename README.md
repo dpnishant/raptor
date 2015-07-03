@@ -24,11 +24,9 @@ Note: Most of the following tools/modules/libs have been modified heavily to be 
 * [Brakeman] - for Ruby On Rails
 * [RIPS] - for PHP
 * [Manitree] - for AndroidManifest.xml insecurities
-* [safe-regex] - for detecting [ReDoS] vulnerabilities
 
 Avaiables Rulepacks (_currently_):
 * ActionScript - supports ActionScript 2.0 & 3.0 source/sinks
-* Java - partial support for Andrdoid. J2EE and JSP support yet to be added. (to be merged with FindSecurityBugs rules)
 * [FindSecurityBugs]  (Rules Only) - for Java (J2EE, JSP, Android, Scala, Groovy etc.)
 
 ### Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)
@@ -91,7 +89,5 @@ GNU GPL v2.0
 [Raptor Home]:http://127.0.0.1/raptor/
 [Manitree]:https://github.com/antitree/manitree/
 [FindSecurityBugs]:http://h3xstream.github.io/find-sec-bugs/
-[safe-regex]:https://www.npmjs.com/package/safe-regex
-[ReDoS]:https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS
 [github_backend]:https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L25-L26
 [github_frontend]:https://github.com/dpnishant/raptor/blob/master/frontend/scan.php#L13-L17
