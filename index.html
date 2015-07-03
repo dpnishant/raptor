@@ -59,15 +59,12 @@ This is best-used if you plug Raptor into your CI/CD pipeline.</p>
 <a href="http://rips-scanner.sourceforge.net/">RIPS</a> - for PHP</li>
 <li>
 <a href="https://github.com/antitree/manitree/">Manitree</a> - for AndroidManifest.xml insecurities</li>
-<li>
-<a href="https://www.npmjs.com/package/safe-regex">safe-regex</a> - for detecting <a href="https://www.owasp.org/index.php/Regular_expression_Denial_of_Service_-_ReDoS">ReDoS</a> vulnerabilities</li>
 </ul>
 
 <p>Avaiables Rulepacks (<em>currently</em>):</p>
 
 <ul>
 <li>ActionScript - supports ActionScript 2.0 &amp; 3.0 source/sinks</li>
-<li>Java - partial support for Andrdoid. J2EE and JSP support yet to be added. (to be merged with FindSecurityBugs rules)</li>
 <li>
 <a href="Rules%20Only">FindSecurityBugs</a> - for Java (J2EE, JSP, Android, Scala, Groovy etc.)</li>
 </ul>
@@ -101,9 +98,14 @@ sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre>
 <h5>
 <a id="rules-editor" class="anchor" href="#rules-editor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rules Editor</h5>
 
-<p>You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor_init.py#L9">Init Script</a>. Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set!</p>
+<p>You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L9">Init Script</a>. Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set!</p>
 
 <p>You can access it here: <a href="http://127.0.0.1/raptor/editrules.php">Rules Editor</a></p>
+
+<h5>
+<a id="publicprivate-github-instance" class="anchor" href="#publicprivate-github-instance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public/Private GitHub instance</h5>
+
+<p>You can use Raptor to scan your organization's private as well as public instances of GitHub by specifiying the right server endpoints at <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L25-L26">here</a> and <a href="https://github.com/dpnishant/raptor/blob/master/frontend/scan.php#L13-L17">here</a>.</p>
 
 <h3>
 <a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h3>
