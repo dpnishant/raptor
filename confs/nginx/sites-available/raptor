@@ -7,33 +7,40 @@ server {
 	# Listen on all interfaces
 	server_name 0.0.0.0;
 
-        location /raptor/heartbeat {
-        proxy_set_header X-Real-IP  $remote_addr;
-        proxy_set_header X-Forwarded-For $remote_addr;
-        proxy_set_header Host $host;
-        proxy_pass http://127.0.0.1:8000; #defined in gunicorn_config.py
-        }
+    location /raptor/heartbeat {
+      proxy_set_header X-Real-IP  $remote_addr;
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_set_header Host $host;
+      proxy_pass http://127.0.0.1:8000; #defined in gunicorn_config.py
+    }
+
+	location /raptor/githook {
+      proxy_set_header X-Real-IP  $remote_addr;
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_set_header Host $host;
+      proxy_pass http://127.0.0.1:8000; #defined in gunicorn_config.py
+    }    
 
 	location /raptor/upload {
-	proxy_set_header X-Real-IP  $remote_addr;
-        proxy_set_header X-Forwarded-For $remote_addr;
-        proxy_set_header Host $host;
-        proxy_pass http://127.0.0.1:8000; #defined in gunicorn_config.py
+	  proxy_set_header X-Real-IP  $remote_addr;
+      proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_set_header Host $host;
+      proxy_pass http://127.0.0.1:8000; #defined in gunicorn_config.py
 	}
 
 	# pass the PHP scripts to Apache server listening on 127.0.0.1:8081
 
 	location ~ \.php$ {
-	proxy_set_header X-Real-IP  $remote_addr;
-	proxy_set_header X-Forwarded-For $remote_addr;
-        proxy_set_header Host $host;
-        proxy_pass http://127.0.0.1:8081;
+	  proxy_set_header X-Real-IP  $remote_addr;
+	  proxy_set_header X-Forwarded-For $remote_addr;
+      proxy_set_header Host $host;
+      proxy_pass http://127.0.0.1:8081;
 	}
 
 	location /raptor {
-		# First attempt to serve request as file, then
-		# as directory, then fall back to displaying a 404.
-		try_files $uri $uri/ /index.php =404;
+	  # First attempt to serve request as file, then
+	  # as directory, then fall back to displaying a 404.
+	  try_files $uri $uri/ /index.php =404;
 	}
 
 	# deny access to .htaccess files, if Apache's document root
