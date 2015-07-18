@@ -17,6 +17,10 @@ def server_error(e):
 def help():
     return '<h1>Usage</h1><h3>/scan/?r=&lt;git-repo-path&gt;&amp;p=&lt;report-save-directory&gt;</h3>'
 
+@app.route('/raptor/heartbeat', methods=['GET'])
+def heartbeat():
+    return '{"status":"true", "time":%s}' % (str(int(time.time())))
+
 @app.route('/internal/scan/', methods=['GET'])
 def internal_repo_scan():
     repo = request.args.get('r')

@@ -184,6 +184,7 @@ include_once("session.php");
     editor = new JSONEditor(container, options, json);
 });
 </script>
+<script src="dist/js/heartbeat.js"></script>
 </body>
 </html>
 

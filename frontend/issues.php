@@ -27,10 +27,8 @@ $chart_vulntype_metrics = Array();
   <meta name="author" content="">
   <link rel="icon" href="/favicon.ico">
   
-  <title>
-    Raptor: Source Vulnerability Scanner
-  </title>
-  
+  <title>Raptor: Source Vulnerability Scanner</title>
+
   <!-- Bootstrap core CSS -->
   <link href="dist/css/bootstrap.min.css" rel="stylesheet">
   
@@ -52,8 +50,22 @@ $chart_vulntype_metrics = Array();
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js">
 </script>
 <![endif]-->
-  <script type="text/javascript" src="https://www.google.com/jsapi">
-  </script>
+  <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    
+    <script src="dist/js/jquery-1.11.1.min.js"></script>
+    <script src="dist/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap Modal Dialog JS/CSS -->
+    <script src="dist/js/bootstrap-dialog.min.js"></script>
+    <link href="dist/css/bootstrap-dialog.min.css" rel="stylesheet" type="text/css">
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <style>
+        .login-dialog .modal-dialog {
+          width: 300px;
+        }
+    </style>
   </head>
   
   <body>
@@ -513,5 +525,6 @@ $chart_vulntype_metrics = Array();
         200x200
       </text>
     </svg>
+    <script src="dist/js/heartbeat.js"></script>
   </body>
 </html>
