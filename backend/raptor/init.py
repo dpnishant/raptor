@@ -5,9 +5,11 @@ import json as jsoner
 from codescan import *
 from externalscan import *
 from fsb import *
+from gitrob import *
 
 
-rulepacks = ['common', 'android', 'php', 'actionscript', 'fsb_android']
+rulepacks = ['common', 'android', 'php', 'actionscript']
+plugin_rulepacks = ['fsb_android', 'gitrob']
 
 json = { 
         "scan_info": {
@@ -36,18 +38,28 @@ def scan_all(scan_path, repo_path):
     start_time = time.strftime("%a, %d %b %Y %I:%M:%S %p", time.localtime())
 
     for rulepack in rulepacks:
-        if not rulepack.startswith('fsb_'):
-            rule_path = 'rules/%s.rulepack' % rulepack
-            report_path = scan_path + '/%s_report.json' % rulepack
-            result = Scanner(scan_path, rule_path, report_path)
+        rule_path = 'rules/%s.rulepack' % rulepack
+        report_path = scan_path + '/%s_report.json' % rulepack
+        result = Scanner(scan_path, rule_path, report_path)
 
         if len(result.issues) > 0:
             for issue in result.issues:
                 results.append(issue)
                 total_issues += 1
 
+    print "[INFO] Started gitrob plugin"
+    for rulepack in plugin_rulepacks:
+        if rulepack.startswith('gitrob'):
+            rule_path = 'rules/%s.rulepack' % rulepack
+            gitrob_results = gitrob_scan(scan_path, rule_path)
+
+            if len(gitrob_results) > 0:
+                for issue in gitrob_results:
+                    results.append(issue)
+                    total_issues += 1
+
     print "[INFO] Started fsb plugin"
-    for rulepack in rulepacks:
+    for rulepack in plugin_rulepacks:
         if rulepack.startswith('fsb_'):
             rule_path = 'rules/%s.rulepack' % rulepack
             fsb_results = fsb_scan(scan_path, rule_path)

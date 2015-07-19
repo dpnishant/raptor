@@ -1,0 +1,394 @@
+[
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "LipfcnNh",
+    "caption": "Private SSH key",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "LipfZHNh",
+    "caption": "Private SSH key",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "LipfZWQyNTUxOQ==",
+    "caption": "Private SSH key",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "LipfZWNkc2E=",
+    "caption": "Private SSH key",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "cGVt",
+    "caption": "Potential cryptographic private key",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "regex",
+    "pattern": "a2V5KHBhaXIpPw==",
+    "caption": "Potential cryptographic private key",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "cGtjczEy",
+    "caption": "Potential cryptographic key bundle",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "cGZ4",
+    "caption": "Potential cryptographic key bundle",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "cDEy",
+    "caption": "Potential cryptographic key bundle",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "YXNj",
+    "caption": "Potential cryptographic key bundle",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "b3RyLnByaXZhdGVfa2V5",
+    "caption": "Pidgin OTR private key",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj8oYmFzaF98enNoX3x6KT9oaXN0b3J5",
+    "caption": "Shell command history file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj9teXNxbF9oaXN0b3J5",
+    "caption": "MySQL client command history file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj9wc3FsX2hpc3Rvcnk=",
+    "caption": "PostgreSQL client command history file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj9pcmJfaGlzdG9yeQ==",
+    "caption": "Ruby IRB console history file",
+    "description": null
+  },
+  {
+    "part": "path",
+    "type": "regex",
+    "pattern": "Lj9wdXJwbGVcL2FjY291bnRzLnhtbA==",
+    "caption": "Pidgin chat client account configuration file",
+    "description": null
+  },
+  {
+    "part": "path",
+    "type": "regex",
+    "pattern": "Lj94Y2hhdDI/XC9zZXJ2bGlzdF8/LmNvbmY=",
+    "caption": "Hexchat/XChat IRC client server list configuration file",
+    "description": null
+  },
+  {
+    "part": "path",
+    "type": "regex",
+    "pattern": "Lj9pcnNzaVwvY29uZmln",
+    "caption": "Irssi IRC client configuration file",
+    "description": null
+  },
+  {
+    "part": "path",
+    "type": "regex",
+    "pattern": "Lj9yZWNvbi1uZ1wva2V5cy5kYg==",
+    "caption": "Recon-ng web reconnaissance framework API key database",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj9kYmVhdmVyLWRhdGEtc291cmNlcy54bWw=",
+    "caption": "DBeaver SQL database manager configuration file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj9tdXR0cmM=",
+    "caption": "Mutt e-mail client configuration file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj9zM2NmZw==",
+    "caption": "S3cmd configuration file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj90cmM=",
+    "caption": "T command-line Twitter client configuration file",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "b3Zwbg==",
+    "caption": "OpenVPN client configuration file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj9naXRyb2JyYw==",
+    "caption": "Well, this is awkward... Gitrob configuration file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj8oYmFzaHx6c2gpcmM=",
+    "caption": "Shell configuration file",
+    "description": "Shell configuration files might contain information such as server hostnames, passwords and API keys."
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj8oYmFzaF98enNoXyk/cHJvZmlsZQ==",
+    "caption": "Shell profile configuration file",
+    "description": "Shell configuration files might contain information such as server hostnames, passwords and API keys."
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj8oYmFzaF98enNoXyk/YWxpYXNlcw==",
+    "caption": "Shell command alias configuration file",
+    "description": "Shell configuration files might contain information such as server hostnames, passwords and API keys."
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "c2VjcmV0X3Rva2VuLnJi",
+    "caption": "Ruby On Rails secret token configuration file",
+    "description": "If the Rails secret token is known, it can allow for remote code execution. (http://www.exploit-db.com/exploits/27527/)"
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "b21uaWF1dGgucmI=",
+    "caption": "OmniAuth configuration file",
+    "description": "The OmniAuth configuration file might contain client application secrets."
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "Y2FycmllcndhdmUucmI=",
+    "caption": "Carrierwave configuration file",
+    "description": "Can contain credentials for online storage systems such as Amazon S3 and Google Storage."
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "c2NoZW1hLnJi",
+    "caption": "Ruby On Rails database schema file",
+    "description": "Contains information on the database schema of a Ruby On Rails application."
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "ZGF0YWJhc2UueW1s",
+    "caption": "Potential Ruby On Rails database configuration file",
+    "description": "Might contain database credentials."
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "c2V0dGluZ3MucHk=",
+    "caption": "Django configuration file",
+    "description": "Might contain database credentials, online storage system credentials, secret keys, etc."
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "KC4qKT9jb25maWcoLmluYyk/LnBocA==",
+    "caption": "PHP configuration file",
+    "description": "Might contain credentials and keys."
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "a2Ri",
+    "caption": "KeePass password manager database file",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "YWdpbGVrZXljaGFpbg==",
+    "caption": "1Password password manager database file",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "a2V5Y2hhaW4=",
+    "caption": "Apple Keychain database file",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "regex",
+    "pattern": "a2V5KHN0b3JlfHJpbmcp",
+    "caption": "GNOME Keyring database file",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "bG9n",
+    "caption": "Log file",
+    "description": "Log files might contain information such as references to secret HTTP endpoints, session IDs, user information, passwords and API keys."
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "cGNhcA==",
+    "caption": "Network traffic capture file",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "regex",
+    "pattern": "c3FsKGR1bXApPw==",
+    "caption": "SQL dump file",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "Z251Y2FzaA==",
+    "caption": "GnuCash database file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "YmFja3Vw",
+    "caption": "Contains word: backup",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "ZHVtcA==",
+    "caption": "Contains word: dump",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "cGFzc3dvcmQ=",
+    "caption": "Contains word: password",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "cHJpdmF0ZS4qa2V5",
+    "caption": "Contains words: private, key",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "amVua2lucy5wbHVnaW5zLnB1Ymxpc2hfb3Zlcl9zc2guQmFwU3NoUHVibGlzaGVyUGx1Z2luLnhtbA==",
+    "caption": "Jenkins publish over SSH plugin file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "Y3JlZGVudGlhbHMueG1s",
+    "caption": "Potential Jenkins credentials file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj9odHBhc3N3ZA==",
+    "caption": "Apache htpasswd file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "Lj9uZXRyYw==",
+    "caption": "Configuration file for auto-login process",
+    "description": "Might contain username and password."
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "a3dhbGxldA==",
+    "caption": "KDE Wallet Manager database file",
+    "description": null
+  },
+  {
+    "part": "filename",
+    "type": "match",
+    "pattern": "TG9jYWxTZXR0aW5ncy5waHA=",
+    "caption": "Potential MediaWiki configuration file",
+    "description": null
+  },
+  {
+    "part": "extension",
+    "type": "match",
+    "pattern": "dGJsaw==",
+    "caption": "Tunnelblick VPN configuration file",
+    "description": null
+  },
+  {
+    "part": "path",
+    "type": "regex",
+    "pattern": "Lj9nZW0vY3JlZGVudGlhbHM=",
+    "caption": "Rubygems credentials file",
+    "description": "Might contain API key for a rubygems.org account."
+  },
+  {
+    "part": "filename",
+    "type": "regex",
+    "pattern": "LnB1YnhtbCgudXNlcik/",
+    "caption": "Potential MSBuild publish profile",
+    "description": null
+  }
+]
