@@ -26,7 +26,7 @@ Note: Most of the following tools/modules/libs have been modified heavily to be 
 * [Manitree] - for AndroidManifest.xml insecurities
 
 Avaiables Rulepacks:
-* ActionScript - supports ActionScript 2.0 & 3.0 source/sinks
+* ActionScript - supports Flash/Flex (ActionScript 2.0 & 3.0) source/sinks
 * [FindSecurityBugs]  (rules Only) - for Java (J2EE, JSP, Android, Scala, Groovy etc.)
 * [gitrob] (rules only) - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)
 
