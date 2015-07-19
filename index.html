@@ -46,13 +46,13 @@ This is best-used if you plug Raptor into your CI/CD pipeline.</p>
 <h3>
 <a id="tech" class="anchor" href="#tech" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tech</h3>
 
-<p>Integrated Plugins (<em>currently</em>):</p>
+<p>Integrated Plugins:</p>
 
 <p>Note: Most of the following tools/modules/libs have been modified heavily to be able to integrate well in the framework.</p>
 
 <ul>
 <li>
-<a href="https://github.com/mozilla/scanjs">Mozilla ScanJS</a> - for JavaScript (Client-Side, Node.JS, FireFox OS etc.)</li>
+<a href="https://github.com/mozilla/scanjs">Mozilla ScanJS</a> - for JavaScript (Client-Side, Node.JS etc. and upcomming support for Chrome Extensions &amp; Firefox Plugins)</li>
 <li>
 <a href="http://brakemanscanner.org/">Brakeman</a> - for Ruby On Rails</li>
 <li>
@@ -61,12 +61,14 @@ This is best-used if you plug Raptor into your CI/CD pipeline.</p>
 <a href="https://github.com/antitree/manitree/">Manitree</a> - for AndroidManifest.xml insecurities</li>
 </ul>
 
-<p>Avaiables Rulepacks (<em>currently</em>):</p>
+<p>Avaiables Rulepacks:</p>
 
 <ul>
-<li>ActionScript - supports ActionScript 2.0 &amp; 3.0 source/sinks</li>
+<li>ActionScript - supports Flash/Flex (ActionScript 2.0 &amp; 3.0) source/sinks</li>
 <li>
-<a href="Rules%20Only">FindSecurityBugs</a> - for Java (J2EE, JSP, Android, Scala, Groovy etc.)</li>
+<a href="rules%20Only">FindSecurityBugs</a> - for Java (J2EE, JSP, Android, Scala, Groovy etc.)</li>
+<li>
+<a href="rules%20only">gitrob</a> - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)</li>
 </ul>
 
 <h3>
@@ -93,7 +95,16 @@ sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre>
 
 <p>Now point your browser to <a href="http://127.0.0.1/raptor/">Raptor Home</a></p>
 
-<p>Login with <em>any</em> username and <em>any</em> password (but remember the username to view scan history)</p>
+<h6>
+<a id="login" class="anchor" href="#login" aria-hidden="true"><span class="octicon octicon-link"></span></a>Login</h6>
+
+<p>Login with the username as registered on the corresponding github server you are connected to and <em>any</em> password (but remember the username to view scan history)</p>
+
+<p>For example: </p>
+
+<p>If you are registered as <code>foobar</code> on <a href="https://github.com">https://github.com</a>, then use the same username when scanning repos on <a href="https://github.com">https://github.com</a>. However if are registered as <code>foobar_corp</code> on your personal/corporate github (say <a href="https://github.corp.company.com">https://github.corp.company.com</a>) then use the same username if you intend to scan repos on <a href="https://github.corp.company.com">https://github.corp.company.com</a></p>
+
+<p>However, as of now password can be anything, since we have <em>NOT</em> implemented a database in the development version.</p>
 
 <h5>
 <a id="rules-editor" class="anchor" href="#rules-editor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rules Editor</h5>
@@ -105,7 +116,7 @@ sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre>
 <h5>
 <a id="publicprivate-github-instance" class="anchor" href="#publicprivate-github-instance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public/Private GitHub instance</h5>
 
-<p>You can use Raptor to scan your organization's private as well as public instances of GitHub by specifiying the right server endpoints at <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L25-L26">here</a> and <a href="https://github.com/dpnishant/raptor/blob/master/frontend/scan.php#L13-L17">here</a>.</p>
+<p>You can use Raptor to scan your organization's private as well as public instances of GitHub by specifiying the right server endpoints at <a href="https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L32">here</a>.</p>
 
 <h3>
 <a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h3>
