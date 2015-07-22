@@ -16,18 +16,19 @@ Some of the features of the Raptor:
 
 ### Tech
 
-Integrated Plugins (_currently_):
+Integrated Plugins:
 
 Note: Most of the following tools/modules/libs have been modified heavily to be able to integrate well in the framework.
 
-* [Mozilla ScanJS] - for JavaScript (Client-Side, Node.JS, FireFox OS etc.)
+* [Mozilla ScanJS] - for JavaScript (Client-Side, Node.JS etc. and upcomming support for Chrome Extensions & Firefox Plugins)
 * [Brakeman] - for Ruby On Rails
 * [RIPS] - for PHP
 * [Manitree] - for AndroidManifest.xml insecurities
 
-Avaiables Rulepacks (_currently_):
-* ActionScript - supports ActionScript 2.0 & 3.0 source/sinks
-* [FindSecurityBugs]  (Rules Only) - for Java (J2EE, JSP, Android, Scala, Groovy etc.)
+Avaiables Rulepacks:
+* ActionScript - supports Flash/Flex (ActionScript 2.0 & 3.0) source/sinks
+* [FindSecurityBugs]  (rules Only) - for Java (J2EE, JSP, Android, Scala, Groovy etc.)
+* [gitrob] (rules only) - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)
 
 ### Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)
 
@@ -97,3 +98,4 @@ GNU GPL v2.0
 [Manitree]:https://github.com/antitree/manitree/
 [FindSecurityBugs]:http://h3xstream.github.io/find-sec-bugs/
 [github_configs]:https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L32
+[gitrob]:https://github.com/michenriksen/gitrob
