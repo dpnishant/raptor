@@ -9,7 +9,7 @@ from gitrob import *
 
 
 rulepacks = ['common', 'android', 'php', 'actionscript']
-plugin_rulepacks = ['fsb_android', 'gitrob']
+plugin_rulepacks = ['fsb_android', 'fsb_injection', 'fsb_crypto', 'fsb_endpoint', 'gitrob']
 
 json = { 
         "scan_info": {

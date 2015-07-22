@@ -1,0 +1,139 @@
+{
+  "plugin_type": "fsb_endpoint",
+  "file_types": [
+    ".java"
+  ],
+  "rules": [
+    {
+      "id": "FSB_ENDPOINT_COOKIE_USAGE",
+      "severity": "Medium",
+      "title": "Potentially Sensitive Data in Cookie",
+      "description": "Sensitive data may be stored by the application in a cookie. The information stored in a custom cookie should not be sensitive or related to the session. In most cases, sensitive data should only be stored in sessionand referenced by the user's session cookie. See HttpSession (HttpServletRequest.getSession())",
+      "remediation": "Custom cookies can be used for information that needs to live longer than and is independent of a specific session.",
+      "signature": "KFwuZ2V0KENvb2tpZXN8TmFtZXxWYWx1ZXxQYXRoKVwoXCkpfCguYWRkQ29va2llXCgpfChuZXdcc0Nvb2tpZVwoKQ==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuc2VydmxldFwuaHR0cFwuKENvb2tpZXwoSHR0cFNlcnZsZXQoUmVxdWVzdHxSZXNwb25zZSk/KSk7",
+          "description": "check if it imports javax.servlet.http.Cookie or javax.servlet.http.HttpServlet; or javax.servlet.http.HttpServletRequest; or javax.servlet.http.HttpServletResponse;"
+        }
+      ],
+      "link": "http://cwe.mitre.org/data/definitions/315.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ENDPOINT_JAXRS_ENDPOINT",
+      "severity": "Medium",
+      "title": "REST Endpoint Detected",
+      "description": "A REST Web Service (JSR311) endpoint was detected.",
+      "remediation": "The security of this web service should be analyzed. For example:\nAuthentication, if enforced, should be tested.\nAccess control, if enforced, should be tested.\nThe inputs should be tracked for potential vulnerabilities.\nThe communication should ideally be over SSL.\nIf the service supports writes (e.g., via POST), its vulnerability to CSRF should be investigated.",
+      "signature": "QFBhdGhcKFsnIl0=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwud3NcLnJzXC5QYXRoOw==",
+          "description": "check if it imports javax.ws.rs.Path;"
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/REST_Assessment_Cheat_Sheet",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ENDPOINT_JAXWS_ENDPOINT",
+      "severity": "Medium",
+      "title": "SOAP Endpoint Detected",
+      "description": "A SOAP Web Service (JSR224) endpoint was detected.",
+      "remediation": "The security of this web service should be analyzed. For example:\nAuthentication, if enforced, should be tested.\nAccess control, if enforced, should be tested.\nThe inputs should be tracked for potential vulnerabilities.\nThe communication should ideally be over SSL.",
+      "signature": "QFdlYk1ldGhvZA==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuandzXC5XZWIoTWV0aG9kfFNlcnZpY2UpOw==",
+          "description": "check if it imports javax.jws.Web(Method|Service);"
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/Web_Service_Security_Cheat_Sheet",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ENDPOINT_SERVLET_ENDPOINT",
+      "severity": "Medium",
+      "title": "Untrusted client-side data usage via Servlet API",
+      "description": "This method returns a String value that can potentially be tampered by the client, hence be extra cautious while handling such data.",
+      "remediation": "You may need to validate or sanitize those values before passing them to sensitive APIs such as: SQL query (May lead to SQL injection), File opening (May lead to path traversal), Command execution (Potential Command injection), HTML construction (Potential XSS)\netc.",
+      "signature": "XC5nZXQoKFBhcmFtZXRlcigoKFZhbHVlc3xOYW1lcylcKCl8TWFwXChcKS5nZXRcKCk/KXxTZXJ2ZXJOYW1lfENvbnRlbnRUeXBlfFJlcXVlc3RlZFNlc3Npb25JZHxRdWVyeVN0cmluZ3xIZWFkZXIp",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuc2VydmxldFwuaHR0cFwuKEh0dHBTZXJ2bGV0KFJlcXVlc3R8UmVzcG9uc2UpPyk7",
+          "description": "check if it check if it imports javax.servlet.http.HttpServlet; or javax.servlet.http.HttpServletRequest; or javax.servlet.http.HttpServletResponse;"
+        }
+      ],
+      "link": "http://cwe.mitre.org/data/definitions/20.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ENDPOINT_SPRING_MVC",
+      "severity": "Medium",
+      "title": "Spring MVC Enpoint Detected",
+      "description": "This class is a Spring Controller. All methods annotated with RequestMapping are reachable remotely. ",
+      "remediation": "This class should be analyzed to make sure that remotely exposed methods are safe to expose to potential attackers.",
+      "signature": "QFJlcXVlc3RNYXBwaW5nXCg=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNvcmdcLnNwcmluZ2ZyYW1ld29ya1wud2ViXC5iaW5kXC5hbm5vdGF0aW9uXC4oUGF0aFZhcmlhYmxlfFJlcXVlc3QoTWFwcGluZ3xNZXRob2QpPyk7",
+          "description": "check if it check if it imports org.springframework.web.bind.annotation.(PathVariable|RequestMapping|RequestMethod);"
+        }
+      ],
+      "link": "http://cwe.mitre.org/data/definitions/20.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ENDPOINT_STRUTSV1",
+      "severity": "Medium",
+      "title": "Struts V1 MVC Enpoint Detected",
+      "description": "This class is a Struts version 1 Action (aka endpoint). Once a request is routed to this controller, a Form object will automatically be instantiated that contains the HTTP parameters.",
+      "remediation": "The use of these parameters should be reviewed to make sure they are used safely.",
+      "signature": "QWN0aW9uRm9yd2FyZC4qZXhlY3V0ZVwoLipBY3Rpb25NYXBwaW5n",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNvcmdcLmFwYWNoZVwuc3RydXRzXC5hY3Rpb25cLkFjdGlvbihGb3JtfEZvcndhcmR8TWFwcGluZyk/Ow==",
+          "description": "check if it check if it imports org.apache.struts.action.(ActionForm|ActionForward|ActionMapping|Action);"
+        }
+      ],
+      "link": "http://cwe.mitre.org/data/definitions/20.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ENDPOINT_STRUTSV2",
+      "severity": "Medium",
+      "title": "Struts V2 MVC Enpoint Detected",
+      "description": "This class is a Struts version 2 endpoint. Once a request is routed to this controller, a Form object will automatically be instantiated that contains the HTTP parameters.",
+      "remediation": "The use of these parameters should be reviewed to make sure they are used safely.",
+      "signature": "XHNleGVjdXRlXChcKVtcc3td",
+      "condition": [],
+      "link": "http://cwe.mitre.org/data/definitions/20.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_ENDPOINT_WICKET",
+      "severity": "Medium",
+      "title": "Wicket Framework Enpoint Detected",
+      "description": "This class represents a Wicket WebPage. Input is automatically read from a PageParameters instance passed to the constructor. The current page is mapped to the view [/package/WebPageName].html",
+      "remediation": "Each Wicket page in this application should be researched to make sure all inputs that are automatically mapped in this way are properly validated before they are used.",
+      "signature": "V2ViKFBhZ2V8QXBwbGljYXRpb24pfHdpY2tldA==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNvcmdcLmFwYWNoZVwud2lja2V0KFwubWFya3VwXC5odG1sXC5XZWJQYWdlfFwucmVxdWVzdFwubWFwcGVyXC5wYXJhbWV0ZXJcLlBhZ2VQYXJhbWV0ZXJzfFwucHJvdG9jb2xcLmh0dHBcLldlYkFwcGxpY2F0aW9uKT87",
+          "description": "check if it imports org.apache.(wicket.markup.html.WebPage|wicket.request.mapper.parameter.PageParameters|wicket.protocol.http.WebApplication);"
+        }
+      ],
+      "link": "http://cwe.mitre.org/data/definitions/20.html",
+      "platform_version": "all",
+      "enabled": "true"
+    }
+  ]
+}

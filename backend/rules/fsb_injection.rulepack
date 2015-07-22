@@ -1,0 +1,236 @@
+{
+  "plugin_type": "fsb_injection",
+  "file_types": [
+    ".java"
+  ],
+  "rules": [
+    {
+      "id": "FSB_INJECTION_CODEEXEC",
+      "severity": "High",
+      "title": "Potential Command Injection",
+      "description": "The highlighted API is used to execute a system command. If unfiltered input is passed to this API, it can lead to arbitrary command execution.",
+      "remediation": "Always try to avoid any user controlled data to reach APIs that do some kind on command execution. If it is really necessary make sure you have properly escape all harmful characters.",
+      "signature": "KChSdW50aW1lXC5nZXRSdW50aW1lXChcKSl8KFwuZXhlY1woLipcKSkpfChuZXdcc1Byb2Nlc3NCdWlsZGVyXChcKShcLmNvbW1hbmRcKC4qXCkoXC5zdGFydFwoXCkpPyk/KQ==",
+      "condition": [],
+      "link": "https://www.owasp.org/index.php/Command_Injection",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_LDAPJNDI",
+      "severity": "High",
+      "title": "Potential LDAP Injection",
+      "description": "The query could be vulnerable to LDAP injection. Just like SQL, all inputs passed to an LDAP query need to be passed in safely. Unfortunately, LDAP doesn't have prepared statement interfaces like SQL.",
+      "remediation": "The primary defense against LDAP injection is strong input validation of any untrusted data before including it in an LDAP query.",
+      "signature": "XC5zZWFyY2hcKA==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwubmFtaW5nXC5kaXJlY3RvcnlcLkluaXRpYWxEaXJDb250ZXh0Ow==",
+          "description": "check if it imports javax.naming.directory.InitialDirContext;"
+        },
+        {
+          "signature": "bmV3XHNTZWFyY2hDb250cm9sc1wo",
+          "description": "check if it initializes new SearchControls()"
+        },
+        {
+          "signature": "bmV3XHNJbml0aWFsRGlyQ29udGV4dFwo",
+          "description": "check if it initializes new InitialDirContext()"
+        }
+      ],
+      "link": "http://www.veracode.com/security/ldap-injection",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_LDAPJNDI",
+      "severity": "High",
+      "title": "Potential LDAP Injection",
+      "description": "The query could be vulnerable to LDAP injection. Just like SQL, all inputs passed to an LDAP query need to be passed in safely. Unfortunately, LDAP doesn't have prepared statement interfaces like SQL.",
+      "remediation": "The primary defense against LDAP injection is strong input validation of any untrusted data before including it in an LDAP query.",
+      "signature": "XC5zZWFyY2hcKA==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNjb21cLnVuYm91bmRpZFwubGRhcFwuc2RrXC4oTERBUENvbm5lY3Rpb24pPw==",
+          "description": "check if it imports com.unboundid.ldap.sdk.(LDAPConnection)?"
+        },
+        {
+          "signature": "bmV3XHNMREFQQ29ubmVjdGlvblwo",
+          "description": "check if it initializes new LDAPConnection()"
+        }
+      ],
+      "link": "http://www.veracode.com/security/ldap-injection",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_REDIRECT",
+      "severity": "High",
+      "title": "Potential Unvalidated Redirect",
+      "description": "Unvalidated redirects occur when an application redirects a user to a destination URL specified by a user supplied\n    parameter that is not validated. Such vulnerabilities can be used to facilitate phishing attacks.",
+      "remediation": "Don't accept redirection destinations from users; Accept a destination key, and use it to look up the target (legal) destination; Accept only relative paths; White list URLs (if possible); Validate that the beginning of the URL is part of a white list",
+      "signature": "XC5hZGRIZWFkZXJcKFsiJ11Mb2NhdGlvblsiJ10sW1xzYS16QS1aMC05X10qXCl8XC5zZW5kUmVkaXJlY3RcKFtcc2EtekEtWjAtOV9dKlwp",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuc2VydmxldFwuaHR0cFwuSHR0cFNlcnZsZXQoUmVxdWVzdHxSZXNwb25zZSk/Ow==",
+          "description": "check if it imports javax.servlet.http.HttpServlet(Request|Response)?;"
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_SCRIPT_ENGINE",
+      "severity": "High",
+      "title": "Potential code injection when using Script Engine",
+      "description": "This code evaluation could be vulnerable to code injection as dynamic code is being evaluated. Malicious code execution could lead to data leakage or operating system compromised.",
+      "remediation": "A careful analysis of the code construction should be made. ",
+      "signature": "bmV3XHNTY3JpcHRFbmdpbmVNYW5hZ2VyXChcKXxcLmdldEVuZ2luZUJ5RXh0ZW5zaW9uXCh8XC5ldmFsXCg=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuc2NyaXB0XC5TY3JpcHRFbmdpbmUoTWFuYWdlcik/Ow==",
+          "description": "check if it imports javax.script.ScriptEngine(Manager)?;"
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_SPEL",
+      "severity": "High",
+      "title": "Potential Spring Expression Language injection",
+      "description": "A Spring expression is built with a dynamic value. The source of the value(s) should be verified to avoid that unfiltered values fall into this risky code evaluation.",
+      "remediation": "A careful analysis of the code construction should be made. ",
+      "signature": "bmV3XHNTcGVsRXhwcmVzc2lvblBhcnNlclwofFwucGFyc2VFeHByZXNzaW9uXCg=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNvcmdcLnNwcmluZ2ZyYW1ld29ya1wuZXhwcmVzc2lvblwuKEV4cHJlc3Npb24oUGFyc2VyKT98Y29tbW9uXC5UZW1wbGF0ZUF3YXJlRXhwcmVzc2lvblBhcnNlcnxzcGVsXC5zdGFuZGFyZFwuU3BlbEV4cHJlc3Npb25QYXJzZXIpOw==",
+          "description": "check if it imports org.springframework.expression.(Expression|ExpressionParser|common.TemplateAwareExpressionParser|spel.standard.SpelExpressionParser);"
+        }
+      ],
+      "link": "https://www.mindedsecurity.com/fileshare/ExpressionLanguageInjection.pdf",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_HIBERNATE_SQLI",
+      "severity": "High",
+      "title": "Potential SQL/HQL Injection (Hibernate)",
+      "description": "The query is potentially vulnerable SQL/HQL injection. The input values included in SQL queries need to be passed in safely.Bind variables in prepared statements can be used to easily mitigate the risk of SQL injection. Alternatively to prepare statement, Hibernate Criteria can be used.",
+      "remediation": "Use parameterized queries/bind vraiables for protection against SQL injection.",
+      "signature": "XC5zcWxSZXN0cmljdGlvbnxjcmVhdGVRdWVyeXxjcmVhdGVTUUxRdWVyeVwo",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNvcmdcLmhpYmVybmF0ZVwuKENyaXRlcmlhfGNyaXRlcmlvblwuUmVzdHJpY3Rpb25zfFNlc3Npb24oRmFjdG9yeSk/KTs=",
+          "description": "check if it imports org.hibernate.(Criteria|Session|SessionFactory|criterion.Restrictions);"
+        }
+      ],
+      "link": "https://www.mindedsecurity.com/fileshare/ExpressionLanguageInjection.pdf",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_JDO_SQLI",
+      "severity": "High",
+      "title": "Potential SQL/JDOQL Injection (JDO)",
+      "description": "The query is potentially vulnerable SQL/JDOQL injection.",
+      "remediation": "The input values included in SQL queries need to be passed in safely. Bind variables in prepared statements can be used to easily mitigate the risk of SQL injection.",
+      "signature": "XC4obmV3UXVlcnl8c2V0KEZpbHRlcnxHcm91cGluZykpW15cKF0qXCg=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuamRvXC4oUGVyc2lzdGVuY2VNYW5hZ2VyKEZhY3RvcnkpP3xRdWVyeSk7",
+          "description": "check if it imports javax.jdo.(PersistenceManager(Factory)?|Query);"
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/Query_Parameterization_Cheat_Sheet",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_JPA_SQLI",
+      "severity": "High",
+      "title": "Potential SQL/JPQL Injection (JPA)",
+      "description": "The query is potentially vulnerable SQL/JPQL injection",
+      "remediation": "The input values included in SQL queries need to be passed in safely. Bind variables in prepared statements can be used to easily mitigate the risk of SQL injection.",
+      "signature": "XC5jcmVhdGUoTmF0aXZlKT9RdWVyeVwo",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwucGVyc2lzdGVuY2VcLihFbnRpdHlNYW5hZ2VyfFR5cGVkUXVlcnkpOw==",
+          "description": "check if it imports javax.persistence.(EntityManager|TypedQuery);"
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/Query_Parameterization_Cheat_Sheet",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_SERVLET_XSS",
+      "severity": "High",
+      "title": "Potential XSS in Servlet",
+      "description": "A potential XSS was found. It could be used to execute unwanted JavaScript in a client's browser.",
+      "remediation": "The best defense against XSS is context sensitive output encoding like the example above. There are typically 4 contexts to consider: \nHTML, JavaScript, CSS (styles), and URLs. Please follow the XSS protection rules defined in the OWASP XSS Prevention Cheat Sheet,\nwhich explains these defenses in significant detail.",
+      "signature": "XC5nZXQoUGFyYW1ldGVyfEF0dHJpYnV0ZSlcKHxwcmludChsbnxmKT9cKHx3cml0ZVwo",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHMoamF2YXhcLnNlcnZsZXRcLihodHRwXC5IdHRwU2VydmxldFJlcXVlc3R8anNwXC5Kc3BXcml0ZXIpfGphdmFcLmlvXC5QcmludFdyaXRlcik7",
+          "description": "check if it imports (javax.servlet.(http.HttpServletRequest|jsp.JspWriter)|java.io.PrintWriter);"
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/XSS_%28Cross_Site_Scripting%29_Prevention_Cheat_Sheet",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_XPATH",
+      "severity": "High",
+      "title": "Potential XPath Injection",
+      "description": "XPath injection risks are similar to SQL injection. If the XPath query contains untrusted user input, the complete datasource could be exposed. This could allow an attacker to access unauthorized data or maliciously modify the target XML.",
+      "remediation": "Refer to the documentation link to learn more about preventing XPath Injections",
+      "signature": "XC5zZWxlY3QoKFNpbmdsZSk/Tm9kZShJdGVyYXRvcnxMaXN0KT8pXCg=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNvcmdcLmFwYWNoZVwueHBhdGhcLlhQYXRoKEFQSSk/Ow==",
+          "description": "check if it imports org.apache.xpath.XPath(API)?;"
+        }
+      ],
+      "link": "https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=61407250",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_XPATH",
+      "severity": "High",
+      "title": "Potential XPath Injection",
+      "description": "XPath injection risks are similar to SQL injection. If the XPath query contains untrusted user input, the complete datasource could be exposed. This could allow an attacker to access unauthorized data or maliciously modify the target XML.",
+      "remediation": "Refer to the documentation link to learn more about preventing XPath Injections",
+      "signature": "XC4oY29tcGlsZXxldmFsdWF0ZSlcKA==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwueG1sXC54cGF0aA==",
+          "description": "check if it imports javax.xml.xpath"
+        }
+      ],
+      "link": "https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=61407250",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_INJECTION_XXE",
+      "severity": "High",
+      "title": "XML Parsing Vulnerable to XXE ",
+      "description": "XML External Entity (XXE) attacks can occur when an XML parser supports XML entities while processing XML received from an untrusted source. It can be a vulnerability due unsafe usage either of SAXParser or XMLReader or DocumentBuilder.",
+      "remediation": "Refer to the documentation link to learn more about preventing XXE Injections",
+      "signature": "XC5wYXJzZVwo",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHMoamF2YXhcLnhtbFwucGFyc2Vyc1wuKFNBWFBhcnNlcihGYWN0b3J5KT98RG9jdW1lbnRCdWlsZGVyKEZhY3RvcnkpPyl8b3JnXC54bWxcLnNheFwuWE1MUmVhZGVyKEZhY3RvcnkpPyk7",
+          "description": "check if it imports org.xml.sax.XMLReader or javax.xml.parsers.DocumentBuilder or javax.xml.parsers.SAXParser"
+        }
+      ],
+      "link": "https://www.securecoding.cert.org/confluence/pages/viewpage.action?pageId=61702260",
+      "platform_version": "all",
+      "enabled": "true"
+    }
+  ]
+}

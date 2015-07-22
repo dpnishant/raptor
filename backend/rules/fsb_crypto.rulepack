@@ -1,0 +1,244 @@
+{
+  "plugin_type": "fsb_crypto",
+  "file_types": [
+    ".java"
+  ],
+  "rules": [
+    {
+      "id": "FSB_CRPYTO_DES_USAGE",
+      "severity": "Medium",
+      "title": "Unsafe usage of weak cryptography",
+      "description": "DES and DESede (3DES) are not considered strong ciphers for modern applications. Currently, NIST recommends the \nusage of AES block ciphers instead of DES/3DES.",
+      "remediation": "Replace DES or 3DES with AES e.g. Cipher c = Cipher.getInstance(\"AES/GCM/NoPadding\");c.init(Cipher.ENCRYPT_MODE, k, iv);\nbyte[] cipherText = c.doFinal(plainText);",
+      "signature": "XC5nZXRJbnN0YW5jZVwoW1wnXCJdREVTKGVkZSk/",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuY3J5cHRvXC5DaXBoZXI7",
+          "description": "check if it imports javax.crypto.Cipher;"
+        }
+      ],
+      "link": "http://cwe.mitre.org/data/definitions/326.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_INSECURE_ECB_MODES",
+      "severity": "Medium",
+      "title": "Unsafe usage ECB Mode in Cryptographic API",
+      "description": "The cipher chosen uses ECB mode, which provides poor confidentiality for encrypted data.\nAn authentication cipher mode which provides better confidentiality of the encrypted data should be used instead of Electronic Codebook (ECB) mode, \nwhich does not provide good confidentiality. Specifically, ECB mode produces the same output for the same input each time. So, \nfor example, if a user is sending a password, the encrypted value is the same each time. This allows an attacker to intercept \nand replay the data.",
+      "remediation": "To fix this, something like Galois/Counter Mode (GCM) should be used instead.",
+      "signature": "XC5nZXRJbnN0YW5jZVwoWyciXShBRVN8REVTKGVkZSk/KSgvRUNCLy4qKT8=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuY3J5cHRvXC5DaXBoZXI7",
+          "description": "check if it imports javax.crypto.Cipher;"
+        }
+      ],
+      "link": "http://csrc.nist.gov/groups/ST/toolkit/BCM/modes_development.html#01",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_PADDING_ORACLE",
+      "severity": "Medium",
+      "title": "Cipher algorithm is susceptible to Padding Oracle attacks",
+      "description": "The cipher is susceptible to padding oracle attacks.\nThis specific mode of CBC with PKCS5Padding is susceptible to padding oracle attacks. An adversary could potentially decrypt the message if the system exposed the difference between plaintext with invalid padding or valid padding. The distinction between valid and invalid padding is usually revealed through distinct error messages being returned for each condition.",
+      "remediation": "To fix this, something like Galois/Counter Mode (GCM) with NoPadding should be used instead.",
+      "signature": "XC5nZXRJbnN0YW5jZVwoWyciXS4qL0NCQy9QS0NTNVBhZGRpbmc=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuY3J5cHRvXC5DaXBoZXI7",
+          "description": "check if it imports javax.crypto.Cipher;"
+        }
+      ],
+      "link": "http://capec.mitre.org/data/definitions/463.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_CUSTOM_MESSAGE_DIGEST",
+      "severity": "Medium",
+      "title": "Custom MessageDigest can be risky",
+      "description": "Implementing a custom MessageDigest is error-prone. NIST recommends the use of SHA-1, SHA-256, SHA-384, SHA-512, SHA-512/224, or SHA-512/256.",
+      "remediation": "Upgrade your implementation to use one of the approved algorithms. Use an algorithm that is sufficiently strong for your specific security needs.\nMessageDigest sha256Digest = MessageDigest.getInstance(\"SHA256\");\nsha256Digest.update(password.getBytes());",
+      "signature": "XC5kaWdlc3RcKFwpOw==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZhXC5zZWN1cml0eVwuTWVzc2FnZURpZ2VzdDs=",
+          "description": "check if it imports java.security.MessageDigest"
+        }
+      ],
+      "link": "http://csrc.nist.gov/groups/ST/toolkit/secure_hashing.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_NULL_CIPHER",
+      "severity": "Medium",
+      "title": "Unsafe & undesirable NullCipher usage",
+      "description": "The use of a NullCipher is typically not desirable. The NullCipher is rarely used intentionally in production applications. It implements the Cipher interface by returning ciphertext identical to the supplied plaintext. In a few contexts, such as testing, a NullCipher may be appropriate.",
+      "remediation": "Avoid using the NullCipher. Its accidental use can introduce a significant confidentiality risk.",
+      "signature": "bmV3XHNOdWxsQ2lwaGVyXChcKTs=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuY3J5cHRvXC5OdWxsQ2lwaGVyOw==",
+          "description": "check if it imports javax.crypto.NullCipher"
+        }
+      ],
+      "link": "http://csrc.nist.gov/groups/ST/toolkit/secure_hashing.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_INSECURE_SOCKET",
+      "severity": "Medium",
+      "title": "Unencrypted Socket is being used.",
+      "description": "The communication channel used is not encrypted. The traffic could be read by an attacker intercepting the network traffic.",
+      "remediation": "For ensuring secure communications always use SSL Socket and beyond using a SSL socket, you need to make sure your use of SSLSocketFactory does all the appropriate certificate validation checks to\nmake sure you are not subject to man-in-the-middle attacks. Please read the OWASP Transport Layer Protection Cheat Sheet for details on how\nto do this correctly.",
+      "signature": "bmV3XHNTb2NrZXRcKA==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZhXC5uZXRcLlNvY2tldDs=",
+          "description": "check if it imports java.net.Socket;"
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/Top_10_2010-A9",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_WEAK_MESSAGE_DIGEST",
+      "severity": "Medium",
+      "title": "Weak MessageDigest is being used.",
+      "description": "The algorithm used is not a recommended MessageDigest.",
+      "remediation": "NIST recommends the use of SHA-1, SHA-256, SHA-384, SHA-512, SHA-512/224, or SHA-512/256.",
+      "signature": "KFwuZ2V0SW5zdGFuY2VcKFsiJ10oTUQyfE1ENXxTSEExKSl8KFwuZ2V0KE1kMnxNZDV8U2hhMXxTaGEpRGlnZXN0XChcKSl8KFwuZ2V0RGlnZXN0XChbIiddKG1kMnxtZDV8c2hhMSkpfChcLihtZDJ8bWQ1fHNoYTEpSGV4XCgp",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZhXC5zZWN1cml0eVwuTWVzc2FnZURpZ2VzdDs=",
+          "description": "check if it imports java.security.MessageDigest;"
+        },
+        {
+          "signature": "aW1wb3J0XHNvcmdcLmFwYWNoZVwuY29tbW9uc1wuY29kZWNcLmRpZ2VzdFwuRGlnZXN0VXRpbHM7",
+          "description": "check if it imports org.apache.commons.codec.digest.DigestUtils;"
+        }
+      ],
+      "link": "http://csrc.nist.gov/groups/ST/toolkit/secure_hashing.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_RSA_NOPADDING",
+      "severity": "Medium",
+      "title": "Unsafe usage of RSA in NoPadding mode",
+      "description": "Use of RSA cipher without proper padding. Using the RSA algorithm without Optimal Asymmetric Encryption Padding (OAEP) might weaken the encryption.",
+      "remediation": "Avoid using RSA without proper padding.",
+      "signature": "XC5nZXRJbnN0YW5jZVwoWyInXVJTQS8uKk5vUGFkZGluZw==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuY3J5cHRvXC5DaXBoZXI7",
+          "description": "check if it imports javax.crypto.Cipher;"
+        }
+      ],
+      "link": "http://rdist.root.org/2009/10/06/why-rsa-encryption-padding-is-critical/",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_RSA_WEAK_KEY",
+      "severity": "Medium",
+      "title": "RSA Usage with Weak Key Size",
+      "description": "RSA Laboratories currently recommends key sizes of 1024 bits for corporate use and 2048 bits for extremely valuable keys \nlike the root key pair used by a certifying authority",
+      "remediation": "The KeyPairGenerator creation should be as follows with at least 2048 bit key size.",
+      "signature": "KFwuaW5pdGlhbGl6ZVwoKSgoWzAtOV17M30pfChuZXdcc1JTQUtleUdlblBhcmFtZXRlclNwZWNcKFswLTldezN9LFtcc10qUlNBS2V5R2VuUGFyYW1ldGVyU3BlY1wuRjRcKSkp",
+      "condition": [
+        {
+          "signature": "S2V5UGFpckdlbmVyYXRvclwuZ2V0SW5zdGFuY2VcKCJSU0EiXCk7",
+          "description": "check if it is an RSA instance: KeyPairGenerator.getInstance(\"RSA\");"
+        },
+        {
+          "signature": "aW1wb3J0XHNqYXZhXC5zZWN1cml0eVwuc3BlY1wuUlNBS2V5R2VuUGFyYW1ldGVyU3BlYzs=",
+          "description": "check if it imports java.security.spec.RSAKeyGenParameterSpec"
+        },
+        {
+          "signature": "aW1wb3J0XHNqYXZhXC5zZWN1cml0eVwuS2V5UGFpckdlbmVyYXRvcg==",
+          "description": "check if it imports java.security.KeyPairGenerator"
+        },
+        {
+          "signature": "aW1wb3J0XHNqYXZhXC5zZWN1cml0eVwuXCo7",
+          "description": "check if it imports java.security.*;"
+        }
+      ],
+      "link": "http://www.emc.com/emc-plus/rsa-labs/standards-initiatives/how-large-a-key-should-be-used.htm",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_WEAK_BLOWFISH_KEY_SIZE",
+      "severity": "Medium",
+      "title": "Blowfish Usage with Weak Key Size",
+      "description": "The Blowfish cipher supports keysizes from 32 bits to 448 bits. A small key size makes the ciphertext vulnerable to brute force attacks.\nAt least 128 bits of entropy should be used when generating the key if the usage of Blowfish must be retained.",
+      "remediation": "If the algorithm can be changed, the AES block cipher should be used instead or at least set the key generation entropy to greater than equal to 128 bits.",
+      "signature": "S2V5R2VuZXJhdG9yXC5nZXRJbnN0YW5jZVwoIkJsb3dmaXNoIlwpOw==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNqYXZheFwuY3J5cHRvXC5LZXlHZW5lcmF0b3I7",
+          "description": "check if it imports javax.crypto.KeyGenerator"
+        },
+        {
+          "signature": "LmluaXRcKChbMC05XXszfXxbMC05XXsyfSk=",
+          "description": "check if the keygenerator.init size is > 128 "
+        },
+        {
+          "signature": "XC5nZW5lcmF0ZUtleVwoXCk7",
+          "description": "check if the keygenerator.generate() is called to generate the key"
+        }
+      ],
+      "link": "http://cwe.mitre.org/data/definitions/326.html",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_HAZELCAST_SYMMETRIC",
+      "severity": "Medium",
+      "title": "Hazelcast Symmetric Encryption",
+      "description": "The network communication for Hazelcast are configured to use a symmetric cipher. The network communications for Hazelcast is configured to use a symmetric cipher (probably DES or blowfish). Those ciphers alone do not provide integrity or secure authentication.",
+      "remediation": "The use of asymmetric encryption is preferred.",
+      "signature": "bmV3XHNTeW1tZXRyaWNFbmNyeXB0aW9uQ29uZmlnXChcKTs=",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNjb21cLmhhemVsY2FzdFwuY29uZmlnXC5TeW1tZXRyaWNFbmNyeXB0aW9uQ29uZmlnOw==",
+          "description": "check if it imports com.hazelcast.config.SymmetricEncryptionConfig"
+        },
+        {
+          "signature": "aW1wb3J0XHNjb21cLmhhemVsY2FzdFwuY29uZmlnXC5OZXR3b3JrQ29uZmlnOw==",
+          "description": "check if it imports com.hazelcast.config.NetworkConfig"
+        }
+      ],
+      "link": "http://projects.webappsec.org/w/page/13246945/Insufficient%20Transport%20Layer%20Protection",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
+      "id": "FSB_CRYPTO_OWASP_ESAPI",
+      "severity": "Medium",
+      "title": "Usage of OWASP ESAPI Encryption Library",
+      "description": "The ESAPI has a small history of vulnerabilities within the cryptography component. Here is a quick validation list to\n    make sure the Authenticated Encryption is working as expected.",
+      "remediation": "This issue is corrected in ESAPI version 2.1.0. Versions <= 2.0.1 are vulnerable to a MAC bypass (CVE-2013-5679)",
+      "signature": "RVNBUElcLmVuY3J5cHRvclwoXClcLihlbnxkZSljcnlwdFwo",
+      "condition": [
+        {
+          "signature": "aW1wb3J0XHNvcmdcLm93YXNwXC5lc2FwaVwuRVNBUEk7",
+          "description": "check if it imports org.owasp.esapi.ESAPI;"
+        },
+        {
+          "signature": "aW1wb3J0XHNvcmdcLm93YXNwXC5lc2FwaVwuY3J5cHRvXC5DaXBoZXJUZXh0Ow==",
+          "description": "check if it imports org.owasp.esapi.crypto.CipherText;"
+        }
+      ],
+      "link": "http://lists.owasp.org/pipermail/esapi-dev/2015-March/002533.html",
+      "platform_version": "all",
+      "enabled": "true"
+    }
+  ]
+}
