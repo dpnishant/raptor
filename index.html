@@ -22,7 +22,8 @@
       <h1>
 <a id="raptor" class="anchor" href="#raptor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Raptor</h1>
 
-<p>Raptor is a web-based (web-serivce + UI) github centric source-vulnerability scanner i.e. it scans a repository with just the github repo url. You can setup webhooks to ensure automated scans everytime you commit or merge a pull request. The scan is done asynchonously and the results are available only to the user who initiated the scan.</p>
+<p><img src="http://daspatnaik.com/raptor/logo.png" alt="RaptorLogo">
+is a web-based (web-serivce + UI) github centric source-vulnerability scanner i.e. it scans a repository with just the github repo url. You can setup webhooks to ensure automated scans everytime you commit or merge a pull request. The scan is done asynchonously and the results are available only to the user who initiated the scan.</p>
 
 <p>Some of the features of the Raptor:</p>
 
@@ -52,23 +53,24 @@ This is best-used if you plug Raptor into your CI/CD pipeline.</p>
 
 <ul>
 <li>
-<a href="https://github.com/mozilla/scanjs">Mozilla ScanJS</a> - for JavaScript (Client-Side, Node.JS etc. and upcomming support for Chrome Extensions &amp; Firefox Plugins)</li>
+<img class="emoji" title=":zap:" alt=":zap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a1.png" height="20" width="20" align="absmiddle"> <a href="https://github.com/mozilla/scanjs">Mozilla ScanJS</a> - for JavaScript (Client-Side, Node.JS etc. and upcomming support for Chrome Extensions &amp; Firefox Plugins)</li>
 <li>
-<a href="http://brakemanscanner.org/">Brakeman</a> - for Ruby On Rails</li>
+<img class="emoji" title=":zap:" alt=":zap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a1.png" height="20" width="20" align="absmiddle"> <a href="http://brakemanscanner.org/">Brakeman</a> - for Ruby On Rails</li>
 <li>
-<a href="http://rips-scanner.sourceforge.net/">RIPS</a> - for PHP</li>
+<img class="emoji" title=":zap:" alt=":zap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a1.png" height="20" width="20" align="absmiddle"> <a href="http://rips-scanner.sourceforge.net/">RIPS</a> - for PHP</li>
 <li>
-<a href="https://github.com/antitree/manitree/">Manitree</a> - for AndroidManifest.xml insecurities</li>
+<img class="emoji" title=":zap:" alt=":zap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a1.png" height="20" width="20" align="absmiddle"> <a href="https://github.com/antitree/manitree/">Manitree</a> - for AndroidManifest.xml insecurities</li>
 </ul>
 
 <p>Avaiables Rulepacks:</p>
 
 <ul>
-<li>ActionScript - supports Flash/Flex (ActionScript 2.0 &amp; 3.0) source/sinks</li>
 <li>
-<a href="rules%20Only">FindSecurityBugs</a> - for Java (J2EE, JSP, Android, Scala, Groovy etc.)</li>
+<img class="emoji" title=":zap:" alt=":zap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a1.png" height="20" width="20" align="absmiddle"> ActionScript - supports Flash/Flex (ActionScript 2.0 &amp; 3.0) source/sinks</li>
 <li>
-<a href="rules%20only">gitrob</a> - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)</li>
+<img class="emoji" title=":zap:" alt=":zap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a1.png" height="20" width="20" align="absmiddle"> <a href="rules%20Only">FindSecurityBugs</a> - for Java (J2EE, JSP, Android, Scala, Groovy etc.)</li>
+<li>
+<img class="emoji" title=":zap:" alt=":zap:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/26a1.png" height="20" width="20" align="absmiddle"> <a href="rules%20only">gitrob</a> - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)</li>
 </ul>
 
 <h3>
@@ -109,7 +111,7 @@ sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre>
 <h5>
 <a id="rules-editor" class="anchor" href="#rules-editor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rules Editor</h5>
 
-<p>You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L9">Init Script</a>. Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set!</p>
+<p>You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L9">Init Script</a>. Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set! <img class="emoji" title=":thumbsup:" alt=":thumbsup:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" height="20" width="20" align="absmiddle"></p>
 
 <p>You can access it here: <a href="http://127.0.0.1/raptor/editrules.php">Rules Editor</a></p>
 
@@ -122,7 +124,7 @@ sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre>
 <a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h3>
 
 <p>Want to contribute? Great! 
-Get in touch with me if you have an idea or else feel free to fork and improve. :)</p>
+Get in touch with me if you have an idea or else feel free to fork and improve. <img class="emoji" title=":blush:" alt=":blush:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f60a.png" height="20" width="20" align="absmiddle"></p>
 
 <h3>
 <a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributors</h3>
