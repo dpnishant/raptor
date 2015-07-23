@@ -20,15 +20,15 @@ Integrated Plugins:
 
 Note: Most of the following tools/modules/libs have been modified heavily to be able to integrate well in the framework.
 
-* [Mozilla ScanJS] - for JavaScript (Client-Side, Node.JS etc. and upcomming support for Chrome Extensions & Firefox Plugins)
-* [Brakeman] - for Ruby On Rails
-* [RIPS] - for PHP
-* [Manitree] - for AndroidManifest.xml insecurities
+* :zap: [Mozilla ScanJS] - for JavaScript (Client-Side, Node.JS etc. and upcomming support for Chrome Extensions & Firefox Plugins)
+* :zap: [Brakeman] - for Ruby On Rails
+* :zap: [RIPS] - for PHP
+* :zap: [Manitree] - for AndroidManifest.xml insecurities
 
 Avaiables Rulepacks:
-* ActionScript - supports Flash/Flex (ActionScript 2.0 & 3.0) source/sinks
-* [FindSecurityBugs]  (rules Only) - for Java (J2EE, JSP, Android, Scala, Groovy etc.)
-* [gitrob] (rules only) - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)
+* :zap: ActionScript - supports Flash/Flex (ActionScript 2.0 & 3.0) source/sinks
+* :zap: [FindSecurityBugs]  (rules Only) - for Java (J2EE, JSP, Android, Scala, Groovy etc.)
+* :zap: [gitrob] (rules only) - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)
 
 ### Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)
 
@@ -63,7 +63,7 @@ If you are registered as `foobar` on https://github.com, then use the same usern
 However, as of now password can be anything, since we have *NOT* implemented a database in the development version.
 
 #####Rules Editor
-You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: [Init Script]. Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set!
+You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: [Init Script]. Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set! :thumbsup:
 
 You can access it here: [Rules Editor]
 
@@ -73,7 +73,7 @@ You can use Raptor to scan your organization's private as well as public instanc
 ### Development
 
 Want to contribute? Great! 
-Get in touch with me if you have an idea or else feel free to fork and improve. :)
+Get in touch with me if you have an idea or else feel free to fork and improve. :blush:
 
 ### Contributors
 
