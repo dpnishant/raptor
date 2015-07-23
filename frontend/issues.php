@@ -145,18 +145,18 @@ $chart_vulntype_metrics = Array();
                   <div id="collapseOne" class="panel-collapse collapse">
                     <div class="panel-body">
                       <div class="row placeholders">
-                        <div class="col-sm-12 placeholder">
-                          <div id="chart_vulntype" style="height: 200px;">
+                        <!--<div class="col-sm-12 placeholder">-->
+                          <div id="chart_vulntype" style="height: 400px;">
+                            loading...
+                          </div>
+                        <!--</div>-->
+                        <div class="col-sm-6 placeholder">
+                          <div id="chart_lang" style="width: 100%; height: 400px;">
                             loading...
                           </div>
                         </div>
                         <div class="col-sm-6 placeholder">
-                          <div id="chart_lang" style="width: 100%; height: 200px;">
-                            loading...
-                          </div>
-                        </div>
-                        <div class="col-sm-6 placeholder">
-                          <div id="chart_severity" style="width: 100%; height: 200px;">
+                          <div id="chart_severity" style="width: 100%; height: 400px;">
                             loading...
                           </div>
                     </div>
@@ -317,10 +317,11 @@ $chart_vulntype_metrics = Array();
     <script type="text/javascript">
       
       google.load("visualization", "1", {
-        packages:["corechart"]});
+        packages:["corechart"]
+      });
       
+      //Plugin Metrics
       google.setOnLoadCallback(drawPluginChart);
-      
       function drawPluginChart() {
         var data = google.visualization.arrayToDataTable([
           ['Plugin Type', 'Issue Count'], 
@@ -334,14 +335,17 @@ $chart_vulntype_metrics = Array();
         ]);
       
         var options = {
-          title: 'Plugin Metrics',
-          pieHole: 0.5,
+          'title': 'Plugin-Type Metrics',
+          'pieHole': 0.5,
+          'width':500,
+          'height':300
         };
         
         var chart = new google.visualization.PieChart(document.getElementById('chart_lang'));
         chart.draw(data, options);
       }
       
+      //Severity Metrics
       google.setOnLoadCallback(drawSeverityChart);
       function drawSeverityChart() {
         var data = google.visualization.arrayToDataTable([
@@ -354,15 +358,19 @@ $chart_vulntype_metrics = Array();
             echo $sev_metrics;
           ?>
         ]);
+
         var options = {
-          title: 'Severity Metrics',
-          pieHole: 0.5,
+          'title': 'Severity Metrics',
+          'pieHole': 0.5,
+          'width':500,
+          'height':300
         };
         
         var chart = new google.visualization.PieChart(document.getElementById('chart_severity'));
         chart.draw(data, options);
       }
       
+      //Issue Type Metrics
       google.setOnLoadCallback(drawVulntypeChart);
       function drawVulntypeChart() {
         var data = google.visualization.arrayToDataTable([
@@ -375,9 +383,12 @@ $chart_vulntype_metrics = Array();
             echo $vuln_metrics;
           ?>
         ]);
+        
         var options = {
-          title: 'Vulnerability Metrics',
-          pieHole: 0.5,
+          'title': 'Issue Type Metrics',
+          'pieHole': 0.5,
+          'width':700,
+          'height':400
         };
         
         var chart = new google.visualization.PieChart(document.getElementById('chart_vulntype'));
@@ -439,29 +450,21 @@ $chart_vulntype_metrics = Array();
                 return $cols.map(function (j, col) {
                   var $col = $(col),
                       text = $col.html();
-                  if(text.indexOf("checkbox")==-1&&text.indexOf("select")==-1&&text.indexOf("Asset")==-1)
-                  {
-                    if(text.indexOf("<")==-1)
-                    {
+                  if (text.indexOf("checkbox") == -1  && text.indexOf("select") == -1 && text.indexOf("Asset") == -1) {
+                    if (text.indexOf("<") == -1) {
                       // text=$col.find("a").text();  
-                      if(text=="&nbsp;")
-                      {  text=""; }
-                      if(text.indexOf("planned")!=-1)
-                        text= text.slice(8,text.length);
+                      if (text=="&nbsp;") {  
+                        text="";
+                      }
+                      if (text.indexOf("planned")!=-1)
+                      text= text.slice(8,text.length);
                       return text.replace('"', '""');
                       // escape double quotes
-                    }
-                  }
-                }
-                                ).get().join(tmpColDelim);
-                
-              }
-                                   ).get().join(tmpRowDelim)
-              .split(tmpRowDelim).join(rowDelim)
-              .split(tmpColDelim).join(colDelim) + '"',
+                  }}}).get().join(tmpColDelim);
+                }).get().join(tmpRowDelim).split(tmpRowDelim).join(rowDelim).split(tmpColDelim).join(colDelim) + '"',
               
-              // Data URI
-              csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
+          // Data URI
+          csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
           var pom = document.createElement('a');
           
           var csvContent=csv; //here we load our csv data 
@@ -487,8 +490,7 @@ $chart_vulntype_metrics = Array();
         if (master_search.parentNode.removeChild(master_search)) {
           clearTimeout(delete_timeout_id)
         }
-      }
-                                         , 10);
+      }, 10);
     </script>
     
     
