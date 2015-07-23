@@ -175,7 +175,7 @@ $chart_vulntype_metrics = Array();
                   </a>
                 </td>
                 <td>
-                  <a style="margin: 0px; padding: 0px; float: right; text-decoration: none" class="export"> Export </a>
+                  <button type="button" class="btn btn-success export" style="margin: 0px; float: right; text-decoration: none"> Export </button>
                 </td>
               </tr>
             </tbody>
@@ -406,7 +406,7 @@ $chart_vulntype_metrics = Array();
     </script>
     <script>
       
-      $(document).ready(function(){
+      $(document).ready(function () {
         //console.log($('issues_table'))
         $('#issues_table tfoot th').each( function () {
           var title = $('#issues_table thead th').eq($(this).index()).text();
@@ -415,8 +415,48 @@ $chart_vulntype_metrics = Array();
 
         var table = $('#issues_table').DataTable();
         
-        $(".export").on("click",function(e){
-          exportTableToCSV.apply($(this),[$("#issues_table"), "source-scan-report.csv"])
+        $(".export").on("click",function(e) {
+          var report_export_dialog_config = {
+            type: 'type-primary',
+            title: 'Export Report',
+            message: 'How do you want to export the report?',
+            buttons: [
+            {
+              icon: '',
+              label: 'Current View',
+              cssClass: 'btn-primary',
+              autospin: true,
+              autodestroy: true,
+              action: function(dialogRef) {
+                exportTableToCSV.apply($(this),[$("#issues_table"), "source-scan-report-view.csv"]);
+                dialogRef.close();
+              }
+            }, {
+              icon: '',
+              label: 'Everything',
+              cssClass: 'btn-warning',
+              autospin: true,
+              autodestroy: true,
+              action: function(dialogRef) {
+                table.columns().eq(0).each(function(colIdx) {
+                    table.column(colIdx).search('').draw();
+                });
+                var prev_len = table.page.len();
+                table.page.len(10000).draw();
+                exportTableToCSV.apply($(this),[$("#issues_table"), "source-scan-report-all.csv"]);
+                table.page.len(prev_len).draw();
+                dialogRef.close();
+              }
+            }, {
+              label: 'Close',
+              cssClass: 'btn-danger',
+              action: function(dialogRef) {
+                dialogRef.close();
+              }
+            }]
+          };
+
+          BootstrapDialog.show(report_export_dialog_config);
         });
         
         // Apply the search
@@ -431,7 +471,7 @@ $chart_vulntype_metrics = Array();
           
           //   var $rows = $table.find('tr:has(td)'),
           // var $rows = $table.find('tr:has(td),thead'),
-          var $rows=$table.find('tr:has(td),thead').not($($("thead")[1])),
+          var $rows = $table.find('tr:has(td),thead').not($($("thead")[1])),
               //var $rows=$("table").find('tr').not($("tr")[0])
               // Temporary delimiter characters unlikely to be typed by keyboard
               // This is to avoid accidentally splitting the actual contents
@@ -456,7 +496,7 @@ $chart_vulntype_metrics = Array();
                       if (text=="&nbsp;") {  
                         text="";
                       }
-                      if (text.indexOf("planned")!=-1)
+                      if (text.indexOf("planned") != -1)
                       text= text.slice(8,text.length);
                       return text.replace('"', '""');
                       // escape double quotes
@@ -467,8 +507,8 @@ $chart_vulntype_metrics = Array();
           csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
           var pom = document.createElement('a');
           
-          var csvContent=csv; //here we load our csv data 
-          var blob = new Blob([csvContent],{type: 'text/csv;charset=utf-8;'});
+          var csvContent = csv; //here we load our csv data 
+          var blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
           var url = URL.createObjectURL(blob);
           pom.href = url;
           
