@@ -8,6 +8,7 @@ include_once("session.php");
 @$upload_id = $_REQUEST['upload_id'];
 @$zip_name = $_REQUEST['zip_name'];
 
+
 function normalize_git_path($git_repo) {  
 
 #point your github server endpoints here, and do NOT forget the trailing slash
@@ -27,7 +28,8 @@ if ( strstr($git_repo, $git_endpoint['internal']) ) {
     
     if ($git_repo[strlen($git_repo)-1] === '/')
       $git_repo[strlen($git_repo)-1] = '';
-  
+
+    $git_repo = preg_replace( '/[^[:print:]]/', '',$git_repo);
     return $git_repo;
 }
 

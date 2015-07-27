@@ -4,14 +4,14 @@ from flask import Flask, request, jsonify, Response, redirect, url_for
 from werkzeug.contrib.fixers import ProxyFix
 from werkzeug import secure_filename
 import sys, os, json, threading, hashlib, shutil, zipfile, requests, time
-
+from raptor import log
 
 app = Flask(__name__)
 app.debug=True
 
 @app.errorhandler(500)
 def server_error(e):
-    return 'Internal Server Error', 500    
+    return 'Internal Server Error', 500
 
 @app.route('/', methods=['GET'])
 def help():
@@ -21,6 +21,7 @@ def help():
 def heartbeat():
     return '{"status":"true", "time":%s}' % (str(int(time.time())))
 
+#server-side call; nginx route not required
 @app.route('/internal/scan/', methods=['GET'])
 def internal_repo_scan():
     repo = request.args.get('r')
@@ -35,10 +36,10 @@ def internal_repo_scan():
     fhandle = open(report_directory, "w")
     content = fhandle.write(results)
     fhandle.close()
-    print "[INFO] Report created at %s" % (report_directory)
+    log.logger.debug("Report created at %s" % (report_directory))
     return jsonify(json_results)
 
-
+#server-side call; nginx route not required
 @app.route('/external/scan/', methods=['GET'])
 def external_repo_scan():
     repo = request.args.get('r')
@@ -53,7 +54,7 @@ def external_repo_scan():
     fhandle = open(report_directory, "w")
     content = fhandle.write(results)
     fhandle.close()
-    print "[INFO] Report created at %s" % (report_directory)
+    log.logger.debug("Report created at %s" % (report_directory))
     return jsonify(json_results)
 
 @app.route('/purge/', methods=['GET'])
@@ -69,20 +70,20 @@ def delete_report():
                 os.remove(report_path)
                 resp_content = "Success"
         except Exception as e:
-            print "[ERROR] %s: %s" % (report_path, str(e))
+            log.logger.error("%s: %s" % (report_path, str(e)))
             resp_content = "Failure"
     else:
         resp_content = "Failure"
     return resp_content
 
-UPLOAD_FOLDER = os.path.abspath('./uploads')
+UPLOAD_FOLDER = os.path.abspath(os.environ['zip_upload_dir'])
 ALLOWED_EXTENSIONS = set(['zip'])
 
 try:
     os.makedirs(UPLOAD_FOLDER)
 except Exception as e:
     if ' File exists: ' in str(e):
-        print "[INFO] %s" % str(e)
+        log.logger.debug("%s" % str(e))
     else:
         raise e
 
@@ -103,7 +104,7 @@ def unzip_thread(fname, path='.'):
             else:
                 return False
         except Exception as e:
-            print e
+            log.logger.error(e)
             return False
     t = threading.Thread(target=unzip, args=(fname, path))
     t.start()
@@ -127,7 +128,7 @@ def index():
                 unzip_thread(new_path, os.path.join(UPLOAD_FOLDER, new_fname.rstrip('.zip')))
                 return redirect('/raptor/scan.php?scan_name=%s&upload_id=%s&zip_name=%s' % (scan_name, new_fname.rstrip('.zip'), upld_file.filename), code=302)
             except Exception as e:
-                print e
+                log.logger.error(e)
 
 #server-side call; nginx route not required
 @app.route('/zip/scan/', methods=['GET'])
@@ -145,9 +146,10 @@ def zip_scan():
     fhandle = open(report_directory, "w")
     content = fhandle.write(results)
     fhandle.close()
-    print "[INFO] Report created at %s" % (report_directory)
+    log.logger.debug("Report created at %s" % (report_directory))
     return jsonify(json_results)
 
+#exposed via nginx route
 @app.route('/raptor/githook', methods=['POST'])
 def gitHook():
     try:
@@ -177,10 +179,10 @@ def gitHook():
             content = fhandle.write(results)
             fhandle.close()
 
-            print "[INFO] Report created at %s" % (report_directory)
+            log.logger.debug("Report created at %s" % (report_directory))
             return jsonify(json_results)
     except Exception as e:
-        print str(e)
+        log.logger.error(str(e))
     return ""
 
 app.wsgi_app = ProxyFix(app.wsgi_app)

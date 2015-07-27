@@ -1,6 +1,7 @@
 #!usr/bin/python
 import os, sys, subprocess, shutil, json, linecache, base64, fnmatch, traceback
 import BeautifulSoup as bs
+import log
 
 bin_paths = {}
 bin_paths['nodejs'] = '/usr/bin/nodejs' if os.path.isfile('/usr/bin/nodejs') else '/usr/local/bin/node'

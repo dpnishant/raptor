@@ -13,6 +13,9 @@ if(!empty($report_id)) {
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     $response = curl_exec($ch);
     curl_close($ch);
+    if ($response === 'Success') {
+    	$_SESSION['delete_id'][$report_id] = '';
+    }
 	header('Location: history.php');
 }
 

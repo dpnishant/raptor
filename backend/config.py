@@ -144,9 +144,11 @@ tmp_upload_dir = None
 #       A string of "debug", "info", "warning", "error", "critical"
 #
 
-errorlog = '-'
+errorlog = '/var/raptor/log/error.log'
 loglevel = 'info'
-accesslog = '-'
+accesslog = '/var/raptor/log/access.log'
+#access_format = "request-date pid remote-address username status-line response-code referer user-agent request-header"
+access_log_format = '%(t)s %(p)s %(h)s %(u)s %(r)s %(s)s %(b)s %(f)s %(a)s %({Header}i)s'
 
 #
 # Process naming

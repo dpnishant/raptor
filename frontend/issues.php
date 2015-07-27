@@ -5,9 +5,11 @@ include_once("session.php");
 
 if (!empty($_SESSION['current_scan_report'])) {
 
-$data = json_decode(file_get_contents($_SESSION['current_scan_report']), true);
-
+if (file_exists($_SESSION['current_scan_report'])) {
+  $data = json_decode(file_get_contents($_SESSION['current_scan_report']), true);
 } else {
+  $_SESSION['current_scan_report'] = '';
+}} else {
 error_log("[ERROR] session: current_scan_report is null.");
 }
 

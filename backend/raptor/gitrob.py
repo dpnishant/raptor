@@ -7,6 +7,7 @@ This module is uses the rules defined patterns.json of the Gitrob project:
 https://github.com/michenriksen/gitrob created by Michael Henriksen.
 '''
 import os, sys, re, json, base64
+import log
 
 def load_gitrob_rules(fname):
     file = open(fname, 'r')
@@ -35,7 +36,7 @@ def gitrob_scan(root_path, rules_path):
                     gitrob_issue['warning_type'] =  'Sensitive Information Disclosure'
                     gitrob_issue['warning_code'] = 'SID'
                     gitrob_issue['message'] = str(gitrob_rule['caption'])
-                    gitrob_issue['file'] = re.sub('/(clones|uploads)/[a-zA-Z0-9]{56}/', '', file_path.replace(os.getcwd(), '').replace(root_path, '')).lstrip('/')
+                    gitrob_issue['file'] = re.sub('/var/raptor/(clones|uploads)/[a-zA-Z0-9]{56}/', '', file_path.replace(os.getcwd(), '').replace(root_path, '')).lstrip('/')
                     gitrob_issue['line'] = ''
                     gitrob_issue['link'] = 'https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure'
                     gitrob_issue['code'] = 'n/a'

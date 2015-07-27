@@ -1,7 +1,8 @@
 #!/bin/sh
 
 export reportpath="/var/raptor/scan_results"
-
+export zip_upload_dir="/var/raptor/uploads"
+export git_clone_dir="/var/raptor/clones"
 
 #IMPORTANT: Do NOT add the trailing slash after the URLs.
 ############PUBLIC###############

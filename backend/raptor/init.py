@@ -6,6 +6,7 @@ from codescan import *
 from externalscan import *
 from fsb import *
 from gitrob import *
+import log
 
 
 rulepacks = ['common', 'android', 'php', 'actionscript']
@@ -40,6 +41,7 @@ def scan_all(scan_path, repo_path):
     for rulepack in rulepacks:
         rule_path = 'rules/%s.rulepack' % rulepack
         report_path = scan_path + '/%s_report.json' % rulepack
+        log.logger.debug('scanning with [%s] rulepack' % (rulepack))
         result = Scanner(scan_path, rule_path, report_path)
 
         if len(result.issues) > 0:
@@ -47,7 +49,7 @@ def scan_all(scan_path, repo_path):
                 results.append(issue)
                 total_issues += 1
 
-    print "[INFO] Started gitrob plugin"
+    log.logger.debug("scanning with [gitrob] plugin")
     for rulepack in plugin_rulepacks:
         if rulepack.startswith('gitrob'):
             rule_path = 'rules/%s.rulepack' % rulepack
@@ -58,7 +60,7 @@ def scan_all(scan_path, repo_path):
                     results.append(issue)
                     total_issues += 1
 
-    print "[INFO] Started fsb plugin"
+    log.logger.debug("scanning with [fsb] plugin")
     for rulepack in plugin_rulepacks:
         if rulepack.startswith('fsb_'):
             rule_path = 'rules/%s.rulepack' % rulepack
@@ -69,21 +71,21 @@ def scan_all(scan_path, repo_path):
                     results.append(issue)
                     total_issues += 1
 
-    print "[INFO] Started scanjs plugin"
+    log.logger.debug("scanning with [scanjs] plugin")
     js_results = scanjs(scan_path)
     if len(js_results) > 0 and js_results != 'error':
         for js_issue in js_results:
             results.append(js_issue)
             total_issues += 1
     
-    print "[INFO] Started brakeman plugin"
+    log.logger.debug("scanning with [brakeman] plugin")
     ror_results = scan_brakeman(scan_path)
     if len(ror_results) > 0 and ror_results != 'error':
         for ror_result in ror_results:
             results.append(ror_result)
             total_issues += 1
 
-    print "[INFO] Started rips plugin"
+    log.logger.debug("scanning with [rips] plugin")
     php_results = scan_phprips(scan_path)
     if len(php_results) > 0 and php_results != 'error':
         for php_result in php_results:
@@ -107,11 +109,11 @@ def scan_all(scan_path, repo_path):
     return json
 
 def clone(repo_name, internal):
+    clone_directory = os.environ['git_clone_dir']
     uniq_path = hashlib.sha224(repo_name).hexdigest()
-
-    uniq_path = hashlib.sha224(repo_name).hexdigest()
-    if os.path.isdir(os.getcwd() + '/clones/' + uniq_path):
-        shutil.rmtree(os.getcwd() + '/clones/' + uniq_path)
+    
+    if os.path.isdir(os.path.join(clone_directory, uniq_path)):
+        shutil.rmtree(os.path.join(clone_directory, uniq_path))
 
     if internal:
         repo_url = '%s/%s.git' % (os.environ['int_git_url'], repo_name)
@@ -119,10 +121,10 @@ def clone(repo_name, internal):
         repo_url = '%s/%s.git' % (os.environ['ext_git_url'], repo_name)
 
     try:
-        clone_dir = os.getcwd() + '/clones/'
+        clone_dir = clone_directory
         if not os.path.isdir(clone_dir):
             os.makedirs(clone_dir)
-        repo_path = clone_dir + uniq_path
+        repo_path = os.path.join(clone_dir, uniq_path)
 
         if internal==True:
             username = os.environ['int_git_user']
@@ -135,32 +137,31 @@ def clone(repo_name, internal):
         git_obj = git.clone_repository(repo_url, repo_path, credentials=login_info)            
         return repo_path
     except Exception, e:
-        print e
         if str(e).find('Unexpected HTTP status code: 404'):
-            print "Repo doesn't exists"
+            log.logger.error("repo doesn't exists")
             return "Repo doesn't exists"
-        #return str(e)
+        log.logger.error(e)
 
 def delete_residue(path, report_files):
     shutil.rmtree(path)
 
 def start(repo_path, report_dir, internal):
-    print "==============New Scan: [github] ==================="
-    print "[INFO] Now cloning: %s" % (repo_path)
+    log.logger.debug("==============New Scan: [github] ===================")
+    log.logger.debug("Now cloning: %s" % (repo_path))
     cloned_path = clone(repo_path, internal)
     if os.path.isdir(cloned_path):
-        print "[INFO] Now scanning: %s" % repo_path
+        log.logger.debug("[INFO] Now scanning: %s" % repo_path)
         results = scan_all(cloned_path, repo_path)
-        print "[INFO] Scan complete! Deleting ..."
+        log.logger.debug("[INFO] Scan complete! Deleting ...")
         delete_residue(cloned_path, rulepacks)
         return results
 
 def scan_zip(upload_id, zip_name, report_dir):
-    print "==============New Scan: [zip] ==================="
-    extracted_path = os.path.join(os.path.abspath('./uploads'), upload_id)
+    log.logger.debug("==============New Scan: [zip] ===================")
+    extracted_path = os.path.join(os.path.abspath(os.environ['zip_upload_dir']), upload_id)
     if os.path.exists(extracted_path):
-        print "[INFO] Now scanning: %s" % zip_name
+        log.logger.debug("Now scanning: %s" % zip_name)
         results = scan_all(extracted_path, zip_name)
-        print "[INFO] Scan complete! Deleting ..."
+        log.logger.debug("Scan complete! Deleting ...")
         delete_residue(extracted_path, zip_name)
         return results

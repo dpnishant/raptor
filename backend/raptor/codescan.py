@@ -2,6 +2,7 @@
 import os, sys, re, fnmatch, json, base64, time
 from datetime import datetime
 from android import *
+import log
 
 def version():
     return 'beta'
@@ -123,7 +124,7 @@ class Scanner(object):
                     issue["warning_type"] =  str(rule["title"])
                     issue["warning_code"] = str(rule["id"])
                     issue["message"] = str(rule["description"])
-                    issue["file"] = re.sub('/(clones|uploads)/[a-zA-Z0-9]{56}/', '', fpath.replace(os.getcwd(),''))
+                    issue["file"] = re.sub('/var/raptor/(clones|uploads)/[a-zA-Z0-9]{56}/', '', fpath.replace(os.getcwd(),''))
                     issue["line"] = int(line_num) + 1
                     issue["link"] = str(rule["link"])
                     issue["code"] = line_content.strip("\n").strip("\r").strip("\t").strip(" ")

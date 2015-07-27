@@ -7,6 +7,7 @@
 
 import os, sys, re, linecache, json
 from lxml import etree
+import log
 
 plugin_name = "android_manifest"
 

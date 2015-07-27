@@ -33,6 +33,12 @@ rm -rf libgit2-0.22.0.tar.gz
 rm -rf libgit2-0.22.0/
 mkdir -p /var/raptor/scan_results
 chmod -R 777 /var/raptor/scan_results #development purpose only
+mkdir -p /var/raptor/log
+chmod -R 777 /var/raptor/log #development purpose only
+mkdir -p /var/raptor/uploads
+chmod -R 777 /var/raptor/uploads #development purpose only
+mkdir -p /var/raptor/clones
+chmod -R 777 /var/raptor/clones #development purpose only
 mkdir -p /var/www/html/raptor
 cp -r frontend/* /var/www/html/raptor
 rm -rf /etc/apache2/sites-available/raptor.conf

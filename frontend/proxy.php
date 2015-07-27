@@ -43,7 +43,7 @@ function write_to_file($data, $username, $scan_name) {
 if( !empty($_SESSION['git_repo']) && !empty($_SESSION['scan_active']) ) {
 	
 	$path = PATH . '/' . $_SESSION['user_name'] . '/' . $_SESSION['scan_name'] . '/' . $_SESSION['git_repo'] . '/' . 	time() . '.json';
-	error_log($path);
+	//error_log('DEBUG: <proxy.php>'.$_SESSION['git_repo']);
 
 	$ch = curl_init();
 	curl_setopt($ch, CURLOPT_URL, ENDPOINT . '/' . $_SESSION['git_type'] . '/scan/?r=' . $_SESSION['git_repo'] . '&p=' . $path);
