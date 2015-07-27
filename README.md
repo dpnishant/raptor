@@ -69,6 +69,43 @@ You can access it here: [Rules Editor](http://127.0.0.1/raptor/editrules.php)
 #####Public/Private GitHub instance
 You can use Raptor to scan your organization's private as well as public instances of GitHub by specifiying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L32) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/scan.php#L16-L17).
 
+### Screenshots
+#### Login
+![Login](http://www.daspatnaik.com/raptor/login.png)
+
+#### Github Scan 
+![Github Scan](http://www.daspatnaik.com/raptor/scan.png)
+
+#### Zip Scan
+![Zip Scan](http://www.daspatnaik.com/raptor/zip_scan.png)
+
+#### Scan Started
+![Scan Started](http://www.daspatnaik.com/raptor/scan_start.png)
+
+#### Scan in progress
+![Scan in progress](http://www.daspatnaik.com/raptor/scan_progress.png)
+
+#### Report Statistics
+![Report Statistics](http://www.daspatnaik.com/raptor/statistics.png)
+
+#### Issue Details
+![Login](http://www.daspatnaik.com/raptor/issues.png)
+
+#### Issue Filters
+![Issue Details](http://www.daspatnaik.com/raptor/filters.png)
+
+#### Export Report
+![Export Report](http://www.daspatnaik.com/raptor/report_export.png)
+
+#### Scan History
+![Scan History](http://www.daspatnaik.com/raptor/history.png)
+
+#### Rules Editor
+![Rules Editor](http://www.daspatnaik.com/raptor/rules.png)
+
+#### Server Error
+![Server Error](http://www.daspatnaik.com/raptor/notifications.png)
+
 ### Development
 
 Want to contribute? Great! 
