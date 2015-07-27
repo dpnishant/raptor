@@ -64,7 +64,7 @@ def match_condition(fpath, rule):
         for condition in rule['condition']:
             condition_sig = base64.b64decode(condition['signature'])
             pattern = re.compile(condition_sig)
-            if pattern.search(lines[line]):
+            if pattern.search(lines[line]) and not (lines[line].strip().startswith('//') or lines[line].strip().startswith('/*')):
                 return line + 1, lines[line].strip()
     return False
 
@@ -101,7 +101,7 @@ def scan_line(delim_line, fpath, root_path):
         if rule['enabled'] == 'true':
             rule_signature = base64.b64decode(rule['signature'])
             pattern = re.compile(rule_signature)
-            if pattern.search(line_content):
+            if pattern.search(line_content) and not (line_content.strip().startswith('//') or line_content.strip().startswith('/*')):
                 if match_condition(fpath, rule) or scan_localImports(get_localImports(fpath), rule, root_path):
                     fsb_issue['warning_type'] =  str(rule['title'])
                     fsb_issue['warning_code'] = str(rule['id'])

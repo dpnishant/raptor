@@ -37,6 +37,8 @@ $chart_vulntype_metrics = Array();
   <!-- Custom styles for this template -->
   <link href="assets/css/dashboard.css" rel="stylesheet">
   
+  <!-- CSS for highlight.js syntax highlighting library -->
+  <link rel="stylesheet" href="dist/css/xcode.css">
   <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
   <!--[if lt IE 9]>
 <script src="../../assets/js/ie8-responsive-file-warning.js">
@@ -260,15 +262,37 @@ $chart_vulntype_metrics = Array();
            ltrim($data['warnings'][$i]['file'], '/') . '#L' . $data['warnings'][$i]['line'] . '</a></td>';
       }
       
+      if (!function_exists('highlight_type')) {
+        function highlight_type($plugin) {
+        $type = '';
+        switch ($plugin) {
+          case 'android':
+            $type = 'java';
+          case 'php':
+            $type = 'php';
+          case 'actionscript':
+            $type = 'actionscript';
+          case 'fsb_android':
+            $type = 'java';
+          case 'fsb_injection':
+            $type = 'java';
+          case 'fsb_crypto':
+            $type = 'java';
+          case 'fsb_endpoint':
+            $type = 'java';
+        }
+        return $type;
+      }}
+      
       echo '<tr>' . 
            '<td>' . $rule_id . '</td>' .
            '<td>' . $data['warnings'][$i]['warning_type'] . '</td>' . 
            $line_content .
            '<td>' . $data['warnings'][$i]['message'] . '</td>' .
-           '<td>' . htmlentities($data['warnings'][$i]['code']) . '</td>' .
+           '<td><pre><code style="white-space:nowrap" class="'. pathinfo($data['warnings'][$i]['file'], PATHINFO_EXTENSION) .'">' . htmlentities($data['warnings'][$i]['code']) . '</pre></code></td>' .
            '<td>' . $data['warnings'][$i]['plugin'] . '</td>' .
            '<td>' . $data['warnings'][$i]['severity'] . '</td>' .
-           '<td>' . $data['warnings'][$i]['link'] . '</td>'; 
+           '<td><a target="_blank" href="' . $data['warnings'][$i]['link'] . '">'. $data['warnings'][$i]['link'] .'</a></td>'; 
 
       if (gettype(@$data['warnings'][$i]['location']) === 'array') {
         echo '<td>';
@@ -569,6 +593,8 @@ $chart_vulntype_metrics = Array();
         200x200
       </text>
     </svg>
+    <script src="dist/js/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <script src="dist/js/heartbeat.js"></script>
   </body>
 </html>
