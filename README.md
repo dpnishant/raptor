@@ -85,5 +85,3 @@ License
 GNU GPL v2.0
 
 **Free Software, Hell Yeah!**
-
-[Init Script]:
