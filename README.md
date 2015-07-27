@@ -20,19 +20,19 @@ Integrated Plugins:
 
 Note: Most of the following tools/modules/libs have been modified heavily to be able to integrate well in the framework.
 
-* :zap: [Mozilla ScanJS] - for JavaScript (Client-Side, Node.JS etc. and upcomming support for Chrome Extensions & Firefox Plugins)
-* :zap: [Brakeman] - for Ruby On Rails
-* :zap: [RIPS] - for PHP
-* :zap: [Manitree] - for AndroidManifest.xml insecurities
+* :zap: [Mozilla ScanJS](https://github.com/mozilla/scanjs) - for JavaScript (Client-Side, Node.JS etc. and upcomming support for Chrome Extensions & Firefox Plugins)
+* :zap: [Brakeman](http://brakemanscanner.org/) - for Ruby On Rails
+* :zap: [RIPS](http://rips-scanner.sourceforge.net/) - for PHP
+* :zap: [Manitree](https://github.com/antitree/manitree/) - for AndroidManifest.xml insecurities
 
 Avaiables Rulepacks:
 * :zap: ActionScript - supports Flash/Flex (ActionScript 2.0 & 3.0) source/sinks
-* :zap: [FindSecurityBugs]  (rules Only) - for Java (J2EE, JSP, Android, Scala, Groovy etc.)
-* :zap: [gitrob] (rules only) - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)
+* :zap: [FindSecurityBugs](http://h3xstream.github.io/find-sec-bugs/)  (rules Only) - for Java (J2EE, JSP, Android, Scala, Groovy etc.)
+* :zap: [gitrob](https://github.com/michenriksen/gitrob) - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)
 
 ### Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)
 
-Installation Video: [YouTube Install]
+Installation Video: [YouTube Install](https://www.youtube.com/v/0KneQwJiUFk?start=0&end=537)
 
 ```sh
 $ wget https://github.com/dpnishant/raptor/archive/master.zip -O raptor.zip
@@ -46,12 +46,12 @@ $ sudo sh install.sh
 
 ###Usage
 #####Scanner
-Installation Video: [YouTube Usage]
+Installation Video: [YouTube Usage](https://www.youtube.com/v/0KneQwJiUFk?start=550)
 ```sh
 cd raptor-master
 sudo sh start.sh #starts the backend web-service
 ```
-Now point your browser to [Raptor Home]
+Now point your browser to [Raptor Home](http://127.0.0.1/raptor/)
 
 ######Login
 Login with the username as registered on the corresponding github server you are connected to and *any* password (but remember the username to view scan history)
@@ -63,12 +63,12 @@ If you are registered as `foobar` on https://github.com, then use the same usern
 However, as of now password can be anything, since we have *NOT* implemented a database in the development version.
 
 #####Rules Editor
-You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: [Init Script]. Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set! :thumbsup:
+You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: [Init Script](https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L9). Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set! :thumbsup:
 
-You can access it here: [Rules Editor]
+You can access it here: [Rules Editor](http://127.0.0.1/raptor/editrules.php)
 
 #####Public/Private GitHub instance
-You can use Raptor to scan your organization's private as well as public instances of GitHub by specifiying the right server endpoints at [here][github_configs] and [here](https://github.com/dpnishant/raptor/blob/master/frontend/scan.php#L16-L17).
+You can use Raptor to scan your organization's private as well as public instances of GitHub by specifiying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L32) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/scan.php#L16-L17).
 
 ### Development
 
@@ -77,7 +77,7 @@ Get in touch with me if you have an idea or else feel free to fork and improve. 
 
 ### Contributors
 
- - [Anant Shrivastava]
+ - [Anant Shrivastava](https://twitter.com/anantshri)
 
 License
 ----
@@ -86,16 +86,4 @@ GNU GPL v2.0
 
 **Free Software, Hell Yeah!**
 
-[Mozilla ScanJS]:https://github.com/mozilla/scanjs
-[Brakeman]:http://brakemanscanner.org/
-[RIPS]:http://rips-scanner.sourceforge.net/
-[Anant Shrivastava]:https://twitter.com/anantshri
-[YouTube Install]:https://www.youtube.com/v/0KneQwJiUFk?start=0&end=537
-[YouTube Usage]:https://www.youtube.com/v/0KneQwJiUFk?start=550
-[Init Script]:https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L9
-[Rules Editor]:http://127.0.0.1/raptor/editrules.php
-[Raptor Home]:http://127.0.0.1/raptor/
-[Manitree]:https://github.com/antitree/manitree/
-[FindSecurityBugs]:http://h3xstream.github.io/find-sec-bugs/
-[github_configs]:https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L32
-[gitrob]:https://github.com/michenriksen/gitrob
+[Init Script]:
