@@ -1,4 +1,4 @@
-![Raptor](https://camo.githubusercontent.com/8c120bacdaf2d6dbbe7a2bb278a68f69a9b53ba4/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f6c6f676f2e706e67)
+![Raptor](https://camo.githubusercontent.com/8c120bacdaf2d6dbbe7a2bb278a68f69a9b53ba4/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f6c6f676f2e706e67){:width="32%"}
  is a web-based (web-serivce + UI) github centric source-vulnerability scanner i.e. it scans a repository with just the github repo url. You can setup webhooks to ensure automated scans everytime you commit or merge a pull request. The scan is done asynchonously and the results are available only to the user who initiated the scan.
 
 Some of the features of the Raptor:
