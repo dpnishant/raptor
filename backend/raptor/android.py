@@ -1,4 +1,4 @@
-#!usr/bin/python
+#!/usr/bin/python
 #
 # The security checks in this module have been taken from 
 # https://github.com/antitree/manitree/ project.
