@@ -1,3 +1,4 @@
+#!/usr/bin/python
 import logging, logging.handlers
 
 LOG_FILENAME = '/var/raptor/log/debug.log'
