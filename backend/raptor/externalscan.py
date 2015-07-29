@@ -1,4 +1,4 @@
-#!usr/bin/python
+#!/usr/bin/python
 import os, sys, subprocess, shutil, json, linecache, base64, fnmatch, traceback
 import BeautifulSoup as bs
 import log
