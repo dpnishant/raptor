@@ -1,4 +1,4 @@
-#!usr/bin/python
+#!/usr/bin/python
 from raptor import init as init
 from flask import Flask, request, jsonify, Response, redirect, url_for
 from werkzeug.contrib.fixers import ProxyFix
