@@ -1,4 +1,4 @@
-#!usr/bin/python
+#!/usr/bin/python
 # Raptor Gunicorn configuration file.
 
 #
