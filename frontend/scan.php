@@ -2,7 +2,6 @@
 
 include_once("session.php");
 
-
 @$scan_name = $_REQUEST['scan_name'];
 @$git_repo = $_REQUEST['git_repo'];
 @$upload_id = $_REQUEST['upload_id'];
