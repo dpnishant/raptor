@@ -5,8 +5,10 @@ if(empty($_SESSION['user_name'])) {
  header('Location: login.php'); 
 }
 
+global $git_endpoint;
+
 #point your github server endpoints here, and do NOT forget the trailing slash
-global $git_endpoint = array(
+$git_endpoint = array(
   'internal' => 'https://github.dummycorp.com/',
   'external' => 'https://github.com/'
   );
