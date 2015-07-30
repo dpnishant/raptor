@@ -1,5 +1,5 @@
 <?php
-include_once("session.php");
+include("session.php");
 
 header('Location: scan.php');
 

@@ -1,5 +1,5 @@
 <?php
-include_once("session.php");
+include("session.php");
 
 
 if ( ( !empty($_SESSION['git_repo']) || !empty($_SESSION['zip_name']) ) && empty($_SESSION['scan_active']) ) {

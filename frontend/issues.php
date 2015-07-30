@@ -1,6 +1,6 @@
 <?php
 
-include_once("session.php");
+include("session.php");
 
 
 if (!empty($_SESSION['current_scan_report'])) {
@@ -313,9 +313,9 @@ $chart_vulntype_metrics = Array();
         $usrinput = '';
         
         if ($_SESSION['git_type'] === 'internal') {
-          $git_url = $git_endpoint['internal'];
+          $git_url = $_SESSION['git_endpoint']['internal'];
         } elseif ($_SESSION['git_type'] === 'external') {
-          $git_url = $git_endpoint['external'];
+          $git_url = $_SESSION['git_endpoint']['external'];
         }
 
         foreach($data['warnings'][$i]['user_input'] as $value) {

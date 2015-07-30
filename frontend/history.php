@@ -1,6 +1,6 @@
 <?php
 
-include_once("session.php");
+include("session.php");
 
 
 $GLOBALS['report_base']  = '/var/raptor/scan_results/';  

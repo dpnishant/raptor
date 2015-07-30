@@ -1,6 +1,6 @@
 <?php
 
-include_once("session.php");
+include("session.php");
 
 @$scan_name = $_POST['scan_name'];
 @$git_repo = $_POST['git_repo'];

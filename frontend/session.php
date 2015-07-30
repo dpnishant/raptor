@@ -5,10 +5,8 @@ if(empty($_SESSION['user_name'])) {
  header('Location: login.php'); 
 }
 
-global $git_endpoint;
-
 #point your github server endpoints here, and do NOT forget the trailing slash
-$git_endpoint = array(
+$_SESSION['git_endpoint'] = array(
   'internal' => 'https://github.dummycorp.com/',
   'external' => 'https://github.com/'
   );
@@ -17,7 +15,7 @@ $time = $_SERVER['REQUEST_TIME'];
 /**
  * for a 60 minute timeout, specified in seconds
  */
-$timeout_duration = 60*60;
+$timeout_duration = 60	*60;
 
 /**
  * Here we look for the user’s LAST_ACTIVITY timestamp. If

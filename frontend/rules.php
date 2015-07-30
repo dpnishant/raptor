@@ -1,6 +1,6 @@
 <?php
 
-include_once("session.php");
+include("session.php");
 
 ?>
 <!DOCTYPE HTML>

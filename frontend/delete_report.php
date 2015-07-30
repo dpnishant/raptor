@@ -1,6 +1,6 @@
 <?php
 
-include_once("session.php");
+include("session.php");
 
 define('ENDPOINT', 'http://127.0.0.1:8000'); #defined in gunicorn_config.py
 

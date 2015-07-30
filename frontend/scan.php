@@ -1,6 +1,6 @@
 <?php
 
-include_once("session.php");
+include("session.php");
 
 @$scan_name = $_REQUEST['scan_name'];
 @$git_repo = $_REQUEST['git_repo'];
@@ -10,14 +10,14 @@ include_once("session.php");
 
 function normalize_git_path($git_repo) {  
 
-if ( strstr($git_repo, $git_endpoint['internal']) ) {
+if ( strstr($git_repo, $_SESSION['git_endpoint']['internal']) ) {
       $_SESSION['git_type'] = 'internal';
-    } else if ( strstr($git_repo, $git_endpoint['external']) ) {
+    } else if ( strstr($git_repo, $_SESSION['git_endpoint']['external']) ) {
       $_SESSION['git_type'] = 'external';
     }
 
-    $git_repo = str_ireplace($git_endpoint['external'], '', $git_repo = str_ireplace('.git', '', $git_repo));
-    $git_repo = str_ireplace($git_endpoint['internal'], '', $git_repo);
+    $git_repo = str_ireplace($_SESSION['git_endpoint']['external'], '', $git_repo = str_ireplace('.git', '', $git_repo));
+    $git_repo = str_ireplace($_SESSION['git_endpoint']['internal'], '', $git_repo);
     
     if ($git_repo[strlen($git_repo)-1] === '/')
       $git_repo[strlen($git_repo)-1] = '';
