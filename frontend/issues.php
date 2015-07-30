@@ -233,6 +233,13 @@ $chart_vulntype_metrics = Array();
         <tbody>
   <?php
     if (!empty($_SESSION['current_scan_report'])) {
+      
+      if ($_SESSION['git_type'] === 'internal') {
+          $git_url = $_SESSION['git_endpoint']['internal'];
+        } elseif ($_SESSION['git_type'] === 'external') {
+          $git_url = $_SESSION['git_endpoint']['external'];
+        }
+
       for($i=0; $i < count($data['warnings']); $i++) {
         @$rule_id = !empty($data['warnings'][$i]['warning_code']) ? $data['warnings'][$i]['warning_code'] : '-';
 
@@ -257,7 +264,7 @@ $chart_vulntype_metrics = Array();
       if ( strstr(ltrim($data['warnings'][$i]['file']), '.zip') ) {
           $line_content = '<td><a target="_blank" href="#">' . ltrim($data['warnings'][$i]['file'], '/') . '#L' . $data['warnings'][$i]['line'] . '</a></td>';
       } else {
-         $line_content = '<td><a target="_blank" href="' . 'https://github.com/' . $data['scan_info']['app_path'] . 
+         $line_content = '<td><a target="_blank" href="' . $git_url . $data['scan_info']['app_path'] . 
            '/blob/master/' . ltrim($data['warnings'][$i]['file'], '/') . '#L' . $data['warnings'][$i]['line'] . '">' . 
            ltrim($data['warnings'][$i]['file'], '/') . '#L' . $data['warnings'][$i]['line'] . '</a></td>';
       }
@@ -298,7 +305,7 @@ $chart_vulntype_metrics = Array();
         echo '<td>';
         for($loc=0; $loc < count($data['warnings'][$i]['location']); $loc++) {
         
-          echo '<a target="_blank" href="' . 'https://github.com/' . $data['scan_info']['app_path'] . 
+          echo '<a target="_blank" href="' . $git_url . $data['scan_info']['app_path'] . 
           '/blob/master/' . $data['warnings'][$i]['file'] . '#L' . $data['warnings'][$i]['location'][$loc] . '">' . 
           $data['warnings'][$i]['location'][$loc] . '</a>, ';
         
@@ -311,12 +318,6 @@ $chart_vulntype_metrics = Array();
 
       if (gettype(@$data['warnings'][$i]['user_input']) === 'array') {
         $usrinput = '';
-        
-        if ($_SESSION['git_type'] === 'internal') {
-          $git_url = $_SESSION['git_endpoint']['internal'];
-        } elseif ($_SESSION['git_type'] === 'external') {
-          $git_url = $_SESSION['git_endpoint']['external'];
-        }
 
         foreach($data['warnings'][$i]['user_input'] as $value) {
           $usrinput .= '<a target="_blank" href="' . $git_url . $data['scan_info']['app_path'] . 
