@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, sys, subprocess, shutil, json, linecache, base64, fnmatch, traceback
+import os, sys, subprocess, shutil, json, linecache, base64, fnmatch, traceback, re
 import BeautifulSoup as bs
 import log
 
@@ -35,7 +35,7 @@ def parse_scanjs_report(app_path, report):
             js_issue["warning_type"] = str(issue['rule']['threat'])
             js_issue["warning_code"] = ""
             js_issue["message"] = str(issue['rule']['desc'])
-            js_issue["file"] = str(issue['filename']).replace(app_path, '')
+            js_issue["file"] = re.sub('\/var\/raptor\/(clones|uploads)\/[a-zA-Z0-9]{56}\/', '', str(issue['filename']).replace(app_path, ''))
             js_issue["line"] = str(issue['line'])
             js_issue["link"] = "N/A"
             js_issue["code"] = linecache.getline(issue['filename'], int(issue['line'])).strip(' \r\n\t')
@@ -76,7 +76,7 @@ def parse_brakeman_report(app_path, report):
         ror_issue["warning_type"] = str(item['warning_type'])
         ror_issue["warning_code"] = str(item['warning_code'])
         ror_issue["message"] = str(item["message"])
-        ror_issue["file"] = str(item["file"]).replace(app_path, '')
+        ror_issue["file"] = re.sub('\/var\/raptor\/(clones|uploads)\/[a-zA-Z0-9]{56}\/', '', str(item["file"]).replace(app_path, ''))
         ror_issue["line"] = str(item['line'])
         ror_issue["link"] = str(item['link'])
         ror_issue["code"] = str(item['code'])
@@ -172,6 +172,7 @@ def parse_rips_report(path, report_name):
                     php_issue["code"] = linecache.getline(filenames[i], line_number).strip(' \r\n\t')
                     php_issue["message"] = str(bs.BeautifulSoup(str(p_issue_details[i][j])).findAll('span', attrs={'class':'vulntitle'})[0].contents[0]).replace('Userinput', 'User input')
     
+                php_issue["file"] = re.sub('\/var\/raptor\/(clones|uploads)\/[a-zA-Z0-9]{56}\/', '', php_issue["file"].replace(os.getcwd(), ''))
                 php_issue["line"] = line_number
                 php_issue["link"] = ""
                 
