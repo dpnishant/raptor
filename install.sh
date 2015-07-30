@@ -96,6 +96,7 @@ mkdir -p /var/raptor/clones
 chmod -R 777 /var/raptor/clones #development purpose only
 mkdir -p /var/www/html/raptor
 cp -r frontend/* /var/www/html/raptor
+chmod -R 755 /var/www/html/raptor
 rm -rf /etc/apache2/sites-available/raptor.conf
 rm -rf /etc/apache2/sites-enabled/raptor.conf
 rm -rf /etc/nginx/sites-available/raptor
