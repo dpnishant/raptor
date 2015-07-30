@@ -10,7 +10,62 @@ echo "gem: --no-rdoc --no-ri" >> ~/.gemrc
 echo "gem: --no-document" >> ~/.gemrc
 apt-get update
 apt-get upgrade
-apt-get install -y git nginx apache2 php5 php5-curl php5-common libapache2-mod-php5 libapache2-mod-rpaf php5-mcrypt libffi-dev ruby php5-cli cmake libssh-4 libssl-dev linux-headers-generic build-essential autoconf libtool pkg-config python-pip python-opengl python-imaging python-pyrex python-pyside.qtopengl idle-python2.7 libgle3 python-dev python-dateutil python-docutils python-feedparser python-gdata python-jinja2 python-ldap python-libxslt1 python-lxml python-mako python-mock python-openid python-psycopg2 python-psutil python-pybabel python-pychart python-pydot python-pyparsing python-reportlab python-simplejson python-tz python-unittest2 python-vatnumber python-vobject python-webdav python-werkzeug python-xlwt python-yaml python-zsi
+apt-get install -y git
+apt-get install -y nginx
+apt-get install -y apache2
+apt-get install -y php5
+apt-get install -y php5-common
+apt-get install -y php5-curl
+apt-get install -y libapache2-mod-php5
+apt-get install -y libapache2-mod-rpaf
+apt-get install -y php5-mcrypt
+apt-get install -y libffi-dev
+apt-get install -y ruby
+apt-get install -y php5-cli
+apt-get install -y cmake
+apt-get install -y libssh-4
+apt-get install -y libssl-dev
+apt-get install -y linux-headers-generic
+apt-get install -y build-essential
+apt-get install -y autoconf
+apt-get install -y libtool
+apt-get install -y pkg-config
+apt-get install -y python-pip
+apt-get install -y python-opengl
+apt-get install -y python-imaging
+apt-get install -y python-pyrex
+apt-get install -y python-pyside.qtopengl
+apt-get install -y idle-python2.7
+apt-get install -y libgle3
+apt-get install -y python-dev
+apt-get install -y python-dateutil
+apt-get install -y python-docutils
+apt-get install -y python-feedparser
+apt-get install -y python-gdata
+apt-get install -y python-jinja2
+apt-get install -y python-ldap
+apt-get install -y python-libxslt1
+apt-get install -y python-lxml
+apt-get install -y python-mako
+apt-get install -y python-mock
+apt-get install -y python-openid
+apt-get install -y python-psycopg2
+apt-get install -y python-psutil
+apt-get install -y python-pybabel
+apt-get install -y python-pychart
+apt-get install -y python-pydot
+apt-get install -y python-pyparsing
+apt-get install -y python-reportlab
+apt-get install -y python-simplejson
+apt-get install -y python-tz
+apt-get install -y python-unittest2
+apt-get install -y python-vatnumber
+apt-get install -y python-vobject
+apt-get install -y python-webdav
+apt-get install -y python-werkzeug
+apt-get install -y python-xlwt
+apt-get install -y python-yaml
+apt-get install -y python-zsi
 pip install cffi
 wget https://codeload.github.com/libgit2/libgit2/tar.gz/v0.22.0 -O libgit2-0.22.0.tar.gz
 tar xzf libgit2-0.22.0.tar.gz
