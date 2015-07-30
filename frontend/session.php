@@ -5,6 +5,12 @@ if(empty($_SESSION['user_name'])) {
  header('Location: login.php'); 
 }
 
+#point your github server endpoints here, and do NOT forget the trailing slash
+$git_endpoint = array(
+  'internal' => 'https://github.dummycorp.com/',
+  'external' => 'https://github.com/'
+  );
+
 $time = $_SERVER['REQUEST_TIME'];
 /**
  * for a 60 minute timeout, specified in seconds

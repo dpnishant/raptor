@@ -311,8 +311,15 @@ $chart_vulntype_metrics = Array();
 
       if (gettype(@$data['warnings'][$i]['user_input']) === 'array') {
         $usrinput = '';
+        
+        if ($_SESSION['git_type'] === 'internal') {
+          $git_url = $git_endpoint['internal'];
+        } elseif ($_SESSION['git_type'] === 'external') {
+          $git_url = $git_endpoint['external'];
+        }
+
         foreach($data['warnings'][$i]['user_input'] as $value) {
-          $usrinput .= '<a target="_blank" href="' . 'https://github.com/' . $data['scan_info']['app_path'] . 
+          $usrinput .= '<a target="_blank" href="' . $git_url . $data['scan_info']['app_path'] . 
           '/blob/master/' . ltrim($data['warnings'][$i]['file'], '/') . '#L' . $value . '">' . $value . '</a>, ';
         }
         echo '<td>' . substr($usrinput, 0, strlen($usrinput)-1) . '</td>';

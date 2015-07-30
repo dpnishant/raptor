@@ -106,7 +106,7 @@ def scan_line(delim_line, fpath, root_path):
                     fsb_issue['warning_type'] =  str(rule['title'])
                     fsb_issue['warning_code'] = str(rule['id'])
                     fsb_issue['message'] = str(rule['description'])
-                    fsb_issue['file'] = re.sub('/var/raptor/(clones|uploads)/[a-zA-Z0-9]{56}/', '', fpath.replace(os.getcwd(), '').replace(root_path, ''))
+                    fsb_issue['file'] = re.sub('\/var\/raptor\/(clones|uploads)\/[a-zA-Z0-9]{56}\/', '', fpath.replace(os.getcwd(), '').replace(root_path, ''))
                     fsb_issue['line'] = int(line_num) + 1
                     fsb_issue['link'] = str(rule['link'])
                     fsb_issue['code'] = line_content.strip('\n').strip('\r').strip('\t').strip(' ')

@@ -11,12 +11,6 @@ include_once("session.php");
 
 function normalize_git_path($git_repo) {  
 
-#point your github server endpoints here, and do NOT forget the trailing slash
-$git_endpoint = array(
-  'internal' => 'https://github.dummycorp.com/',
-  'external' => 'https://github.com/'
-  );
-
 if ( strstr($git_repo, $git_endpoint['internal']) ) {
       $_SESSION['git_type'] = 'internal';
     } else if ( strstr($git_repo, $git_endpoint['external']) ) {
