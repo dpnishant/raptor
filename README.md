@@ -67,7 +67,7 @@ You can use the bundled light-weight, GUI client-side rules editor for adding an
 You can access it here: [Rules Editor](http://127.0.0.1/raptor/editrules.php)
 
 #####Public/Private GitHub instance
-You can use Raptor to scan your organization's private as well as public instances of GitHub by specifiying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L32) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/scan.php#L16-L17).
+You can use Raptor to scan your organization's private as well as public instances of GitHub by specifiying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L32) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/session.php#L10-L11).
 
 ### Screenshots
 #### Login
