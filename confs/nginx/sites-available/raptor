@@ -7,6 +7,8 @@ server {
 	# Listen on all interfaces
 	server_name 0.0.0.0;
 
+    client_max_body_size 1024M;
+
     location /raptor/heartbeat {
       proxy_set_header X-Real-IP  $remote_addr;
       proxy_set_header X-Forwarded-For $remote_addr;
