@@ -1,0 +1,12 @@
+language: node_js
+node_js:
+  - 0.10
+env:
+  global:
+    - GH_REF: github.com/mozilla/scanjs.git
+    - secure: N/F/nDgbRmbquD4f9rADkyUlH5wOYxqSiZW92YItJTB7RE5jbj9jEXhgOXGrGJ+kr9yz5CEPbu1TtPO1KdCpVnAVvJ7MJeM0XsUEyhuB+vbd7j8IEQA1zGGKecvjn7wY0sBlwgnqclBc3dGTiIjV9jhNYzIXYfNXcaNnCSGZ9cca
+after_success: ./deploy-ghpages.sh
+branches:
+  only:
+    - master
+

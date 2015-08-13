@@ -1,0 +1,70 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="content-security-policy" content="default-src 'self'; object-src 'none'; img-src 'self' data:; script-src 'self' 'unsafe-eval'">
+  <title>Scan.js Tests</title>
+  <!-- Third-party libs -->
+  <script src='../client/js/lib/jquery-2.1.0.min.js'></script>
+  <script src='../client/js/lib/acorn.js'></script>
+  <script src='../client/js/lib/walk.js'></script>
+  <script src='../client/js/lib/acorn_loose.js'></script>
+  <!-- CommonJS modules -->
+  <script src='../common/scan.js'></script>
+
+  <!-- Testing framework files -->
+  <link href='css/mocha.css' rel='stylesheet' media='screen'>
+  <script src='js/mocha.js'></script>
+  <script src='js/chai.js'></script>
+  <script src='js/main.js'></script>
+  <!-- loads rules since new scanner uses rules.json instead of rules.js -->
+  <script src='js/loadrules.js'></script>
+</head>
+<body>
+  <div id="mocha"><p><h1><b>Scan.js Mocha Unit Tests</b></h1></p></div>
+  <div id="messages"></div>
+  <div id="fixtures"></div>
+
+
+  <!-- rule test cases -->
+  <script src='cases/ruletests.js'></script>
+
+  <!-- Test cases -->
+  <script src='cases/innerhtml.js'></script>
+  <script src='cases/CustomEvent.js'></script>
+  <!-- removing these since they arent in the default rule set
+  Too broad: <script src='cases/addEventListener.js'></script>
+  Too broad: <script src='cases/data.js'></script>
+  non-standard: <script src='cases/escapeHTML.js'></script>
+  Too broad: <script src='cases/window.open.js'></script>
+
+  -->
+  <script src='cases/addIdleObserver.js'></script>
+  <script src='cases/createContextualFragment.js'></script>
+  <script src='cases/crypto.generateCRMFRequest.js'></script>
+
+  <script src='cases/document.write.js'></script>
+  <script src='cases/document.writeln.js'></script>
+
+  <script src='cases/eval.js'></script>
+  <script src='cases/geolocation.js'></script>
+  <script src='cases/href.js'></script>
+  <script src='cases/indexedDB.js'></script>
+  <script src='cases/localStorage.js'></script>
+  <script src='cases/message.js'></script>
+  <script src='cases/newFunction.js'></script>
+  <script src='cases/outerHTML.js'></script>
+  <script src='cases/parseFromString.js'></script>
+  <script src='cases/sessionStorage.js'></script>
+  <script src='cases/setInterval.js'></script>
+  <script src='cases/setTimeout.js'></script>
+  <script src='cases/src.js'></script>
+  <script src='cases/getDeviceStorage.js'></script>
+
+
+
+  <!-- mozilla specific tests -->
+  <script src='cases/moz/moz.js'></script>
+
+</body>
+</html>

@@ -1,0 +1,54 @@
+TESTING
+======
+
+To run tests, just use one of the following commands.
+
+Equivalent to visiting test/index.html in the browser:
+  mocha -r mocha-includes cases/placeholders.js cases/test_ruletests.js cases/production_ruletests.js
+
+Equivalent to visiting test/advanced.html in the browser:
+  mocha -r mocha-includes cases/innerhtml.js cases/CustomEvent.js cases/addIdleObserver.js cases/createContextualFragment.js cases/crypto.generateCRMFRequest.js cases/document.write.js cases/document.writeln.js cases/eval.js cases/geolocation.js cases/href.js cases/indexedDB.js cases/localStorage.js cases/message.js cases/newFunction.js cases/outerHTML.js cases/parseFromString.js cases/sessionStorage.js cases/setInterval.js cases/setTimeout.js cases/src.js cases/getDeviceStorage.js cases/moz/moz.js
+
+See disbaled tests in JS format below
+
+List of tests in JS format:
+--------------------------------------------------------------------------------
+
+
+var disabledTests = ["action.js",
+"addEventListener.js",
+"data.js",
+"escapeHTML.js",
+"window.open.js"]
+
+
+var standardTests = ["placeholders.js",
+    "test_ruletests.js",
+    "production_ruletests.js"]
+
+var advancedTests = ["innerhtml.js",
+  "CustomEvent.js",
+  "addIdleObserver.js",
+  "createContextualFragment.js",
+  "crypto.generateCRMFRequest.js",
+  "document.write.js",
+  "document.writeln.js",
+  "eval.js",
+  "geolocation.js",
+  "href.js",
+  "indexedDB.js",
+  "localStorage.js",
+  "message.js",
+  "newFunction.js",
+  "outerHTML.js",
+  "parseFromString.js",
+  "sessionStorage.js",
+  "setInterval.js",
+  "setTimeout.js",
+  "src.js",
+  "getDeviceStorage.js",
+  "moz/moz.js"]
+
+var allTests = disabledTests+standardTests+advancedTests;
+
+

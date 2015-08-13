@@ -250,4 +250,18 @@
     "testmiss": "if(x==y){x=0;}",
     "desc": "Unintended use of AssignmentExpression in If Statement",
     "threat": "Typo"
+}, {
+    "name": "nodejs exec",
+    "source": "require('child_process').exec",
+    "testhit": "require('child_process').exec",
+    "testmiss": "exec()",
+    "desc": "Instantiation of command execution. Check for untrusted input to the API.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs spawn",
+    "source": "require('child_process').spawn",
+    "testhit": "require('child_process').spawn",
+    "testmiss": "spawn()",
+    "desc": "Instantiation of command execution. Check for untrusted input to the API.",
+    "threat": "RCE"
 }]

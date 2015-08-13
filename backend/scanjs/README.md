@@ -1,5 +1,11 @@
-ScanJS
+ScanJS (DEPRECATED)
 ======
+
+**Development of ScanJS has stopped. We are currently investigating the use of [ESLint](http://eslint.org) with some additional rules. Please see [eslint-config-scanjs](https://github.com/mozfreddyb/eslint-config-scanjs).**
+
+*Testing and feedback appreciated! :)*
+
+--------------------------------
 
 ![travis-ci](https://travis-ci.org/mozilla/scanjs.svg)
 

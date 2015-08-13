@@ -6,11 +6,13 @@
 var fs = require('fs');
 var path = require('path');
 var beautify = require('js-beautify').js_beautify;
-global.acorn = require(__dirname + '/client/js/lib/acorn.js');
-acorn.walk = require('acorn/util/walk.js');
 
+var parser = require(__dirname+ '/client/js/lib/acorn.js');
 var ScanJS = require(__dirname + '/common/scan');
+
 var signatures = JSON.parse(fs.readFileSync(__dirname + "/common/rules.json", "utf8"));
+
+ScanJS.parser(parser);
 ScanJS.loadRules(signatures);
 
 var argv = require('optimist').usage('Usage: $node scan.js -t [path/to/app] -o [resultFile.json]').demand(['t']).argv;
@@ -23,7 +25,10 @@ var jslibs = [
   /angular/,
   /backbone/,
   /ember/,
-  /yui/
+  /yui/,
+  /mocha/,
+  /express/,
+  /yql/
 ];
 
 function matchInArray(filename, jslibs) {
@@ -56,9 +61,9 @@ var dive = function(dir, action) {
           console.log("SKIPPING FILE: Couldn't parse " + fullpath);
       }
     } else {
-      try {
-        action(file, fullpath);
-      } catch (e) {}
+        try {
+          action(file, fullpath);
+        } catch (e) {}
     }
   });
 };
@@ -92,8 +97,11 @@ if( typeof process != 'undefined' && process.argv[2]) {
       if(ext == '.js' && !matchInArray(file, jslibs)) {
         var content = fs.readFileSync(fullpath, 'utf8');
         //beautify source so result snippet is meaningful
-        //var content = beautify(content, { indent_size: 2 })
-        var scanresult = ScanJS.scan(content, fullpath);
+        //var content = beautify(content, { indent_size: 2 });
+
+        var ast = parser.parse(content, { locations: true });
+
+        var scanresult = ScanJS.scan(ast, fullpath);
         if (scanresult.type == 'error') {
           console.log("SKIPPING FILE: Error in "+ fullpath+", at Line "+ scanresult.error.loc.line +", Column "+scanresult.error.loc.column+ ": " + scanresult.error.message);
         }
@@ -115,5 +123,5 @@ if( typeof process != 'undefined' && process.argv[2]) {
     writeReport(results, reportname + '.json');
   }
 } else {
-  console.log('usage: $ node scan.js path/to/app ')
+  console.log('usage: $ node scan.js path/to/app ');
 }
