@@ -255,13 +255,83 @@
     "source": "require('child_process').exec",
     "testhit": "require('child_process').exec",
     "testmiss": "exec()",
-    "desc": "Instantiation of command execution. Check for untrusted input to the API.",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs execSync",
+    "source": "require('child_process').execSync",
+    "testhit": "require('child_process').execSync",
+    "testmiss": "execSync()",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs execFile",
+    "source": "require('child_process').execFile",
+    "testhit": "require('child_process').execFile",
+    "testmiss": "execFile()",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs execFileSync",
+    "source": "require('child_process').execFileSync",
+    "testhit": "require('child_process').execFileSync",
+    "testmiss": "execFileSync()",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
     "threat": "RCE"
 }, {
     "name": "nodejs spawn",
     "source": "require('child_process').spawn",
     "testhit": "require('child_process').spawn",
     "testmiss": "spawn()",
-    "desc": "Instantiation of command execution. Check for untrusted input to the API.",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs spawnSync",
+    "source": "require('child_process').spawnSync",
+    "testhit": "require('child_process').spawnSync",
+    "testmiss": "spawnSync()",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs fork",
+    "source": "require('child_process').fork",
+    "testhit": "require('child_process').fork",
+    "testmiss": "execFile()",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs chmod",
+    "source": "require('fs').chmod",
+    "testhit": "require('fs').chmod",
+    "testmiss": "chmod()",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs chmod",
+    "source": "$_any.chmod(ignored, 777, ignored)",
+    "testhit": "fs.chmod(/path/,777,callback);",
+    "testmiss": "chmod()",
+    "desc": "Read, write and execute permissions for everyone may be dangerous.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs chmod",
+    "source": "$_any.chmod(ignored, 0777, ignored)",
+    "testhit": "fs.chmod(/path/,0777,callback);",
+    "testmiss": "chmod()",
+    "desc": "Read, write and execute permissions for everyone may be dangerous.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs chmodSync",
+    "source": "$_any.chmodSync(ignored, 777)",
+    "testhit": "fs.chmodSync(/path/,777);",
+    "testmiss": "chmodSync()",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
+    "threat": "RCE"
+}, {
+    "name": "nodejs chownSync",
+    "source": "$_any.chmodSync(ignored, 0777)",
+    "testhit": "fs.chmodSync(/path/,0777);",
+    "testmiss": "chmodSync()",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
     "threat": "RCE"
 }]
