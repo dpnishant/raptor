@@ -9,6 +9,16 @@ https://github.com/michenriksen/gitrob created by Michael Henriksen.
 import os, sys, re, json, base64
 import log
 
+def isUnique(total_issues, filename, linenum):
+    if len(total_issues) == 0:
+        return True
+    for issue in total_issues:
+        if issue["file"] == filename and issue["line"] == linenum:
+            print "found duplicate"
+            return False
+        else:
+            return True
+
 def load_gitrob_rules(fname):
     file = open(fname, 'r')
     return json.loads(file.read())
@@ -46,6 +56,7 @@ def gitrob_scan(root_path, rules_path):
                     gitrob_issue['location'] = 'n/a'
                     gitrob_issue['user_input'] = 'n/a'
                     gitrob_issue['render_path'] = 'n/a'
-                    gitrob_issues.append(gitrob_issue)
-                    flag = False
+                    if isUnique(gitrob_issues, gitrob_issue['file'], gitrob_issue['line']):
+                        gitrob_issues.append(gitrob_issue)
+                        flag = False
     return gitrob_issues

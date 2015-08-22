@@ -10,6 +10,16 @@ bin_paths['scanjs'] = os.getcwd() + '/scanjs/scanner.js'
 bin_paths['php'] = '/usr/bin/php'
 bin_paths['rips'] = os.getcwd() + '/rips/main.php'
 
+def isUnique(total_issues, filename, linenum):
+    if len(total_issues) == 0:
+        return True
+    for issue in total_issues:
+        if issue["file"] == filename and issue["line"] == linenum:
+            print "found duplicate"
+            return False
+        else:
+            return True
+
 def scanjs(path):
     report_name = path + '/scanjs_result'
     p = subprocess.Popen([bin_paths['nodejs'], bin_paths['scanjs'], '-t', path, '-o', report_name], stdout=subprocess.PIPE, shell=False)
@@ -47,7 +57,7 @@ def parse_scanjs_report(app_path, report):
             js_issue["location"] = ''
             js_issue["user_input"] = ''
             js_issue["render_path"] = ''
-        if js_issue:
+        if js_issue and isUnique(total_issues, js_issue["file"], js_issue["line"]):
             total_issues.append(js_issue)
     os.remove(report)
     return total_issues
@@ -86,7 +96,8 @@ def parse_brakeman_report(app_path, report):
         ror_issue["location"] = str(json.dumps(item['location']))
         ror_issue["user_input"] = str(item['user_input'])
         ror_issue["render_path"] = str(item['render_path'])
-        total_issues.append(ror_issue)
+        if isUnique(total_issues, ror_issue["file"], ror_issue["line"]):
+            total_issues.append(ror_issue)
     os.remove(report)
     return total_issues
 
@@ -143,7 +154,7 @@ def parse_rips_report(path, report_name):
                 php_issue = {}
                 userinputs = []
                 php_issue["warning_type"] = str(bs.BeautifulSoup(str(p_issue_names[i])).findAll('div', attrs={'class':'vulnblocktitle'})[0].contents[0])
-                php_issue["warning_code"] = ""
+                php_issue["warning_code"] = "PHPRIPS"
                 
                 line_number = int(str(bs.BeautifulSoup(str(p_issue_details[i][j])).findAll('span', attrs={'class':'linenr'})[0].contents[0]).replace(':',''))
                 
@@ -177,7 +188,7 @@ def parse_rips_report(path, report_name):
                 php_issue["link"] = ""
                 
                 php_issue["severity"] = "High"
-                php_issue["plugin"] = "phpr"
+                php_issue["plugin"] = "phprips"
                 php_issue["signature"] = base64.b64encode(php_issue["warning_type"])
                 php_issue["location"] = ""
                 php_issue["user_input"] = []
@@ -189,7 +200,8 @@ def parse_rips_report(path, report_name):
                         userinput_linenr = str(bs.BeautifulSoup(str(linenr)).findAll('span', attrs={'class':'linenr'})[0].contents[0]).replace(':', '')
                         php_issue["user_input"].append(int(userinput_linenr))
                 php_issue["render_path"] = ""
-                total_issues.append(php_issue)
+                if isUnique(total_issues, php_issue["file"], php_issue["line"]):
+                    total_issues.append(php_issue)
             except:
                 print traceback.print_exc()
 

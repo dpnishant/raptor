@@ -11,6 +11,16 @@ the scan results might be more accurate than this plugin.
 import os, sys, re, json, base64
 import log
 
+def isUnique(total_issues, filename, linenum):
+    if len(total_issues) == 0:
+        return True
+    for issue in total_issues:
+        if issue["file"] == filename and issue["line"] == linenum:
+            print "found duplicate"
+            return False
+        else:
+            return True
+
 def get_localImports(fpath):
     imports = []
     sig_import = 'import\s[^;]*;'
@@ -116,4 +126,5 @@ def scan_line(delim_line, fpath, root_path):
                     fsb_issue['location'] = ''
                     fsb_issue['user_input'] = ''
                     fsb_issue['render_path'] = ''
-                    fsb_issues.append(fsb_issue)
+                    if isUnique(fsb_issues, fsb_issue['file'], fsb_issue['line']):
+                        fsb_issues.append(fsb_issue)
