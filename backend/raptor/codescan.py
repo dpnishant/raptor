@@ -45,14 +45,14 @@ class Scanner(object):
             print "Error: Invalid path (%s)" % app
 
     def isUnique(total_issues, filename, linenum):
-    if len(total_issues) == 0:
-        return True
-    for issue in total_issues:
-        if issue["file"] == filename and issue["line"] == linenum:
-            print "found duplicate"
-            return False
-        else:
+        if len(total_issues) == 0:
             return True
+            for issue in total_issues:
+                if issue["file"] == filename and issue["line"] == linenum:
+                    print "found duplicate"
+                    return False
+                else:
+                    return True
 
     def generate_json(self, path, total, warnings):
         self.endTime = time.strftime("%a, %d %b %Y %I:%M:%S %p", time.localtime())

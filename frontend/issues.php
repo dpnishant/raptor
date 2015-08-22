@@ -434,12 +434,8 @@ $chart_vulntype_metrics = Array();
     <!-- Bootstrap core JavaScript
 ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="dist/js/jquery-1.11.1.min.js">
-    </script>
-    <script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js">
-    </script>
+    <script src="http://cdn.datatables.net/1.10.4/js/jquery.dataTables.min.js"></script>
     <script>
-      
       $(document).ready(function () {
         //console.log($('issues_table'))
         $('#issues_table tfoot th').each( function () {
