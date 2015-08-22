@@ -33,7 +33,7 @@ def parse_scanjs_report(app_path, report):
         js_issue = {}
         for issue in value:
             js_issue["warning_type"] = str(issue['rule']['threat'])
-            js_issue["warning_code"] = ""
+            js_issue["warning_code"] = "SCNJS"
             js_issue["message"] = str(issue['rule']['desc'])
             js_issue["file"] = re.sub('\/var\/raptor\/(clones|uploads)\/[a-zA-Z0-9]{56}\/', '', str(issue['filename']).replace(app_path, ''))
             js_issue["line"] = str(issue['line'])
@@ -42,7 +42,7 @@ def parse_scanjs_report(app_path, report):
             if len(js_issue['code']) > 100:
                 js_issue['code'] = "too big to display, probably a compressed/minified javascript source."
             js_issue["severity"] = "Medium"
-            js_issue["plugin"] = "javascript"
+            js_issue["plugin"] = "scanjs"
             js_issue["signature"] = base64.b64encode(str(issue['rule']['source']))
             js_issue["location"] = ''
             js_issue["user_input"] = ''
