@@ -234,9 +234,9 @@ $chart_vulntype_metrics = Array();
   <?php
     if (!empty($_SESSION['current_scan_report'])) {
       
-      if ($_SESSION['git_type'] === 'internal') {
+      if ($_SESSION['git_type'] === 'internal' || $data['scan_info']['repo_type'] === 'internal') {
           $git_url = $_SESSION['git_endpoint']['internal'];
-        } elseif ($_SESSION['git_type'] === 'external') {
+        } elseif ($_SESSION['git_type'] === 'external' || $data['scan_info']['repo_type'] === 'external') {
           $git_url = $_SESSION['git_endpoint']['external'];
         }
 

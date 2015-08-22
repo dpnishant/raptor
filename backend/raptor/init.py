@@ -26,7 +26,7 @@ json = {
     "errors": []
 }
 
-def scan_all(scan_path, repo_path):
+def scan_all(scan_path, repo_path, repo_type):
     counter_start = time.clock()
     
     results = []
@@ -98,6 +98,7 @@ def scan_all(scan_path, repo_path):
 
     counter_end = time.clock()
     json["scan_info"]["app_path"] = repo_path
+    json["scan_info"]["repo_type"] = repo_type
     json["scan_info"]["security_warnings"] = total_issues
     json["scan_info"]["start_time"] = start_time
     json["scan_info"]["end_time"] = time.strftime("%a, %d %b %Y %I:%M:%S %p", time.localtime())
@@ -149,9 +150,13 @@ def start(repo_path, report_dir, internal):
     log.logger.debug("==============New Scan: [github] ===================")
     log.logger.debug("Now cloning: %s" % (repo_path))
     cloned_path = clone(repo_path, internal)
+    if internal:
+        repo_type = "internal"
+    else:
+        repo_type = "external"
     if os.path.isdir(cloned_path):
         log.logger.debug("[INFO] Now scanning: %s" % repo_path)
-        results = scan_all(cloned_path, repo_path)
+        results = scan_all(cloned_path, repo_path, repo_type)
         log.logger.debug("[INFO] Scan complete! Deleting ...")
         delete_residue(cloned_path, rulepacks)
         return results
@@ -159,9 +164,10 @@ def start(repo_path, report_dir, internal):
 def scan_zip(upload_id, zip_name, report_dir):
     log.logger.debug("==============New Scan: [zip] ===================")
     extracted_path = os.path.join(os.path.abspath(os.environ['zip_upload_dir']), upload_id)
+    repo_type = "zip"
     if os.path.exists(extracted_path):
         log.logger.debug("Now scanning: %s" % zip_name)
-        results = scan_all(extracted_path, zip_name)
+        results = scan_all(extracted_path, zip_name, repo_type)
         log.logger.debug("Scan complete! Deleting ...")
         delete_residue(extracted_path, zip_name)
         return results
