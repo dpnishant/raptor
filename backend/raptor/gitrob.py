@@ -37,7 +37,7 @@ def gitrob_scan(root_path, rules_path):
                     gitrob_issue['warning_code'] = 'SID'
                     gitrob_issue['message'] = str(gitrob_rule['caption'])
                     gitrob_issue['file'] = re.sub('\/var\/raptor\/(clones|uploads)\/[a-zA-Z0-9]{56}\/', '', file_path.replace(os.getcwd(), '').replace(root_path, '')).lstrip('/')
-                    gitrob_issue['line'] = ''
+                    gitrob_issue['line'] = '1'
                     gitrob_issue['link'] = 'https://www.owasp.org/index.php/Top_10_2013-A6-Sensitive_Data_Exposure'
                     gitrob_issue['code'] = 'n/a'
                     gitrob_issue['severity'] = 'High'
