@@ -5,7 +5,7 @@
 
 var fs = require('fs');
 var path = require('path');
-var beautify = require('js-beautify').js_beautify;
+//var beautify = require('js-beautify').js_beautify;
 
 var parser = require(__dirname+ '/client/js/lib/acorn.js');
 var ScanJS = require(__dirname + '/common/scan');

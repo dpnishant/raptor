@@ -84,7 +84,7 @@ def parse_brakeman_report(app_path, report):
     for item in items:
         ror_issue = {}
         ror_issue["warning_type"] = str(item['warning_type'])
-        ror_issue["warning_code"] = str(item['warning_code'])
+        ror_issue["warning_code"] = "BRKMAN-" + str(item['warning_code'])
         ror_issue["message"] = str(item["message"])
         ror_issue["file"] = re.sub('\/var\/raptor\/(clones|uploads)\/[a-zA-Z0-9]{56}\/', '', str(item["file"]).replace(app_path, ''))
         ror_issue["line"] = str(item['line'])
