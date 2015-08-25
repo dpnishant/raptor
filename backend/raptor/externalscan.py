@@ -207,7 +207,10 @@ def parse_rips_report(path, report_name):
                     except:
                         php_issue["code"] = ''
                     php_issue["message"] = str(bs.BeautifulSoup(str(p_issue_details[i][j])).findAll('span', attrs={'class':'vulntitle'})[0].contents[0]).replace('Userinput', 'User input')
-                    php_issue["message"] += ' Original File: ' + filenames[i].replace(path, '') 
+                    if not php_issue["file"]:
+                        php_issue["file"] = filenames[i].replace(path, '')
+                    else:
+                        php_issue["message"] += ' Original File: ' + filenames[i].replace(path, '')
                     try:
                         php_issue["message"] += " and included file: " + find_file(included_file, path)[0].replace(path, '')
                     except:
