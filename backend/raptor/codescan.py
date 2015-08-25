@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, sys, re, fnmatch, json, base64, time
+import os, sys, re, fnmatch, json, base64, time, traceback
 from datetime import datetime
 from android import *
 import log
@@ -44,12 +44,12 @@ class Scanner(object):
         else:
             print "Error: Invalid path (%s)" % app
 
-    def isUnique(total_issues, filename, linenum):
+    def isUnique(self, total_issues, filename, linenum):
         if len(total_issues) == 0:
             return True
             for issue in total_issues:
                 if issue["file"] == filename and issue["line"] == linenum:
-                    print "found duplicate"
+                    #print "found duplicate"
                     return False
                 else:
                     return True
@@ -109,13 +109,14 @@ class Scanner(object):
             fhandle = open(fpath, 'r')
             lines = fhandle.readlines()
             for line in range(0, len(lines)):
-                            try:
-                                current_line = lines[line]
-                                delim_line = '%s:%d:%s' % (fpath, line, current_line)
-                                self.scan_line(delim_line, fpath)
-                            except Exception as e:
-                                print "[ERROR] Skipped line %d in %s. Reason: %s" % (line, fpath, str(e))  
-                                pass
+                try:
+                    current_line = lines[line]
+                    delim_line = '%s:%d:%s' % (fpath, line, current_line)
+                    self.scan_line(delim_line, fpath)
+                except Exception as e:
+                    print "[ERROR] Skipped line %d in %s. Reason: %s" % (line, fpath, str(e))
+                    traceback.print_exc()
+                    pass
             fhandle.close()
 
     def scan_line(self, line, fpath):
@@ -144,7 +145,7 @@ class Scanner(object):
                     issue["location"] = ''
                     issue["user_input"] = ''
                     issue["render_path"] = ''
-                    if self.isUnique(self.issues, issues["file"], issue["line"]):
+                    if self.isUnique(self.issues, issue["file"], issue["line"]):
                         self.issues.append(issue)
 
     def scan(self, rule_path, app_path, type):

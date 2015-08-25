@@ -15,10 +15,32 @@ def isUnique(total_issues, filename, linenum):
         return True
     for issue in total_issues:
         if issue["file"] == filename and issue["line"] == linenum:
-            print "found duplicate"
+            #print "found duplicate"
             return False
         else:
             return True
+
+def hasRailsApp(root_path):
+    rail_apps = []
+    rails_patterns = ['.rb', '.erb']
+    for path, dirs, files in os.walk(os.path.abspath(root_path)):
+        for _dir in dirs:
+            app = os.path.join(path,_dir)
+            #print app
+            if app.endswith('/app'):
+                for app_root, subdirs, _files in os.walk(app):
+                    file_count = 0
+                    match_count = 0
+                    for _file in _files:
+                        file_count += 1
+                        for pattern in rails_patterns:
+                            if _file.endswith(pattern):
+                                match_count += 1
+                    if file_count == match_count:
+                        if not app in rail_apps:
+                            app = app.replace('/app','').replace(os.getcwd()+'/', '')
+                            rail_apps.append(app)
+    return rail_apps
 
 def scanjs(path):
     report_name = path + '/scanjs_result'
@@ -62,21 +84,33 @@ def parse_scanjs_report(app_path, report):
     os.remove(report)
     return total_issues
 
-def scan_brakeman(path):
-    report_name = path + '/ror_scan_result.json'
-    p = subprocess.Popen([bin_paths['brakeman'], '--path', path, '-q', '-A', '--absolute-paths', '--confidence-level', '2', '--output', report_name], stdout=subprocess.PIPE, shell=False)
+def recur_scan_brakeman(path):
+    count = 0
+    ror_results = []
+    rail_apps = hasRailsApp(path)
+    for app in rail_apps:
+        count += 1
+        ror_result = scan_brakeman(path, app, 'ror_scan_' + str(count) + '.json')
+        if len(ror_result) > 0 and ror_result != 'error':
+            for issue in ror_result:
+                ror_results.append(issue)
+    return ror_results
+
+def scan_brakeman(root_path, app_path, report_name):
+    report_name = root_path + '/' + report_name
+    p = subprocess.Popen([bin_paths['brakeman'], '--path', app_path, '-q', '-A', '--absolute-paths', '--confidence-level', '2', '--output', report_name], stdout=subprocess.PIPE, shell=False)
     (output, err) = p.communicate()
     p_status = p.wait()
     if p_status == 0:
         try:
-            return parse_brakeman_report(path, report_name)
+            return parse_brakeman_report(root_path, app_path, report_name)
         except Exception, e:
             return str(e)
     else:
         print 'brakeman_error %s' % (err)
         return 'error'
 
-def parse_brakeman_report(app_path, report):
+def parse_brakeman_report(root_path, app_path, report):
     total_issues = []
     file = open(report, "r")
     json_report = json.loads(file.read())
@@ -86,12 +120,12 @@ def parse_brakeman_report(app_path, report):
         ror_issue["warning_type"] = str(item['warning_type'])
         ror_issue["warning_code"] = "BRKMAN-" + str(item['warning_code'])
         ror_issue["message"] = str(item["message"])
-        ror_issue["file"] = re.sub('\/var\/raptor\/(clones|uploads)\/[a-zA-Z0-9]{56}\/', '', str(item["file"]).replace(app_path, ''))
+        ror_issue["file"] = re.sub('\/var\/raptor\/(clones|uploads)\/[a-zA-Z0-9]{56}\/', '', str(item["file"]).replace(root_path, ''))
         ror_issue["line"] = str(item['line'])
         ror_issue["link"] = str(item['link'])
         ror_issue["code"] = str(item['code'])
         ror_issue["severity"] = str(item['confidence'])
-        ror_issue["plugin"] = "rails"
+        ror_issue["plugin"] = "brakeman"
         ror_issue["signature"] = str(item['fingerprint'])
         ror_issue["location"] = str(json.dumps(item['location']))
         ror_issue["user_input"] = str(item['user_input'])

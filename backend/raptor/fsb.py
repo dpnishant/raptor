@@ -16,7 +16,7 @@ def isUnique(total_issues, filename, linenum):
         return True
     for issue in total_issues:
         if issue["file"] == filename and issue["line"] == linenum:
-            print "found duplicate"
+            #print "found duplicate"
             return False
         else:
             return True
@@ -94,7 +94,7 @@ def fsb_scan(root_path, rules_path):
                         delim_line = '%s:%d:%s' % (file_path, line, current_line)
                         scan_line(delim_line, file_path, root_path)
                     except Exception as e:
-                        print "[ERROR] Skipped line #%d in %s. Reason: %s" % (line, file_path, str(e))
+                        print "[ERROR] plugin:fsb, msg: skipped line #%d in %s, error: %s" % (line, file_path, str(e))
                         pass
                 fhandle.close()
     return fsb_issues

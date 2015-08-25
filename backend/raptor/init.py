@@ -79,7 +79,7 @@ def scan_all(scan_path, repo_path, repo_type):
             total_issues += 1
     
     log.logger.debug("scanning with [brakeman] plugin")
-    ror_results = scan_brakeman(scan_path)
+    ror_results = recur_scan_brakeman(scan_path)
     if len(ror_results) > 0 and ror_results != 'error':
         for ror_result in ror_results:
             results.append(ror_result)
