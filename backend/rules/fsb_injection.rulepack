@@ -68,11 +68,15 @@
       "title": "Potential Unvalidated Redirect",
       "description": "Unvalidated redirects occur when an application redirects a user to a destination URL specified by a user supplied\n    parameter that is not validated. Such vulnerabilities can be used to facilitate phishing attacks.",
       "remediation": "Don't accept redirection destinations from users; Accept a destination key, and use it to look up the target (legal) destination; Accept only relative paths; White list URLs (if possible); Validate that the beginning of the URL is part of a white list",
-      "signature": "XC5hZGRIZWFkZXJcKFsiJ11Mb2NhdGlvblsiJ10sW1xzYS16QS1aMC05X10qXCl8XC5zZW5kUmVkaXJlY3RcKFtcc2EtekEtWjAtOV9dKlwp",
+      "signature": "XC5hZGRIZWFkZXJcKFsiJ11Mb2NhdGlvblsiJ10sW1xzYS16QS1aMC05X1wuXCtcKFwpLF0qfFwuc2VuZFJlZGlyZWN0XChbXHNhLXpBLVowLTlfXC5cK1woXCksXSp8LnNldEhlYWRlclwoWyInXUxvY2F0aW9uWyInXSxbXHNhLXpBLVowLTlfXC5cK1woXCksXSo=",
       "condition": [
         {
           "signature": "aW1wb3J0XHNqYXZheFwuc2VydmxldFwuaHR0cFwuSHR0cFNlcnZsZXQoUmVxdWVzdHxSZXNwb25zZSk/Ow==",
           "description": "check if it imports javax.servlet.http.HttpServlet(Request|Response)?;"
+        },
+        {
+          "signature": "XC5zZXRTdGF0dXNcKEh0dHBTZXJ2bGV0UmVzcG9uc2VcLlNDX01PVkVEXw==",
+          "description": "check if it sets the HTTP redirection status code"
         }
       ],
       "link": "https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards",
@@ -92,7 +96,7 @@
           "description": "check if it imports javax.script.ScriptEngine(Manager)?;"
         }
       ],
-      "link": "https://www.owasp.org/index.php/Top_10_2013-A10-Unvalidated_Redirects_and_Forwards",
+      "link": "http://codeutopia.net/blog/2009/01/02/sandboxing-rhino-in-java/",
       "platform_version": "all",
       "enabled": "true"
     },
