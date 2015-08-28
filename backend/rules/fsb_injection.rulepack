@@ -17,6 +17,23 @@
       "enabled": "true"
     },
     {
+      "id": "FSB_INJECTION_CODEEXEC",
+      "severity": "High",
+      "title": "Potential Command Injection",
+      "description": "The highlighted API is used to execute a system command. If unfiltered input is passed to this API, it can lead to arbitrary command execution.",
+      "remediation": "Always try to avoid any user controlled data to reach APIs that do some kind on command execution. If it is really necessary make sure you have properly escape all harmful characters.",
+      "signature": "XC5nZXRSdW50aW1lXChcKShcLmV4ZWNcKCk/fFwuZXhlY1wo",
+      "condition": [
+        {
+          "signature": "UnVudGltZVwuPw==",
+          "description": "check if the Runtime object has been instantiated."
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/Command_Injection",
+      "platform_version": "all",
+      "enabled": "true"
+    },
+    {
       "id": "FSB_INJECTION_LDAPJNDI",
       "severity": "High",
       "title": "Potential LDAP Injection",
