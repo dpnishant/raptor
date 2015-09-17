@@ -3,7 +3,7 @@ from raptor import init as init
 from flask import Flask, request, jsonify, Response, redirect, url_for
 from werkzeug.contrib.fixers import ProxyFix
 from werkzeug import secure_filename
-import sys, os, json, threading, hashlib, shutil, zipfile, requests, time
+import sys, os, json, threading, hashlib, shutil, zipfile, requests, time, datetime
 from raptor import log
 
 app = Flask(__name__)
@@ -116,6 +116,8 @@ def index():
     if user and request.method == 'POST':
         upld_file = request.files['file']
         scan_name = request.form.get('scan_name')
+        if not scan_name:
+            scan_name = 'untitled-%s' % (str(datetime.datetime.now().strftime('%d_%m_%Y_%H_%m_%S')))
 
         if upld_file and allowed_file(upld_file.filename):
             try:

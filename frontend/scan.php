@@ -79,7 +79,7 @@ if (!empty($scan_name) && !empty($upload_id) && !empty($zip_name)) {
     <link href="assets/css/glyphicons.css" rel="stylesheet">
     <link rel="icon" href="/favicon.ico">
 
-    <title>Raptor: Source Vulnerability Scanner</title>
+    <title>Wolf: Source Code Scanner</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -125,7 +125,7 @@ if (!empty($scan_name) && !empty($upload_id) && !empty($zip_name)) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">Raptor: Source Code Scanner</a>
+          <a class="navbar-brand" href="/"><img src="assets/img/wolf.png" alt="wolf-logo" style="overflow: auto; height: 130%; -webkit-filter: invert(100%); display: inline-block;">Wolf: Source Code Scanner</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
@@ -190,7 +190,7 @@ if (!empty($scan_name) && !empty($upload_id) && !empty($zip_name)) {
             <div class="tab-pane active" id="github">
             <form method="POST" action="" role="form" style="margin-top: 2%"> 
               <label class="control-label">Scan Name</label>
-              <input type="text" class="form-control" name="scan_name" placeholder="Scan Name" /><br />
+              <input type="text" class="form-control" id="scan_name" name="scan_name" placeholder="Scan Name" /><br />
               <label class="control-label">Git Repository URL</label>
               <input type="text" class="form-control" name="git_repo" placeholder="Git Repository" /><br />
               <button type="submit" class="btn btn-default btn-primary">Scan</button>
@@ -209,7 +209,7 @@ if (!empty($scan_name) && !empty($upload_id) && !empty($zip_name)) {
                                         <div class="form-inline">
                                         <input type="hidden" name="usr" value="<?php echo $_SESSION['user_name']; ?>" />
                                         <label class="control-label">Scan Name</label>
-                                        <input type="text" class="form-control" name="scan_name" placeholder="Scan Name" /><br />
+                                        <input type="text" class="form-control" id="scan_name" name="scan_name" placeholder="Scan Name" /><br />
                                             <h4>Select files from your computer</h4>
                                             <div class="form-group">
                                                 <input type="file" name="file" id="js-upload-files" multiple>
@@ -249,4 +249,26 @@ if (!empty($scan_name) && !empty($upload_id) && !empty($zip_name)) {
 
 <div id="global-zeroclipboard-html-bridge" class="global-zeroclipboard-container" style="position: absolute; left: 0px; top: -9999px; width: 15px; height: 15px; z-index: 999999999;">      <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" id="global-zeroclipboard-flash-bridge" width="100%" height="100%">         <param name="movie" value="assets/flash/ZeroClipboard.swf?noCache=1417502908088">         <param name="allowScriptAccess" value="never">         <param name="scale" value="exactfit">         <param name="loop" value="false">         <param name="menu" value="false">         <param name="quality" value="best">         <param name="bgcolor" value="#ffffff">         <param name="wmode" value="transparent">         <param name="flashvars" value="">         <embed src="assets/flash/ZeroClipboard.swf?noCache=1417502908088" loop="false" menu="false" quality="best" bgcolor="#ffffff" width="100%" height="100%" name="global-zeroclipboard-flash-bridge" allowscriptaccess="never" allowfullscreen="false" type="application/x-shockwave-flash" wmode="transparent" pluginspage="http://www.macromedia.com/go/getflashplayer" flashvars="" scale="exactfit">                </object></div><svg xmlns="http://www.w3.org/2000/svg" width="200" height="200" viewBox="0 0 200 200" preserveAspectRatio="none" style="visibility: hidden; position: absolute; top: -100%; left: -100%;"><defs></defs><text x="0" y="10" style="font-weight:bold;font-size:10pt;font-family:Arial, Helvetica, Open Sans, sans-serif;dominant-baseline:middle">200x200</text></svg>
 <script src="dist/js/heartbeat.js"></script>
+<script>
+
+$(document).ready(function () {    
+    $('input').keyup(function() {
+        var $th = $(this);
+        $th.val($th.val().replace(/[^a-zA-Z0-9_]/g, function(str) { 
+        BootstrapDialog.show({
+            title: 'Error',
+            message: 'Only alphabets, numbers & underscores are allowed.',
+            size: 'size-small',
+            buttons: [{
+                label: 'Ok',
+                action: function(dialog){
+                    dialog.close();
+                }
+            }]
+        }); 
+          return ''; 
+        }));
+    });
+});
+</script>
 </body></html>
