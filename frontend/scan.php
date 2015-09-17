@@ -79,7 +79,7 @@ if (!empty($scan_name) && !empty($upload_id) && !empty($zip_name)) {
     <link href="assets/css/glyphicons.css" rel="stylesheet">
     <link rel="icon" href="/favicon.ico">
 
-    <title>Wolf: Source Code Scanner</title>
+    <title>Raptor: Source Code Scanner</title>
 
     <!-- Bootstrap core CSS -->
     <link href="dist/css/bootstrap.min.css" rel="stylesheet">
@@ -125,7 +125,7 @@ if (!empty($scan_name) && !empty($upload_id) && !empty($zip_name)) {
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/"><img src="assets/img/wolf.png" alt="wolf-logo" style="overflow: auto; height: 130%; -webkit-filter: invert(100%); display: inline-block;">Wolf: Source Code Scanner</a>
+          <a class="navbar-brand" href="/">Raptor: Source Code Scanner</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav navbar-right">
