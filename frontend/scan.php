@@ -252,7 +252,7 @@ if (!empty($scan_name) && !empty($upload_id) && !empty($zip_name)) {
 <script>
 
 $(document).ready(function () {    
-    $('input').keyup(function() {
+    $('scan_name').keyup(function() {
         var $th = $(this);
         $th.val($th.val().replace(/[^a-zA-Z0-9_]/g, function(str) { 
         BootstrapDialog.show({
