@@ -114,8 +114,7 @@ class Scanner(object):
                     delim_line = '%s:%d:%s' % (fpath, line, current_line)
                     self.scan_line(delim_line, fpath)
                 except Exception as e:
-                    print "[ERROR] Skipped line %d in %s. Reason: %s" % (line, fpath, str(e))
-                    traceback.print_exc()
+                    log.logger.debug("[ERROR] Skipped line %d in %s. Dump: %s" % (line, fpath, traceback.print_exc()))
                     pass
             fhandle.close()
 
