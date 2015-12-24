@@ -377,6 +377,13 @@
     "threat": "Insecure Permissions - global RWX",
     "condition": "nodejs_fs_createReadStream"
 }, {
+    "name": "respose_write_xss",
+    "source": "$_any.write()",
+    "testhit": "$_any.write('string'+usercontrolledVal )",
+    "testmiss": "write",
+    "desc": "Passing user contolled value into the HTTP Response using the write method may lead to Reflected Cross-Site-Scripting and other such injection attacks. Make sure your properly sanitize the user controlled data before sending it to the client.",
+    "threat": "Reflected XSS"
+}, {
     "name": "HTML5 PostMessage",
     "source": "$_any.postMessage(ignored, '*')",
     "testhit": "parent.postMessage(site, '*');",
