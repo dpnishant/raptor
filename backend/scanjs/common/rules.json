@@ -251,89 +251,131 @@
     "desc": "Unintended use of AssignmentExpression in If Statement",
     "threat": "Typo"
 }, {
-    "name": "nodejs exec",
-    "source": "require('child_process').exec",
-    "testhit": "require('child_process').exec",
-    "testmiss": "exec()",
+    "name": "nodejs_child_process",
+    "source": "require('child_process')",
+    "testhit": "require('child_process')",
+    "testmiss": "",
     "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "threat": "Command Execution - Condition"
+}, {
+    "name": "nodejs exec",
+    "source": "$_any.exec()",
+    "testhit": "$_any.exec('jsCode'+usercontrolledVal )",
+    "testmiss": "exec",
+    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
+    "threat": "RCE",
+    "condition": "nodejs_child_process"
 }, {
     "name": "nodejs execSync",
-    "source": "require('child_process').execSync",
-    "testhit": "require('child_process').execSync",
+    "source": "$_any.execSync()",
+    "testhit": "$_any.execSync()",
     "testmiss": "execSync()",
     "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "threat": "RCE",
+    "condition": "nodejs_child_process"
 }, {
     "name": "nodejs execFile",
-    "source": "require('child_process').execFile",
-    "testhit": "require('child_process').execFile",
+    "source": "$_any.execFile()",
+    "testhit": "$_any.execFile()",
     "testmiss": "execFile()",
     "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "threat": "RCE",
+    "condition": "nodejs_child_process"
 }, {
     "name": "nodejs execFileSync",
-    "source": "require('child_process').execFileSync",
-    "testhit": "require('child_process').execFileSync",
+    "source": "$_any.execFileSync()",
+    "testhit": "$_any.execFileSync()",
     "testmiss": "execFileSync()",
     "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "threat": "RCE",
+    "condition": "nodejs_child_process"
 }, {
     "name": "nodejs spawn",
-    "source": "require('child_process').spawn",
-    "testhit": "require('child_process').spawn",
+    "source": "$_any.spawn()",
+    "testhit": "$_any.spawn()",
     "testmiss": "spawn()",
     "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "threat": "RCE",
+    "condition": "nodejs_child_process"
 }, {
     "name": "nodejs spawnSync",
-    "source": "require('child_process').spawnSync",
-    "testhit": "require('child_process').spawnSync",
+    "source": "$_any.spawnSync()",
+    "testhit": "$_any.spawnSync()",
     "testmiss": "spawnSync()",
     "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "threat": "RCE",
+    "condition": "nodejs_child_process"
 }, {
     "name": "nodejs fork",
-    "source": "require('child_process').fork",
-    "testhit": "require('child_process').fork",
+    "source": "$_any.fork()",
+    "testhit": "$_any.fork()",
     "testmiss": "execFile()",
     "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "threat": "RCE",
+    "condition": "nodejs_child_process"
 }, {
-    "name": "nodejs chmod",
-    "source": "require('fs').chmod",
-    "testhit": "require('fs').chmod",
+    "name": "nodejs_filesystem",
+    "source": "require('fs')",
+    "testhit": "require('fs')",
     "testmiss": "chmod()",
     "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "threat": "FileSystem - Condition"
+}, {
+    "name": "nodejs chmod",
+    "source": "$_any.chmod()",
+    "testhit": "$_any.chmod()",
+    "testmiss": "chmod()",
+    "desc": "This API may cause privilege escalations issues if insecure file permissions are set.",
+    "threat": "Insecure Permissions",
+    "condition": "nodejs_filesystem"
 }, {
     "name": "nodejs chmod",
     "source": "$_any.chmod(ignored, 777, ignored)",
-    "testhit": "fs.chmod(/path/,777,callback);",
+    "testhit": "$_any.chmod(/path/,777,callback);",
     "testmiss": "chmod()",
-    "desc": "Read, write and execute permissions for everyone may be dangerous.",
-    "threat": "RCE"
+    "desc": "Read, Write and eXecute permissions for everyone may be dangerous.",
+    "threat": "Insecure Permissions - global RWX",
+    "condition": "nodejs_filesystem"
 }, {
     "name": "nodejs chmod",
     "source": "$_any.chmod(ignored, 0777, ignored)",
-    "testhit": "fs.chmod(/path/,0777,callback);",
+    "testhit": "$_any.chmod(/path/,0777,callback);",
     "testmiss": "chmod()",
-    "desc": "Read, write and execute permissions for everyone may be dangerous.",
-    "threat": "RCE"
+    "desc": "Read, Write and eXecute permissions for everyone may be dangerous.",
+    "threat": "Insecure Permissions - global RWX",
+    "condition": "nodejs_filesystem"
 }, {
     "name": "nodejs chmodSync",
     "source": "$_any.chmodSync(ignored, 777)",
-    "testhit": "fs.chmodSync(/path/,777);",
+    "testhit": "$_any.chmodSync(/path/,777);",
     "testmiss": "chmodSync()",
-    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "desc": "Read, Write and eXecute permissions for everyone may be dangerous.",
+    "threat": "Insecure Permissions - global RWX",
+    "condition": "nodejs_filesystem"
 }, {
     "name": "nodejs chownSync",
     "source": "$_any.chmodSync(ignored, 0777)",
-    "testhit": "fs.chmodSync(/path/,0777);",
+    "testhit": "$_any.chmodSync(/path/,0777);",
     "testmiss": "chmodSync()",
-    "desc": "This API may cause remote command execution issues if used with unstrusted data.",
-    "threat": "RCE"
+    "desc": "Read, Write and eXecute permissions for everyone may be dangerous.",
+    "threat": "Insecure Permissions - global RWX",
+    "condition": "nodejs_filesystem"
+}, {
+    "name": "nodejs_fs_createReadStream",
+    "source": "$_any.createReadStream()",
+    "testhit": "$_any.createReadStream()",
+    "testmiss": "createReadStream",
+    "desc": "Read, Write and eXecute permissions for everyone may be dangerous.",
+    "threat": "Insecure Permissions - global RWX",
+    "condition": "nodejs_filesystem"
+}, {
+    "name": "nodejs_fs_pipe",
+    "source": "$_any.pipe()",
+    "testhit": "$_any.pipe()",
+    "testmiss": "pipe",
+    "desc": "Read, Write and eXecute permissions for everyone may be dangerous.",
+    "threat": "Insecure Permissions - global RWX",
+    "condition": "nodejs_fs_createReadStream"
 }, {
     "name": "HTML5 PostMessage",
     "source": "$_any.postMessage(ignored, '*')",
