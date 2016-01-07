@@ -14,7 +14,7 @@
   ],
   "rules": [
     {
-      "id": "COMM_CRED",
+      "id": "HARD_CRED1",
       "severity": "High",
       "title": "Possibly hard coded credential",
       "description": "It seems you have possibly hard-coded some sort secret/credential in the source code, for accessing a local/remote resource. This is not a good practice because in event of a source-code disclosure/access to unauthorized people may leak additional information which otherwise should not be possible.",
@@ -25,7 +25,49 @@
       "platform_version": "all",
       "enabled": "true",
       "logic": "Find patterns of hardcoded credentials.",
-      "signature": "KChhdXRoKHRva2VufHNlY3JldHxrZXkpKXxwYXNzd2R8cGFzd2R8cGFzc3xwd2R8cGFzc3dvcmR8LipzZWNyZXQuKnwuKmxvZ2luLip8Lip0b2tlbi4qfC4qY3JlZC4qfHVzZXJuYW1lfHVzZXJfbmFtZXx1c3J8Lipzc2guKnwuKmFwaS4qfC4qb2F1dGguKnwuKm9wZW5pZC4qfCgobG9naW58YXBpfHNlY3JldHxzc2h8b2F1dGh8YXBwfHVzZXIpa2V5KSkuKig9fDopLipbXCdcIl0uKltcJ1wiXG5d"
+      "signature": "KGFwcHxzZXJ2aWNlfHNzaHxjbGllbnR8YXV0aHxsb2dpbnx1c2VyfGFwaXxkYnxvYXV0aHxzZXJ2ZXJ8c3NvfGNyeXB0KG8pP3woZW58ZGUpY3J5cHQoaW9uKT8pPyhffFwuKT8odG9rZW58c2VjcmV0fGtleXxjcmVkKVxzPyg9fDopXHM/"
+    },
+    {
+      "id": "HARD_CRED2",
+      "severity": "Medium",
+      "title": "Possibly hard coded credential",
+      "description": "It seems you have possibly hard-coded some sort secret/credential in the source code, for accessing a local/remote resource. This is not a good practice because in event of a source-code disclosure/access to unauthorized people may leak additional information which otherwise should not be possible.",
+      "remediation": "Please use a secure credential store which has the least possible access privileges for unauthorized users.",
+      "link": "http://cwe.mitre.org/data/definitions/259.html",
+      "example_insecure": "var oauth_token = '5af0nhg48672a",
+      "example_secure": "var oauth_token = env.getkey('oauth_token'); doSomeWork(); flush(oauth_token);",
+      "platform_version": "all",
+      "enabled": "true",
+      "logic": "Find patterns of hardcoded credentials.",
+      "signature": "KF98XC4pPyh0b2tlbnxzZWNyZXR8a2V5fGNyZWQpKF98XC4pPw=="
+    },
+    {
+      "id": "PrivateIP",
+      "severity": "Low",
+      "title": "Hard coded private IP v4/v6 address",
+      "description": "It seems that a Private IP address has been hardcoded in the source-code. A private IP is an IP within the range of 192.168.0.0 - 192.168.255.255 or 172.16.0.0 - 172.31.255.255 or 10.0.0.0 - 10.255.255.255 and their IPv6 equivalents",
+      "remediation": "Please verify that this source code is not deployed on production as it may increase the impact of a server compromise.",
+      "link": "http://cwe.mitre.org/data/definitions/259.html",
+      "example_insecure": "http://192.168.10.3",
+      "example_secure": "Production IP range",
+      "platform_version": "all",
+      "enabled": "true",
+      "logic": "Find patterns of 192.168.0.0 - 192.168.255.255 or 172.16.0.0 - 172.31.255.255 or 10.0.0.0 - 10.255.255.255 and their IPv6 equivalents",
+      "signature": "KF4xMjdcLil8KF4xOTJcLjE2OFwuKXwoXjEwXC4pfCheMTcyXC4xWzYtOV1cLil8KF4xNzJcLjJbMC05XVwuKXwoXjE3MlwuM1swLTFdXC4pfCheOjoxJCl8KF5bZkZdW2NDZERdKQ=="
+    },
+    {
+      "id": "E-Mail",
+      "severity": "Low",
+      "title": "Hard coded email-id",
+      "description": "It seems that an email-id hardcoded in the source-code.",
+      "remediation": "Please ensure that this email-id is headless and doesn't have privacy concerns. Also ensure that the email server doesn't support mail relaying. ",
+      "link": "http://cwe.mitre.org/data/definitions/259.html",
+      "example_insecure": "notify@corp.com",
+      "example_secure": "N/A",
+      "platform_version": "all",
+      "enabled": "true",
+      "logic": "Find patterns of email-ids",
+      "signature": "KChbYS16QS1aXXxbMC05XSl8KFstXXxbX118Wy5dKSkrW0BdKChbYS16QS1aMC05XSl8KFstXSkpezIsNjN9Wy5dKChbYS16QS1aMC05XSl7Miw2M30pKyQ="
     }
   ]
 }
