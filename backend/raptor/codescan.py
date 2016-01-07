@@ -129,7 +129,7 @@ class Scanner(object):
         for rule in self.rules["rules"]:
             if rule["enabled"] == "true":
                 rule_signature = base64.b64decode(rule["signature"])
-                pattern = re.compile(rule_signature)
+                pattern = re.compile(rule_signature, re.IGNORECASE)
                 if pattern.search(line_content):
                     issue["warning_type"] =  str(rule["title"])
                     issue["warning_code"] = str(rule["id"])

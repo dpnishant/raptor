@@ -35,7 +35,7 @@ def gitrob_scan(root_path, rules_path):
             _filename, _filext = os.path.splitext(_file)
             file_path = os.path.join(directory, _file)
             for gitrob_rule in gitrob_rules:
-                pattern = re.compile(base64.b64decode(gitrob_rule['pattern']))
+                pattern = re.compile(base64.b64decode(gitrob_rule['pattern']), re.IGNORECASE)
                 if gitrob_rule['part'] == 'filename' and pattern.search(_file):
                     flag = True
                 elif gitrob_rule['part'] == 'extension' and pattern.search(_filext):

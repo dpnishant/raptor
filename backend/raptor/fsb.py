@@ -27,7 +27,7 @@ def get_localImports(fpath):
     fhandle = open(fpath, 'r')
     lines = fhandle.readlines()
     for line in range(0, len(lines)):
-        pattern = re.compile(sig_import)
+        pattern = re.compile(sig_import, re.IGNORECASE)
         if pattern.search(lines[line]):
             package = lines[line].replace(';', '').replace('import', '').strip().replace('.', '/')
             if '*' in package:
@@ -73,7 +73,7 @@ def match_condition(fpath, rule):
     for line in range(0, len(lines)):
         for condition in rule['condition']:
             condition_sig = base64.b64decode(condition['signature'])
-            pattern = re.compile(condition_sig)
+            pattern = re.compile(condition_sig, re.IGNORECASE)
             if pattern.search(lines[line]) and not (lines[line].strip().startswith('//') or lines[line].strip().startswith('/*')):
                 return line + 1, lines[line].strip()
     return False
@@ -110,7 +110,7 @@ def scan_line(delim_line, fpath, root_path):
     for rule in fsb_rules['rules']:
         if rule['enabled'] == 'true':
             rule_signature = base64.b64decode(rule['signature'])
-            pattern = re.compile(rule_signature)
+            pattern = re.compile(rule_signature, re.IGNORECASE)
             if pattern.search(line_content) and not (line_content.strip().startswith('//') or line_content.strip().startswith('/*')):
                 if match_condition(fpath, rule) or scan_localImports(get_localImports(fpath), rule, root_path):
                     fsb_issue['warning_type'] =  str(rule['title'])
