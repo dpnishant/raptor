@@ -25,7 +25,7 @@
       "platform_version": "all",
       "enabled": "true",
       "logic": "Find patterns of hardcoded credentials.",
-      "signature": "KGFwcHxzZXJ2aWNlfHNzaHxjbGllbnR8YXV0aHxsb2dpbnx1c2VyfGFwaXxkYnxvYXV0aHxzZXJ2ZXJ8c3NvfGNyeXB0KG8pP3woZW58ZGUpY3J5cHQoaW9uKT8pPyhffFwuKT8odG9rZW58c2VjcmV0fGtleXxjcmVkKVxzPyg9fDopXHM/"
+      "signature": "KHNhbHR8Y2FwdGNoYXxjc3JmfGNvbnN1bWVyfGFwcGxpY2F0aW9ufGFwcHxzZXJ2aWNlfHNzaHxjbGllbnR8YXV0aHxsb2dpbnx1c2VyfGFwaXxkYnxvYXV0aHxzZXJ2ZXJ8c3NvfGNyeXB0KG8pP3woZW58ZGUpY3J5cHQoaW9uKT8pPyhffFwuKT8odG9rZW58c2VjcmV0fGtleXxjcmVkKVxzPyg9fDopXHM/"
     },
     {
       "id": "HARD_CRED2",
@@ -39,7 +39,7 @@
       "platform_version": "all",
       "enabled": "true",
       "logic": "Find patterns of hardcoded credentials.",
-      "signature": "KF98XC4pPyh0b2tlbnxzZWNyZXR8a2V5fGNyZWQpKF98XC4pPw=="
+      "signature": "KF98XC4pPyh0b2tlbnxzZWNyZXR8a2V5fGNyZWQpKF98XC4pPy4qPShcc3xcdCkqKFwnfFwifFxbKQ=="
     },
     {
       "id": "PrivateIP",
