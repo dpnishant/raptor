@@ -8,7 +8,7 @@ for FindBugs Java scanner. FindBugs & FindSecurityBugs requires compiled java by
 the scan results might be more accurate than this plugin.  
 
 '''
-import os, sys, re, json, base64
+import os, sys, re, json, base64, codecs
 import log
 
 def isUnique(total_issues, filename, linenum):
@@ -24,8 +24,8 @@ def isUnique(total_issues, filename, linenum):
 def get_localImports(fpath):
     imports = []
     sig_import = 'import\s[^;]*;'
-    fhandle = open(fpath, 'r')
-    lines = fhandle.readlines()
+    fhandle = codecs.open(fpath, 'r', encoding='utf8')
+    lines = [line for line in fhandle]
     for line in range(0, len(lines)):
         pattern = re.compile(sig_import, re.IGNORECASE)
         if pattern.search(lines[line]):
@@ -68,8 +68,8 @@ def load_fsb_rules(fname):
     return json.loads(file.read())
 
 def match_condition(fpath, rule):
-    fhandle = open(fpath, 'r')
-    lines = fhandle.readlines()
+    fhandle = codecs.open(fpath, 'r', encoding='utf8')
+    lines = [line for line in fhandle]
     for line in range(0, len(lines)):
         for condition in rule['condition']:
             condition_sig = base64.b64decode(condition['signature'])
@@ -85,13 +85,13 @@ def fsb_scan(root_path, rules_path):
     for directory, sub_dirs, files in os.walk(root_path):
         for _file in files:
             file_path = os.path.join(directory, _file)
-            if _file.endswith('.java'):
-                fhandle = open(file_path, 'r')
-                lines = fhandle.readlines()
+            if os.path.splitext(_file)[1] in fsb_rules['file_types']:
+                fhandle = codecs.open(file_path, 'r', encoding='utf8')
+                lines = [line for line in fhandle]
                 for line in range(0, len(lines)):
                     try:
                         current_line = lines[line]
-                        delim_line = '%s:%d:%s' % (file_path, line, current_line)
+                        delim_line = '%s**^^**%d**^^**%s' % (file_path, line, current_line)
                         scan_line(delim_line, file_path, root_path)
                     except Exception as e:
                         print "[ERROR] plugin:fsb, msg: skipped line #%d in %s, error: %s" % (line, file_path, str(e))
@@ -102,7 +102,7 @@ def fsb_scan(root_path, rules_path):
 def scan_line(delim_line, fpath, root_path):
     fsb_issue = {}
     line_obj = delim_line
-    line_obj = line_obj.split(':')
+    line_obj = line_obj.split('**^^**')
     file_path = line_obj[0]
     line_num = line_obj[1]
     line_content = line_obj[2]

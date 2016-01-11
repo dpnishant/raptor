@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, sys, re, fnmatch, json, base64, time, traceback
+import os, sys, re, fnmatch, json, base64, time, traceback, codecs
 from datetime import datetime
 from android import *
 import log
@@ -49,7 +49,7 @@ class Scanner(object):
             return True
         for issue in total_issues:
             if issue["file"] == filename and issue["line"] == linenum:
-                #print "found duplicate"
+                print "Duplicate"
                 return False
             else:
                 return True
@@ -106,8 +106,8 @@ class Scanner(object):
                     self.issues.append(manifest_issue)
 
         if (file_ext in self.file_exts):
-            fhandle = open(fpath, 'r')
-            lines = fhandle.readlines()
+            fhandle = codecs.open(fpath, 'r', encoding='utf8')
+            lines = [line for line in fhandle]
             for line in range(0, len(lines)):
                 try:
                     current_line = lines[line]
@@ -119,7 +119,6 @@ class Scanner(object):
             fhandle.close()
 
     def scan_line(self, line, fpath):
-        issue = {}
         line_obj = line
         line_obj = line_obj.split(':')
         file_path = line_obj[0]
@@ -127,6 +126,7 @@ class Scanner(object):
         line_content = line_obj[2]
     
         for rule in self.rules["rules"]:
+            issue = {}
             if rule["enabled"] == "true":
                 rule_signature = base64.b64decode(rule["signature"])
                 pattern = re.compile(rule_signature, re.IGNORECASE)
@@ -144,7 +144,7 @@ class Scanner(object):
                     issue["location"] = ''
                     issue["user_input"] = ''
                     issue["render_path"] = ''
-                    if self.isUnique(self.issues, issue["file"], issue["line"]):
+                    if issue and self.isUnique(self.issues, issue['file'], issue['line']):
                         self.issues.append(issue)
 
     def scan(self, rule_path, app_path, type):
