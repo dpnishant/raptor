@@ -30,7 +30,8 @@ var jslibs = [
   /mocha/,
   /express/,
   /yql/,
-  /\/node_modules\//
+  /\/node_modules\//,
+  /dataTables/
 ];
 
 var verifyCondition = function(json_report, condition, filename, position, line) {
