@@ -6,11 +6,12 @@ from codescan import *
 from externalscan import *
 from fsb import *
 from gitrob import *
+from ebay_nodejs import *
 import log
 
 
 rulepacks = ['common', 'android', 'php', 'actionscript']
-plugin_rulepacks = ['fsb_android', 'fsb_injection', 'fsb_crypto', 'fsb_endpoint', 'gitrob']
+plugin_rulepacks = ['fsb_android', 'fsb_injection', 'fsb_crypto', 'fsb_endpoint', 'fsb_privacy', 'gitrob']
 
 json = { 
         "scan_info": {
@@ -90,6 +91,13 @@ def scan_all(scan_path, repo_path, repo_type):
     if len(php_results) > 0 and php_results != 'error':
         for php_result in php_results:
             results.append(php_result)
+            total_issues += 1
+
+    log.logger.debug("scanning with [ebay-nodejs] plugin")
+    ebay_nodejs_results = scan_ebay_nodejs(scan_path)
+    if len(ebay_nodejs_results) > 0 and ebay_nodejs_results != 'error':
+        for ebay_nodejs_result in ebay_nodejs_results:
+            results.append(ebay_nodejs_result)
             total_issues += 1
 
     if repo_path[-4:len(repo_path)] == '.zip':

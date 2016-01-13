@@ -11,6 +11,21 @@ the scan results might be more accurate than this plugin.
 import os, sys, re, json, base64, codecs
 import log
 
+def isIgnored(path):
+    fhandle = open('rules/ignore_list.rulepack', 'r')
+    contents = fhandle.read()
+    fhandle.close()
+    ignored_rules = json.loads(contents)
+    files = ignored_rules['files']
+    directories = ignored_rules['directories']
+    for f in files:
+        if f in path:
+            return True
+    for d in directories:
+        if d in path:
+            return True
+    return False
+
 def isUnique(total_issues, filename, linenum):
     if len(total_issues) == 0:
         return True
@@ -40,7 +55,7 @@ def scan_localImports(imports=[], rule={}, path=''):
     import_file_paths = []
     flag = ''
     for directory, sub_dir, files in os.walk(path):
-        if '/test/' in directory: # ignore test directories
+        if isIgnored(directory): # ignore test directories
             continue
         for item in imports:
             item = item.lower().lstrip('/').rstrip('/')
@@ -85,6 +100,8 @@ def fsb_scan(root_path, rules_path):
     for directory, sub_dirs, files in os.walk(root_path):
         for _file in files:
             file_path = os.path.join(directory, _file)
+            if isIgnored(file_path):
+                continue
             if os.path.splitext(_file)[1] in fsb_rules['file_types']:
                 fhandle = codecs.open(file_path, 'r', encoding='utf8')
                 lines = [line for line in fhandle]

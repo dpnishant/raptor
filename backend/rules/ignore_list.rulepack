@@ -1,0 +1,21 @@
+{
+  "files": [
+    "/.",
+    "bootstrap",
+    "jquery",
+    "uglify",
+    "knockout",
+    "angular",
+    "backbone",
+    "ember",
+    "yui",
+    "mocha",
+    "express",
+    "yql",
+    "dataTables"
+  ],
+  "directories": [
+    "/node_modules/",
+    "/test/"
+  ]
+}

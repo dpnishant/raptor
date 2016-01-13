@@ -44,6 +44,21 @@ class Scanner(object):
         else:
             print "Error: Invalid path (%s)" % app
 
+    def isIgnored(self, path):
+        fhandle = open('rules/ignore_list.rulepack', 'r')
+        contents = fhandle.read()
+        fhandle.close()
+        ignored_rules = json.loads(contents)
+        files = ignored_rules['files']
+        directories = ignored_rules['directories']
+        for f in files:
+            if f in path:
+                return True
+        for d in directories:
+            if d in path:
+                return True
+        return False
+
     def isUnique(self, total_issues, filename, linenum):
         if len(total_issues) == 0:
             return True
@@ -94,6 +109,8 @@ class Scanner(object):
         for root, dirnames, filenames in os.walk(dirname):
             for filename in fnmatch.filter(filenames, file_ext):
                 file_path = os.path.join(root, filename)
+                if self.isIgnored(file_path):
+                    continue
                 self.read_file(file_path)
 
     def read_file(self, fpath):
@@ -111,7 +128,7 @@ class Scanner(object):
             for line in range(0, len(lines)):
                 try:
                     current_line = lines[line]
-                    delim_line = '%s:%d:%s' % (fpath, line, current_line)
+                    delim_line = '%s**^^**%d**^^**%s' % (fpath, line, current_line)
                     self.scan_line(delim_line, fpath)
                 except Exception as e:
                     log.logger.debug("[ERROR] Skipped line %d in %s. Dump: %s" % (line, fpath, traceback.print_exc()))
@@ -120,7 +137,7 @@ class Scanner(object):
 
     def scan_line(self, line, fpath):
         line_obj = line
-        line_obj = line_obj.split(':')
+        line_obj = line_obj.split('**^^**')
         file_path = line_obj[0]
         line_num = line_obj[1]
         line_content = line_obj[2]
