@@ -93,13 +93,6 @@ def scan_all(scan_path, repo_path, repo_type):
             results.append(php_result)
             total_issues += 1
 
-    log.logger.debug("scanning with [ebay-nodejs] plugin")
-    ebay_nodejs_results = scan_ebay_nodejs(scan_path)
-    if len(ebay_nodejs_results) > 0 and ebay_nodejs_results != 'error':
-        for ebay_nodejs_result in ebay_nodejs_results:
-            results.append(ebay_nodejs_result)
-            total_issues += 1
-
     if repo_path[-4:len(repo_path)] == '.zip':
         for result in results:
             result['file'] = result['file'].replace(repo_path.rstrip('.zip'), repo_path)

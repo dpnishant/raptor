@@ -1,1 +1,25 @@
-{"plugin_type":"fsb_privacy","file_types":[".java"],"rules":[{"id":"FSB_INSECURE_PASSWORD_MGMT","severity":"High","title":"Insecure Password Managment (Privacy Violation)","description":"The function PasswordCallback() gathers sensitive data without disabling the option to echo it back to user at the input prompt.","remediation":"Always ensure that the appropriate flags are set correctly for any APIs that gather sensitive information, such that the sensitive information is not echoed back to the user as he or she enters it at the input prompt.","signature":"KG5ld1tcc1x0XSopP1Bhc3N3b3JkQ2FsbGJhY2tcKFsiJ11bXiciXSpbIiddLFtcc1x0XSp0cnVlW1xzXHRdKg==","condition":[{"signature":"aW1wb3J0W1xzXHRdKmphdmF4XC5zZWN1cml0eVwuYXV0aFwuY2FsbGJhY2soXC5QYXNzd29yZENhbGxiYWNrKT87","description":"checks if javax.security.auth.callback(.PasswordCallback)? is imported"}],"link":"https://www.owasp.org/index.php/Category:Password_Management_Vulnerability","platform_version":"all","enabled":"true"}]}
+{
+  "plugin_type": "fsb_privacy",
+  "file_types": [
+    ".java"
+  ],
+  "rules": [
+    {
+      "id": "FSB_INSECURE_PASSWORD_MGMT",
+      "severity": "High",
+      "title": "Insecure Password Managment (Privacy Violation)",
+      "description": "The function PasswordCallback() gathers sensitive data without disabling the option to echo it back to user at the input prompt.",
+      "remediation": "Always ensure that the appropriate flags are set correctly for any APIs that gather sensitive information, such that the sensitive information is not echoed back to the user as he or she enters it at the input prompt.",
+      "signature": "KG5ld1tcc1x0XSopP1Bhc3N3b3JkQ2FsbGJhY2tcKFsiJ11bXiciXSpbIiddLFtcc1x0XSp0cnVlW1xzXHRdKg==",
+      "condition": [
+        {
+          "signature": "aW1wb3J0W1xzXHRdKmphdmF4XC5zZWN1cml0eVwuYXV0aFwuY2FsbGJhY2soXC5QYXNzd29yZENhbGxiYWNrKT87",
+          "description": "checks if javax.security.auth.callback(.PasswordCallback)? is imported"
+        }
+      ],
+      "link": "https://www.owasp.org/index.php/Category:Password_Management_Vulnerability",
+      "platform_version": "all",
+      "enabled": "true"
+    }
+  ]
+}
