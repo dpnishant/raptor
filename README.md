@@ -80,7 +80,7 @@ You can use Raptor to scan your organization's private as well as public instanc
 ![Zip Scan](/screenshots/scan.png?raw=true "Raptor Github Scan")
 
 #### Scan Started
-![Scan Started]
+![Scan Started](/screenshots/scan_start.png?raw=true "Raptor Scan Start")
 
 #### Scan in progress
 ![Scan in progress](/screenshots/progress.png?raw=true "Raptor Scan in Progress")
@@ -91,20 +91,17 @@ You can use Raptor to scan your organization's private as well as public instanc
 #### Issue Details
 ![Login](/screenshots/issues.png?raw=true "Raptor Report Issues")
 
-#### Issue Filters
-![Issue Details]
-
 #### Export Report
 ![Export Report](/screenshots/export.png?raw=true "Raptor Report Export")
 
 #### Scan History
-![Scan History]
+![Scan History](/screenshots/history.png?raw=true "Raptor Github Scan")
 
 #### Rules Editor
 ![Rules Editor](/screenshots/rules1.png?raw=true "Raptor Rules Editor #1")
 
 #### Server Error
-![Server Error]
+![Server Error](/screenshots/error.png?raw=true "Raptor Server Error")
 
 ### Development
 
