@@ -71,7 +71,7 @@ You can use Raptor to scan your organization's private as well as public instanc
 
 ### Screenshots
 #### Login
-![Login](https://camo.githubusercontent.com/37df31f7e7faed56192885fe8a9f9b908db09d58/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f6c6f67696e2e706e67)
+![Login](/screenshots/login.png?raw=true "Raptor Login")
 
 #### Github Scan 
 ![Github Scan](https://camo.githubusercontent.com/ccd8c5b7891c5d7c0b1138ee45237ff727c8382e/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f7363616e2e706e67)
