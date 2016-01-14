@@ -71,40 +71,40 @@ You can use Raptor to scan your organization's private as well as public instanc
 
 ### Screenshots
 #### Login
-![Login](https://camo.githubusercontent.com/37df31f7e7faed56192885fe8a9f9b908db09d58/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f6c6f67696e2e706e67)
+![Login](/screenshots/login.png?raw=true "Raptor Login")
 
 #### Github Scan 
-![Github Scan](https://camo.githubusercontent.com/ccd8c5b7891c5d7c0b1138ee45237ff727c8382e/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f7363616e2e706e67)
+![Github Scan](/screenshots/scan.png?raw=true "Raptor Github Scan")
 
 #### Zip Scan
-![Zip Scan](https://camo.githubusercontent.com/bdafb5d96356f9f3785c2acc8e26250194e99e70/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f7a69705f7363616e2e706e67)
+![Zip Scan](/screenshots/scan.png?raw=true "Raptor Github Scan")
 
 #### Scan Started
-![Scan Started](https://camo.githubusercontent.com/9b9a977a38903777d12feb4bdac29d0a8f25b01a/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f7363616e5f73746172742e706e67)
+![Scan Started]
 
 #### Scan in progress
-![Scan in progress](https://camo.githubusercontent.com/85d1c08e5a0d6aca084bd154d0c4083ead3ad4d3/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f7363616e5f70726f67726573732e706e67)
+![Scan in progress](/screenshots/progress.png?raw=true "Raptor Scan in Progress")
 
 #### Report Statistics
-![Report Statistics](https://camo.githubusercontent.com/4a2140e6a539320d87be73fad56796b28b8083ca/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f737461746973746963732e706e67)
+![Report Statistics](/screenshots/stats.png?raw=true "Raptor Github Scan Stats")
 
 #### Issue Details
-![Login](https://camo.githubusercontent.com/b3af0b377de131e3498a90f794882a28621c0a24/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f6973737565732e706e67)
+![Login](/screenshots/issues.png?raw=true "Raptor Report Issues")
 
 #### Issue Filters
-![Issue Details](https://camo.githubusercontent.com/d743d30de38bea27f485c5236e02d93655404a2a/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f66696c746572732e706e67)
+![Issue Details]
 
 #### Export Report
-![Export Report](https://camo.githubusercontent.com/e34c57ee606ce5f1628bc76bb969dd2591a386cd/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f7265706f72745f6578706f72742e706e67)
+![Export Report](/screenshots/export.png?raw=true "Raptor Report Export")
 
 #### Scan History
-![Scan History](https://camo.githubusercontent.com/146d5d2ad2ca728f565c44157204e6067c2a3d2b/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f686973746f72792e706e67)
+![Scan History]
 
 #### Rules Editor
-![Rules Editor](https://camo.githubusercontent.com/0cd1c45576d3f5e361760f40242059e0891f682a/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f72756c65732e706e67)
+![Rules Editor](/screenshots/rules1.png?raw=true "Raptor Rules Editor #1")
 
 #### Server Error
-![Server Error](https://camo.githubusercontent.com/8bcde473993917ac9f7ff1b497d69ceabf899a0a/687474703a2f2f7777772e6461737061746e61696b2e636f6d2f726170746f722f6e6f74696669636174696f6e732e706e67)
+![Server Error]
 
 ### Development
 
