@@ -80,6 +80,7 @@ pip install flask
 pip install gunicorn
 pip install beautifulsoup
 pip install Django
+pip install hjson
 curl -sL https://deb.nodesource.com/setup | sudo bash -
 apt-get install -y nodejs
 gem install brakeman

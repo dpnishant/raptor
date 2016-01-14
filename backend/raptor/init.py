@@ -6,7 +6,6 @@ from codescan import *
 from externalscan import *
 from fsb import *
 from gitrob import *
-from ebay_nodejs import *
 import log
 
 
