@@ -1,5 +1,5 @@
-![Raptor](/screenshots/raptor_logo.png?raw=true "Raptor Logo")
- is a web-based (web-serivce + UI) github centric source-vulnerability scanner i.e. it scans a repository with just the github repo url. You can setup webhooks to ensure automated scans everytime you commit or merge a pull request. The scan is done asynchonously and the results are available only to the user who initiated the scan.
+![Raptor](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/raptor_logo.png?raw=true "Raptor Logo")
+ is a web-based (web-serivce + UI) github centric source-vulnerability scanner i.e. it scans a repository with just the github repo url. You can setup webhooks to ensure automated scans every-time you commit or merge a pull request. The scan is done asynchonously and the results are available only to the user who initiated the scan.
 
 Some of the features of the Raptor:
   - Plug-in architecture (plug and play external tools and generate unified reports)
@@ -7,7 +7,7 @@ Some of the features of the Raptor:
   - Easy to create/edit/delete signatures for new vulnerabilities and/or programming languages.
 
 > This tool is an attempt to help the community and start-up companies to 
-> emphasize on secure-coding. This tool may or may not match the features/quality of commercial alternatives, nothing is guaranteed and you have been warned. This tool is targetted to be used by security code-reviewers and/or developers with secure-coding experience to find vulnerability entrypoints during code-audits or peer reviews. Please DO NOT trust the tool's output blindly.
+> emphasize on secure-coding. This tool may or may not match the features/quality of commercial alternatives, nothing is guaranteed and you have been warned. This tool is targeted to be used by security code-reviewers and/or developers with secure-coding experience to find vulnerability entry-points during code-audits or peer reviews. Please DO NOT trust the tool's output blindly.
 > This is best-used if you plug Raptor into your CI/CD pipeline.
 
 ### Version
@@ -24,7 +24,7 @@ Note: Most of the following tools/modules/libs have been modified heavily to be 
 * :zap: [RIPS](http://rips-scanner.sourceforge.net/) - for PHP
 * :zap: [Manitree](https://github.com/antitree/manitree/) - for AndroidManifest.xml insecurities
 
-Avaiables Rulepacks:
+Available Rulepacks:
 * :zap: ActionScript - supports Flash/Flex (ActionScript 2.0 & 3.0) source/sinks
 * :zap: [FindSecurityBugs](http://h3xstream.github.io/find-sec-bugs/)  (rules Only) - for Java (J2EE, JSP, Android, Scala, Groovy etc.)
 * :zap: [gitrob](https://github.com/michenriksen/gitrob) - for Sensitive Date Exposure (files containing credentials, configuration, backup, private settings etc.)
@@ -67,41 +67,41 @@ You can use the bundled light-weight, GUI client-side rules editor for adding an
 You can access it here: [Rules Editor](http://127.0.0.1/raptor/editrules.php)
 
 #####Public/Private GitHub instance
-You can use Raptor to scan your organization's private as well as public instances of GitHub by specifiying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L32) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/session.php#L10-L11).
+You can use Raptor to scan your organization's private as well as public instances of GitHub by specifying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L32) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/session.php#L10-L11).
 
 ### Screenshots
 #### Login
-![Login](/screenshots/login.png?raw=true "Raptor Login")
+![Login](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/login.png?raw=true "Raptor Login")
 
 #### Github Scan 
-![Github Scan](/screenshots/scan.png?raw=true "Raptor Github Scan")
+![Github Scan](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan.png?raw=true "Raptor Github Scan")
 
 #### Zip Scan
-![Zip Scan](/screenshots/scan.png?raw=true "Raptor Github Scan")
+![Zip Scan](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan.png?raw=true "Raptor Github Scan")
 
 #### Scan Started
-![Scan Started](/screenshots/scan_start.png?raw=true "Raptor Scan Start")
+![Scan Started](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan_start.png?raw=true "Raptor Scan Start")
 
 #### Scan in progress
-![Scan in progress](/screenshots/progress.png?raw=true "Raptor Scan in Progress")
+![Scan in progress](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/progress.png?raw=true "Raptor Scan in Progress")
 
 #### Report Statistics
-![Report Statistics](/screenshots/stats.png?raw=true "Raptor Github Scan Stats")
+![Report Statistics](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/stats.png?raw=true "Raptor Github Scan Stats")
 
 #### Issue Details
-![Login](/screenshots/issues.png?raw=true "Raptor Report Issues")
+![Login](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/issues.png?raw=true "Raptor Report Issues")
 
 #### Export Report
-![Export Report](/screenshots/export.png?raw=true "Raptor Report Export")
+![Export Report](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/export.png?raw=true "Raptor Report Export")
 
 #### Scan History
-![Scan History](/screenshots/history.png?raw=true "Raptor Github Scan")
+![Scan History](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/history.png?raw=true "Raptor Github Scan")
 
 #### Rules Editor
-![Rules Editor](/screenshots/rules1.png?raw=true "Raptor Rules Editor #1")
+![Rules Editor](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/rules1.png?raw=true "Raptor Rules Editor #1")
 
 #### Server Error
-![Server Error](/screenshots/error.png?raw=true "Raptor Server Error")
+![Server Error](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/error.png?raw=true "Raptor Server Error")
 
 ### Development
 
