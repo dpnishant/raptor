@@ -50,7 +50,7 @@ Installation Video: [YouTube Usage](https://www.youtube.com/v/0KneQwJiUFk?start=
 cd raptor-master
 sudo sh start.sh #starts the backend web-service
 ```
-Now point your browser to [Raptor Home](http://127.0.0.1/raptor/)
+Now point your browser to [Raptor Home (http://localhost/raptor/)](http://localhost/raptor/)
 
 ######Login
 Login with the username as registered on the corresponding github server you are connected to and *any* password (but remember the username to view scan history)
@@ -64,7 +64,7 @@ However, as of now password can be anything, since we have *NOT* implemented a d
 #####Rules Editor
 You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: [Init Script](https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L12). Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set! :thumbsup:
 
-You can access it here: [Rules Editor](http://127.0.0.1/raptor/editrules.php)
+You can access it here: [Rules Editor (http://localhost/raptor/editrules.php)](http://localhost/raptor/editrules.php)
 
 #####Public/Private GitHub instance
 You can use Raptor to scan your organization's private as well as public instances of GitHub by specifying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L33) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/session.php#L10-L11).
