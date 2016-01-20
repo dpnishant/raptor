@@ -110,7 +110,7 @@ Get in touch with me if you have an idea or else feel free to fork and improve. 
 
 ### Contributors
 
- - [Anant Shrivastava](https://twitter.com/anantshri)
+ - [Anant Shrivastava](https://twitter.com/anantshri) [Commits](https://github.com/dpnishant/raptor/commits?author=anantshri)
 
 License
 ----
