@@ -46,12 +46,12 @@ This is best-used if you plug Raptor into your CI/CD pipeline.</p>
 </blockquote>
 
 <h3>
-<a id="version" class="anchor" href="#version" aria-hidden="true"><span class="octicon octicon-link"></span></a>Version</h3>
+<a id="version" class="anchor" href="#version" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Version</h3>
 
 <p>0.1 beta</p>
 
 <h3>
-<a id="tech" class="anchor" href="#tech" aria-hidden="true"><span class="octicon octicon-link"></span></a>Tech</h3>
+<a id="tech" class="anchor" href="#tech" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Tech</h3>
 
 <p>Integrated Plugins:</p>
 
@@ -80,7 +80,7 @@ This is best-used if you plug Raptor into your CI/CD pipeline.</p>
 </ul>
 
 <h3>
-<a id="installation-tested-on-a-ubuntu-1404-x64-lamp-instance" class="anchor" href="#installation-tested-on-a-ubuntu-1404-x64-lamp-instance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)</h3>
+<a id="installation-tested-on-a-ubuntu-1404-x64-lamp-instance" class="anchor" href="#installation-tested-on-a-ubuntu-1404-x64-lamp-instance" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation (Tested on a Ubuntu 14.04 x64 LAMP instance)</h3>
 
 <p>Installation Video: <a href="https://www.youtube.com/v/0KneQwJiUFk?start=0&amp;end=537">YouTube Install</a></p>
 
@@ -91,10 +91,10 @@ $ <span class="pl-c1">cd</span> raptor-master
 $ sudo sh install.sh</pre></div>
 
 <h3>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h3>
 
 <h5>
-<a id="scanner" class="anchor" href="#scanner" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scanner</h5>
+<a id="scanner" class="anchor" href="#scanner" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scanner</h5>
 
 <p>Installation Video: <a href="https://www.youtube.com/v/0KneQwJiUFk?start=550">YouTube Usage</a></p>
 
@@ -104,7 +104,7 @@ sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre>
 <p>Now point your browser to <a href="http://localhost/raptor/">Raptor Home (http://localhost/raptor/)</a></p>
 
 <h6>
-<a id="login" class="anchor" href="#login" aria-hidden="true"><span class="octicon octicon-link"></span></a>Login</h6>
+<a id="login" class="anchor" href="#login" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Login</h6>
 
 <p>Login with the username as registered on the corresponding github server you are connected to and <em>any</em> password (but remember the username to view scan history)</p>
 
@@ -115,90 +115,91 @@ sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre>
 <p>However, as of now password can be anything, since we have <em>NOT</em> implemented a database in the development version.</p>
 
 <h5>
-<a id="rules-editor" class="anchor" href="#rules-editor" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rules Editor</h5>
+<a id="rules-editor" class="anchor" href="#rules-editor" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rules Editor</h5>
 
 <p>You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L12">Init Script</a>. Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set! <img class="emoji" title=":thumbsup:" alt=":thumbsup:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f44d.png" height="20" width="20" align="absmiddle"></p>
 
 <p>You can access it here: <a href="http://localhost/raptor/editrules.php">Rules Editor (http://localhost/raptor/editrules.php)</a></p>
 
 <h5>
-<a id="publicprivate-github-instance" class="anchor" href="#publicprivate-github-instance" aria-hidden="true"><span class="octicon octicon-link"></span></a>Public/Private GitHub instance</h5>
+<a id="publicprivate-github-instance" class="anchor" href="#publicprivate-github-instance" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Public/Private GitHub instance</h5>
 
 <p>You can use Raptor to scan your organization's private as well as public instances of GitHub by specifying the right server endpoints at <a href="https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L33">here</a> and <a href="https://github.com/dpnishant/raptor/blob/master/frontend/session.php#L10-L11">here</a>.</p>
 
 <h3>
-<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span class="octicon octicon-link"></span></a>Screenshots</h3>
+<a id="screenshots" class="anchor" href="#screenshots" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Screenshots</h3>
 
 <h4>
-<a id="login-1" class="anchor" href="#login-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Login</h4>
+<a id="login-1" class="anchor" href="#login-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Login</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/login.png?raw=true" alt="Login" title="Raptor Login"></p>
 
 <h4>
-<a id="github-scan" class="anchor" href="#github-scan" aria-hidden="true"><span class="octicon octicon-link"></span></a>Github Scan</h4>
+<a id="github-scan" class="anchor" href="#github-scan" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Github Scan</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan.png?raw=true" alt="Github Scan" title="Raptor Github Scan"></p>
 
 <h4>
-<a id="zip-scan" class="anchor" href="#zip-scan" aria-hidden="true"><span class="octicon octicon-link"></span></a>Zip Scan</h4>
+<a id="zip-scan" class="anchor" href="#zip-scan" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Zip Scan</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan.png?raw=true" alt="Zip Scan" title="Raptor Github Scan"></p>
 
 <h4>
-<a id="scan-started" class="anchor" href="#scan-started" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scan Started</h4>
+<a id="scan-started" class="anchor" href="#scan-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scan Started</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan_start.png?raw=true" alt="Scan Started" title="Raptor Scan Start"></p>
 
 <h4>
-<a id="scan-in-progress" class="anchor" href="#scan-in-progress" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scan in progress</h4>
+<a id="scan-in-progress" class="anchor" href="#scan-in-progress" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scan in progress</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/progress.png?raw=true" alt="Scan in progress" title="Raptor Scan in Progress"></p>
 
 <h4>
-<a id="report-statistics" class="anchor" href="#report-statistics" aria-hidden="true"><span class="octicon octicon-link"></span></a>Report Statistics</h4>
+<a id="report-statistics" class="anchor" href="#report-statistics" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Report Statistics</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/stats.png?raw=true" alt="Report Statistics" title="Raptor Github Scan Stats"></p>
 
 <h4>
-<a id="issue-details" class="anchor" href="#issue-details" aria-hidden="true"><span class="octicon octicon-link"></span></a>Issue Details</h4>
+<a id="issue-details" class="anchor" href="#issue-details" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Issue Details</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/issues.png?raw=true" alt="Login" title="Raptor Report Issues"></p>
 
 <h4>
-<a id="export-report" class="anchor" href="#export-report" aria-hidden="true"><span class="octicon octicon-link"></span></a>Export Report</h4>
+<a id="export-report" class="anchor" href="#export-report" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Export Report</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/export.png?raw=true" alt="Export Report" title="Raptor Report Export"></p>
 
 <h4>
-<a id="scan-history" class="anchor" href="#scan-history" aria-hidden="true"><span class="octicon octicon-link"></span></a>Scan History</h4>
+<a id="scan-history" class="anchor" href="#scan-history" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scan History</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/history.png?raw=true" alt="Scan History" title="Raptor Github Scan"></p>
 
 <h4>
-<a id="rules-editor-1" class="anchor" href="#rules-editor-1" aria-hidden="true"><span class="octicon octicon-link"></span></a>Rules Editor</h4>
+<a id="rules-editor-1" class="anchor" href="#rules-editor-1" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Rules Editor</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/rules1.png?raw=true" alt="Rules Editor" title="Raptor Rules Editor #1"></p>
 
 <h4>
-<a id="server-error" class="anchor" href="#server-error" aria-hidden="true"><span class="octicon octicon-link"></span></a>Server Error</h4>
+<a id="server-error" class="anchor" href="#server-error" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Server Error</h4>
 
 <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/error.png?raw=true" alt="Server Error" title="Raptor Server Error"></p>
 
 <h3>
-<a id="development" class="anchor" href="#development" aria-hidden="true"><span class="octicon octicon-link"></span></a>Development</h3>
+<a id="development" class="anchor" href="#development" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Development</h3>
 
 <p>Want to contribute? Great! 
 Get in touch with me if you have an idea or else feel free to fork and improve. <img class="emoji" title=":blush:" alt=":blush:" src="https://assets-cdn.github.com/images/icons/emoji/unicode/1f60a.png" height="20" width="20" align="absmiddle"></p>
 
 <h3>
-<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span class="octicon octicon-link"></span></a>Contributors</h3>
+<a id="contributors" class="anchor" href="#contributors" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributors</h3>
 
 <ul>
-<li><a href="https://twitter.com/anantshri">Anant Shrivastava</a></li>
+<li>
+<a href="https://twitter.com/anantshri">Anant Shrivastava</a> (<a href="https://github.com/dpnishant/raptor/commits?author=anantshri">Commits</a>)</li>
 </ul>
 
 <h2>
-<a id="license" class="anchor" href="#license" aria-hidden="true"><span class="octicon octicon-link"></span></a>License</h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
 
 <p>GNU GPL v2.0</p>
 
