@@ -187,14 +187,14 @@ $chart_vulntype_metrics = Array();
                 </h4>
               </div>
               <div id="collapseTwo" class="panel-collapse collapse">
-                <h2 class="sub-header">
+                <h2 id="lblScanSource" class="sub-header">
                   <?php 
                     if (!empty($_SESSION['current_scan_report'])) {
                       echo $data['scan_info']['app_path'];
                     }
                   ?>
                 </h2>
-                <h4>
+                <h4 id="lblIssueCount">
                   <?php
                     if (!empty($_SESSION['current_scan_report'])) {
                       echo 'Total Warnings: ' . $data['scan_info']['security_warnings'];
@@ -440,7 +440,7 @@ $chart_vulntype_metrics = Array();
         //console.log($('issues_table'))
         $('#issues_table tfoot th').each( function () {
           var title = $('#issues_table thead th').eq($(this).index()).text();
-          $(this).html('<input type="text" placeholder="Search ' + title + '" />');
+          $(this).html('<input type="text"  class="txtSearchFilter" placeholder="Search ' + title + '" />');
         });
 
         var table = $('#issues_table').DataTable();
@@ -600,5 +600,63 @@ $chart_vulntype_metrics = Array();
     <script src="dist/js/highlight.pack.js"></script>
     <script>hljs.initHighlightingOnLoad();</script>
     <script src="dist/js/heartbeat.js"></script>
+    <script>
+    function deleteFilterView() {
+      var filterFlag = false;
+      
+      $('.txtSearchFilter').each(function() {
+        if($(this).val() != '') {
+          filterFlag = true;
+        }
+      });
+
+      if (!filterFlag) {
+        var response = confirm('Do you really want to delete all the issues?');
+        if(!response) {
+          return 0;
+        }
+      }
+
+      var issuesTable =$('#issues_table').dataTable();
+      //get all nodes of the datatable it returns all rows
+      var allNodes = issuesTable.fnGetNodes();
+      //get filtered rows of datatable            
+      var filteredRows = issuesTable._('tr', {"filter":"applied"});
+      var filteredArray= [];
+  
+      for(var i=0; i<filteredRows.length; i++) {
+        var item = filteredRows[i];
+        //compare the github linenumber column 
+        var column= item[2];
+        filteredArray.push(column);
+      }
+  
+      for(var i=0; i < allNodes.length; i++) {
+        var rowData = allNodes[i];
+        var columnData= $(rowData).find('td:eq(2)').html();
+        //if the node is in filtered list remove it
+        if(jQuery.inArray(columnData, filteredArray) > -1 ) {
+          //here i am removing the row
+          var rowData = issuesTable.fnDeleteRow(rowData, null, true);
+        }
+      }
+      
+      $('.txtSearchFilter').each(function() {
+        $(this).val('');
+      });
+      
+      var table = $('#issues_table').DataTable();
+      table.search( '' ).columns().search( '' ).draw();
+
+      var newIssuesCount = $('#issues_table_info').text().split('of')[1].trim().split(' ')[0];
+      $("#lblIssueCount").text('Total Warnings: ' + newIssuesCount);
+
+    }
+
+    $(document).ready(function () {
+      var btnFilterDeleteHTML = '<button type="button" id="btnFilterDelete" class="glyphicon glyphicon-trash btn btn-info btnFilterView" style="margin-left: 10px; float: left; text-decoration: none" onClick="deleteFilterView()"> </button>';
+      $(btnFilterDeleteHTML).insertAfter("#issues_table_info");
+    });
+    </script>
   </body>
 </html>
