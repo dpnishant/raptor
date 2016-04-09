@@ -77,7 +77,7 @@ You can use Raptor to scan your organization's private as well as public instanc
 ![Github Scan](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan.png?raw=true "Raptor Github Scan")
 
 #### Zip Scan
-![Zip Scan](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan.png?raw=true "Raptor Github Scan")
+![Zip Scan](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/zipscan.png?raw=true "Raptor Github Scan")
 
 #### Scan Started
 ![Scan Started](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan_start.png?raw=true "Raptor Scan Start")
