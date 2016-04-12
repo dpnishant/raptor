@@ -123,7 +123,7 @@ A sample rulepack file is a very simple JSON structure.
 }
 ```
 
-If you want more control or add more intelligence to your scanner rather than a simple RegExp search, you may write a quick scanner plugin like this one and integrate the script here and append the script name here. That's it. That's pretty straight forward for anyone with basic Python scripting skills.
+If you want more control or add more intelligence to your scanner rather than a simple RegExp search, you may write a quick scanner plugin like [this one](https://github.com/dpnishant/raptor/blob/master/backend/raptor/gitrob.py) and integrate the script [here](https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L52-L62) and append the script name [here](https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L13). That's it. That's pretty straight forward for anyone with basic Python scripting skills.
 
 #####Public/Private GitHub instance
 You can use Raptor to scan your organization's private as well as public instances of GitHub by specifying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L33) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/session.php#L10-L11).
