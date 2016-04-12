@@ -69,7 +69,7 @@ You can access it here: [Rules Editor (http://localhost/raptor/editrules.php)](h
 
 ###Adding Rules
 ####ignore_list.rulepack
-Add a filename or directory name pattern to exclude from getting scanned. This is useful to ignore any known files like jquery.min.js etc. or say the entire /test/ directory. For example in the sample content below, jquery means *jquery* and is case-sensitive, hence be careful.
+Add a filename or directory name pattern to exclude from getting scanned. This is useful to ignore any known files like ```jquery.min.js``` etc. or say the entire ```/test/``` directory. For example in the sample content below, jquery means *jquery* and is case-sensitive, hence be careful.
 (sample contents below)
 ```
 {
