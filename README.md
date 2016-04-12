@@ -66,6 +66,65 @@ You can use the bundled light-weight, GUI client-side rules editor for adding an
 
 You can access it here: [Rules Editor (http://localhost/raptor/editrules.php)](http://localhost/raptor/editrules.php)
 
+
+###Adding Rules
+####ignore_list.rulepack
+Add a filename or directory name pattern to exclude from getting scanned. This is useful to ignore any known files like jquery.min.js etc. or say the entire /test/ directory. For example in the sample content below, jquery means *jquery* and is case-sensitive, hence be careful.
+(sample contents below)
+```
+{
+  "files": [
+    "/.",
+    "bootstrap",
+    "jquery",
+    "uglify",
+    "knockout",
+    "angular",
+    "backbone",
+    "ember",
+    "yui",
+    "mocha",
+    "express",
+    "yql",
+    "dataTables"
+  ],
+  "directories": [
+    "/node_modules/",
+    "/test/"
+  ]
+}
+``` 
+####your_rule_name.rulepack
+You may either create an entirely new rulepack and add it to the scanner or you may write your own scanner plugin and add it to the framework.
+A sample rulepack file is a very simple JSON structure.
+``` 
+{
+  "plugin_type": "plugin_name",   <-- Give it a name (any string)
+  "file_types": [
+    ".java",                      <-- Add as many file extensions, you would want the scanner to pick while scanning
+    ".js"
+  ],
+  "rules": [
+    {
+      "id": "HARD_CRED1",        <-- A unique IssueID, be creative.
+      "severity": "High",        <-- This can be High, Medium or Low. This would accordingly show up in the graphs in UI.
+      "title": "Title of the Issue",   <-- The title of the issue.
+      "description": "This text here shall be reflected in the UI as description of the issue.",        <-- The description of the issue, this is optional.
+      "remediation": "The text here shall be reflected in the UI as the steps to remediate the issue",  <-- The remediation of the issue, this is optional.
+      "link": "Any URL that has more resources about the issue.",  <-- URL of the issue. This is optional
+      "example_insecure": "Put the insecure version of the code snippet for learning purpose.",   <-- This is optional
+      "example_secure": "Put the secure version of the code snippet for learning purpose.",       <-- This is optional
+      "platform_version": "all",    <-- Leave it like that
+      "enabled": "true",            <-- This value enables or disables the rule during the scan. It can be either "true" or "false".
+      "logic": "Explain the logic behind this rule for future updation or customization",     <-- This is optional
+      "signature": "base64encode(regexp)"    <-- Write the Regular Expression of your pattern and then base64encode it to put it here.
+    }
+  ]
+}
+```
+
+If you want more control or add more intelligence to your scanner rather than a simple RegExp search, you may write a quick scanner plugin like this one and integrate the script here and append the script name here. That's it. That's pretty straight forward for anyone with basic Python scripting skills.
+
 #####Public/Private GitHub instance
 You can use Raptor to scan your organization's private as well as public instances of GitHub by specifying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L33) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/session.php#L10-L11).
 
