@@ -1,34 +1,25 @@
 <!DOCTYPE html>
-<html>
+<html lang="en-us">
   <head>
-    <meta charset='utf-8'>
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+    <meta charset="UTF-8">
+    <title>Raptor by dpnishant</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
     <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
-
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <title>Raptor by dpnishant</title>
   </head>
-
   <body>
-    <header>
-      <div class="inner">
-        <h1>Raptor</h1>
-        <h2>Hosted Source Code Vulnerability Scanner</h2>
-        <a href="https://github.com/dpnishant/raptor" class="button"><small>View project on</small> GitHub</a>
-      </div>
-    </header>
+    <section class="page-header">
+      <h1 class="project-name">Raptor</h1>
+      <h2 class="project-tagline">Hosted Source Code Vulnerability Scanner</h2>
+      <a href="https://github.com/dpnishant/raptor" class="btn">View on GitHub</a>
+      <a href="https://github.com/dpnishant/raptor/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/dpnishant/raptor/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
 
-    <div id="content-wrapper">
-      <div class="inner clearfix">
-        <section id="main-content">
-          <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/raptor_logo.png?raw=true" alt="Raptor" title="Raptor Logo">
+    <section class="main-content">
+      <p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/raptor_logo.png?raw=true" alt="Raptor" title="Raptor Logo">
  is a web-based (web-serivce + UI) github centric source-vulnerability scanner i.e. it scans a repository with just the github repo url. You can setup webhooks to ensure automated scans every-time you commit or merge a pull request. The scan is done asynchonously and the results are available only to the user who initiated the scan.</p>
 
 <p>Some of the features of the Raptor:</p>
@@ -121,6 +112,71 @@ sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre>
 
 <p>You can access it here: <a href="http://localhost/raptor/editrules.php">Rules Editor (http://localhost/raptor/editrules.php)</a></p>
 
+<h3>
+<a id="adding-rules" class="anchor" href="#adding-rules" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adding Rules</h3>
+
+<h4>
+<a id="ignore_listrulepack" class="anchor" href="#ignore_listrulepack" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>ignore_list.rulepack</h4>
+
+<p>Add a filename or directory name pattern to exclude from getting scanned. This is useful to ignore any known files like <code>jquery.min.js</code> etc. or say the entire <code>/test/</code> directory. For example in the sample content below, jquery means <em>jquery</em> and is case-sensitive, hence be careful.
+(sample contents below)</p>
+
+<pre><code>{
+  "files": [
+    "/.",
+    "bootstrap",
+    "jquery",
+    "uglify",
+    "knockout",
+    "angular",
+    "backbone",
+    "ember",
+    "yui",
+    "mocha",
+    "express",
+    "yql",
+    "dataTables"
+  ],
+  "directories": [
+    "/node_modules/",
+    "/test/"
+  ]
+}
+</code></pre>
+
+<h4>
+<a id="your_rule_namerulepack" class="anchor" href="#your_rule_namerulepack" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>your_rule_name.rulepack</h4>
+
+<p>You may either create an entirely new rulepack and add it to the scanner or you may write your own scanner plugin and add it to the framework.
+A sample rulepack file is a very simple JSON structure.</p>
+
+<pre><code>{
+  "plugin_type": "plugin_name",   &lt;-- Give it a name (any string)
+  "file_types": [
+    ".java",                      &lt;-- Add as many file extensions, you would want the scanner to pick while scanning
+    ".js"
+  ],
+  "rules": [
+    {
+      "id": "HARD_CRED1",        &lt;-- A unique IssueID, be creative.
+      "severity": "High",        &lt;-- This can be High, Medium or Low. This would accordingly show up in the graphs in UI.
+      "title": "Title of the Issue",   &lt;-- The title of the issue.
+      "description": "This text here shall be reflected in the UI as description of the issue.",        &lt;-- The description of the issue, this is optional.
+      "remediation": "The text here shall be reflected in the UI as the steps to remediate the issue",  &lt;-- The remediation of the issue, this is optional.
+      "link": "Any URL that has more resources about the issue.",  &lt;-- URL of the issue. This is optional
+      "example_insecure": "Put the insecure version of the code snippet for learning purpose.",   &lt;-- This is optional
+      "example_secure": "Put the secure version of the code snippet for learning purpose.",       &lt;-- This is optional
+      "platform_version": "all",    &lt;-- Leave it like that
+      "enabled": "true",            &lt;-- This value enables or disables the rule during the scan. It can be either "true" or "false".
+      "logic": "Explain the logic behind this rule for future updation or customization",     &lt;-- This is optional
+      "signature": "base64encode(regexp)"    &lt;-- Write the Regular Expression of your pattern and then base64encode it to put it here.
+    }
+  ]
+}
+</code></pre>
+
+<p>If you want more control or add more intelligence to your scanner rather than a simple RegExp search, you may write a quick scanner plugin like <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor/gitrob.py">this one</a> and integrate the script <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L52-L62">here</a> and append the script name <a href="https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L13">here</a>. That's it. That's pretty straight forward for anyone with basic Python scripting skills.</p>
+
 <h5>
 <a id="publicprivate-github-instance" class="anchor" href="#publicprivate-github-instance" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Public/Private GitHub instance</h5>
 
@@ -142,7 +198,7 @@ sudo sh start.sh <span class="pl-c">#starts the backend web-service</span></pre>
 <h4>
 <a id="zip-scan" class="anchor" href="#zip-scan" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Zip Scan</h4>
 
-<p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/scan.png?raw=true" alt="Zip Scan" title="Raptor Github Scan"></p>
+<p><img src="https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/zipscan.png?raw=true" alt="Zip Scan" title="Raptor Github Scan"></p>
 
 <h4>
 <a id="scan-started" class="anchor" href="#scan-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Scan Started</h4>
@@ -204,24 +260,14 @@ Get in touch with me if you have an idea or else feel free to fork and improve. 
 <p>GNU GPL v2.0</p>
 
 <p><strong>Free Software, Hell Yeah!</strong></p>
-        </section>
 
-        <aside id="sidebar">
-          <a href="https://github.com/dpnishant/raptor/zipball/master" class="button">
-            <small>Download</small>
-            .zip file
-          </a>
-          <a href="https://github.com/dpnishant/raptor/tarball/master" class="button">
-            <small>Download</small>
-            .tar.gz file
-          </a>
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/dpnishant/raptor">Raptor</a> is maintained by <a href="https://github.com/dpnishant">dpnishant</a>.</span>
 
-          <p class="repo-owner"><a href="https://github.com/dpnishant/raptor"></a> is maintained by <a href="https://github.com/dpnishant">dpnishant</a>.</p>
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
 
-          <p>This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the Architect theme by <a href="https://twitter.com/jasonlong">Jason Long</a>.</p>
-        </aside>
-      </div>
-    </div>
+    </section>
 
             <script type="text/javascript">
             var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
