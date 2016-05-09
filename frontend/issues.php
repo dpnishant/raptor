@@ -498,53 +498,33 @@ $chart_vulntype_metrics = Array();
       })
         
         function exportTableToCSV($table, filename) {
-          
-          //   var $rows = $table.find('tr:has(td)'),
-          // var $rows = $table.find('tr:has(td),thead'),
-          var $rows = $table.find('tr:has(td),thead').not($($("thead")[1])),
-              //var $rows=$("table").find('tr').not($("tr")[0])
-              // Temporary delimiter characters unlikely to be typed by keyboard
-              // This is to avoid accidentally splitting the actual contents
-              tmpColDelim = String.fromCharCode(11), // vertical tab character
-              tmpRowDelim = String.fromCharCode(0), // null character
-              
-              // actual delimiter characters for CSV format
-              colDelim = '","',
-              rowDelim = '"\n"',
-              
-              // Grab text from table into CSV formatted string
-              csv = '"' + $rows.map(function (i, row) {
-                var $row = $(row),
-                    $cols = $row.find('td,th');
-                
-                return $cols.map(function (j, col) {
-                  var $col = $(col),
-                      text = $col.html();
-                  if (text.indexOf("checkbox") == -1  && text.indexOf("select") == -1 && text.indexOf("Asset") == -1) {
-                    if (text.indexOf("<") == -1) {
-                      // text=$col.find("a").text();  
-                      if (text=="&nbsp;") {  
-                        text="";
-                      }
-                      if (text.indexOf("planned") != -1)
-                      text= text.slice(8,text.length);
-                      return text.replace('"', '""');
-                      // escape double quotes
-                  }}}).get().join(tmpColDelim);
-                }).get().join(tmpRowDelim).split(tmpRowDelim).join(rowDelim).split(tmpColDelim).join(colDelim) + '"',
-              
-          // Data URI
-          csvData = 'data:application/csv;charset=utf-8,' + encodeURIComponent(csv);
-          var pom = document.createElement('a');
-          
-          var csvContent = csv; //here we load our csv data 
-          var blob = new Blob([csvContent], {type: 'text/csv;charset=utf-8;'});
-          var url = URL.createObjectURL(blob);
-          pom.href = url;
-          
-          pom.setAttribute('download', filename);
-          pom.click();
+        var csv = [];
+        var table_id = '#' + $table.attr('id') + ' tr';
+        rows = $(table_id);
+        var output = "";
+        for(var i =0;i < rows.length;i++) {
+          cells = $(rows[i]).find('td,th');
+          csv_row = [];
+          for (var j=0;j<cells.length;j++) {
+            txt = cells[j].innerText;
+            txt = '"' + txt.replace('n/a','') + '"';
+            csv_row.push(txt);
+          }
+            csv.push(csv_row.join(","));
+            if (csv_row.join(",") !== '"","","","","","","","","","",""') {
+              output += csv_row.join(",") + "\r\n";
+            }
         }
+        var csvContent = output;
+        var pom = document.createElement('a');
+        var blob = new Blob([csvContent], {
+          type: 'text/csv;charset=utf-8;'
+        });
+        var url = URL.createObjectURL(blob);
+        pom.href = url;
+        pom.setAttribute('download', filename);
+        pom.click();
+      }
     </script>
     <script src="dist/js/bootstrap.min.js">
     </script>
