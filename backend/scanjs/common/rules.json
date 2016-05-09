@@ -199,15 +199,15 @@
     "source": "indexedDB",
     "testhit": "indexedDB.open('MyTestDatabase');",
     "testmiss": " 'indexeddb'",
-    "desc": "Client-side data storage.",
-    "threat": ""
+    "desc": "A key-value pair is being stored on the client side. Make sure you don't store any sensitive data such as credentials or long-term OAuth tokens etc.",
+    "threat": "Client-side data storage"
 }, {
     "name": "localStorage",
     "source": "localStorage",
     "testhit": "localStorage.setItem('name', 'user1'); ",
     "testmiss": " 'localStorage'",
-    "desc": "Client-side data storage.",
-    "threat": ""
+    "desc": "A key-value pair is being stored on the client side. Make sure you don't store any sensitive data such as credentials or long-term OAuth tokens etc.",
+    "threat": "Client-side data storage"
 }, {
     "name": "sessionStorage",
     "source": "sessionStorage",
