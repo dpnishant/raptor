@@ -508,6 +508,7 @@ $chart_vulntype_metrics = Array();
           for (var j=0;j<cells.length;j++) {
             txt = cells[j].innerText;
             txt = '"' + txt.replace('n/a','') + '"';
+            txt = txt.replace(/\n$/, "");
             csv_row.push(txt);
           }
             csv.push(csv_row.join(","));
