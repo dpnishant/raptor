@@ -130,12 +130,13 @@ def clone(repo_name, internal):
         if internal==True:
             username = os.environ['int_git_user']
             password = os.environ['int_git_token']
+            login_info = git.UserPass(username, password)
+            git_obj = git.clone_repository(repo_url, repo_path, credentials=login_info)
         else:
-            username = os.environ['ext_git_user']
-            password = os.environ['ext_git_token']
+            #username = os.environ['ext_git_user']
+            #password = os.environ['ext_git_token']
+            git_obj = git.clone_repository(repo_url, repo_path)
 
-        login_info = git.UserPass(username, password)
-        git_obj = git.clone_repository(repo_url, repo_path, credentials=login_info)            
         return repo_path
     except Exception, e:
         if str(e).find('Unexpected HTTP status code: 404'):
