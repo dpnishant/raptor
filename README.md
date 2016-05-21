@@ -176,4 +176,9 @@ License
 
 GNU GPL v2.0
 
+Known Bugs (& Workarounds)
+----
+
+>[Ubuntu Kylin Installation](https://github.com/dpnishant/raptor/issues/6)
+
 **Free Software, Hell Yeah!**
