@@ -69,7 +69,7 @@ You can access it here: [Rules Editor (http://localhost/raptor/editrules.php)](h
 
 ###Adding Rules
 ####ignore_list.rulepack
-Add a filename or directory name pattern to exclude from getting scanned. This is useful to ignore any known files like ```jquery.min.js``` etc. or say the entire ```/test/``` directory. For example in the sample content below, jquery means *jquery* and is case-sensitive, hence be careful. In the ```plugins``` section, ```name``` of the plugin is the name of the rulepack file without the ".rulepack" extension as available under the [rules/ directory](https://github.com/dpnishant/raptor/tree/master/backend/rules). The ```issue``` field is the ID of the issue mentioned in each rule of the rulepack files. [Example #1](https://github.com/dpnishant/raptor/blob/master/backend/rules/common.rulepack#L17), [Example #2](https://github.com/dpnishant/raptor/blob/master/backend/rules/fsb_injection.rulepack#L9) 
+Add a filename or directory name pattern to exclude from getting scanned. This is useful to ignore any known files like ```jquery.min.js``` etc. or say the entire ```/test/``` directory. For example in the sample content below, jquery means *jquery* and is case-sensitive, hence be careful. In the ```plugins``` section, ```name``` of the plugin is the name of the rulepack file without the ".rulepack" extension as available under the [rules/](https://github.com/dpnishant/raptor/tree/master/backend/rules) directory. The ```issue``` field is the ID of the issue mentioned in each rule of the rulepack files. [Example #1](https://github.com/dpnishant/raptor/blob/master/backend/rules/common.rulepack#L17), [Example #2](https://github.com/dpnishant/raptor/blob/master/backend/rules/fsb_injection.rulepack#L9) 
 (sample contents below)
 ```
 {
