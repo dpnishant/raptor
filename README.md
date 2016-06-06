@@ -91,6 +91,26 @@ Add a filename or directory name pattern to exclude from getting scanned. This i
   "directories": [
     "/node_modules/",
     "/test/"
+  ],
+  "plugins": [
+    {
+      "name": "common",                <----- Name of the Plugin
+      "issue": "HARD_CRED1",           <----- ID of the issue
+      "patterns": [
+        {
+          "match_type": "start",       <----- Match type can be either "regex", "start" or "end"
+          "value": "foreach"           <----- The actual string to match. Base64 Encode this pattern if match_type is "regex"
+        },
+        {
+          "match_type": "start",
+          "value": "for"       
+        },
+        {
+          "match_type": "start",
+          "value": "elseif"
+        }
+      ]
+    }
   ]
 }
 ``` 
