@@ -1,5 +1,5 @@
 #!/usr/bin/python
-import os, sys, hashlib, shutil
+import os, sys, hashlib, shutil, codecs, re, base64
 import pygit2 as git
 import json as jsoner
 from codescan import *
@@ -26,6 +26,36 @@ json = {
     "errors": []
 }
 
+def issue_ignored(snippet, rulepack):
+    ignored_issue_flag = False
+    snippet = snippet.strip()
+    with codecs.open('rules/ignore_list.rulepack', 'r', encoding='utf8') as f:
+        ignored_rulepack = jsoner.loads(f.read())
+
+    ignored_plugins = ignored_rulepack['plugins']
+
+    for ignored_plugin in ignored_plugins:
+        if ignored_plugin['name'] == rulepack:
+            ignored_plugin_index = ignored_plugins.index(ignored_plugin)
+            ignored_patterns = ignored_plugins[ignored_plugin_index]['patterns']
+            for ignored_pattern in ignored_patterns:
+                if ignored_pattern['match_type'] == 'regex':
+                    try:
+                        ignored_regex_raw = base64.b64decode(ignored_pattern['value'])
+                    except:
+                        ignored_regex_raw = ignored_pattern['value']
+                    ignored_regex_compiled = re.compile(ignored_regex_raw, re.IGNORECASE)
+                    if ignored_regex_compiled.search(snippet):
+                        ignored_issue_flag = True
+                elif ignored_pattern['match_type'] == 'start':
+                    if snippet.startswith(ignored_pattern['value']):
+                        ignored_issue_flag = True
+                elif ignored_pattern['match_type'] == 'end':
+                    if snippet.endswith(ignored_pattern['value']):
+                        ignored_issue_flag = True
+
+    return ignored_issue_flag
+
 def scan_all(scan_path, repo_path, repo_type):
     counter_start = time.clock()
     
@@ -46,8 +76,10 @@ def scan_all(scan_path, repo_path, repo_type):
 
         if len(result.issues) > 0:
             for issue in result.issues:
-                results.append(issue)
-                total_issues += 1
+                #print issue['code'], issue['plugin'], issue_ignored(issue['code'], issue['plugin'])
+                if not issue_ignored(issue['code'], issue['plugin']):
+                    results.append(issue)
+                    total_issues += 1
 
     log.logger.debug("scanning with [gitrob] plugin")
     for rulepack in plugin_rulepacks:

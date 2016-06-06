@@ -145,6 +145,7 @@ tmp_upload_dir = None
 #
 
 errorlog = '/var/raptor/log/error.log'
+#errorlog = '-'
 loglevel = 'info'
 accesslog = '/var/raptor/log/access.log'
 #access_format = "request-date pid remote-address username status-line response-code referer user-agent request-header"

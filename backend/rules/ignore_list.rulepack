@@ -17,5 +17,25 @@
   "directories": [
     "/node_modules/",
     "/test/"
+  ],
+  "plugins": [
+    {
+      "name": "common",
+      "issue": "HARD_CRED1",
+      "patterns": [
+        {
+          "match_type": "start",
+          "value": "foreach"
+        },
+        {
+          "match_type": "start",
+          "value": "for"
+        },
+        {
+          "match_type": "start",
+          "value": "elseif"
+        }
+      ]
+    }
   ]
 }
