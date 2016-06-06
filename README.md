@@ -1,5 +1,7 @@
 ![Raptor](https://raw.githubusercontent.com/dpnishant/raptor/master/screenshots/raptor_logo.png?raw=true "Raptor Logo")
- is a web-based (web-serivce + UI) github centric source-vulnerability scanner i.e. it scans a repository with just the github repo url. You can setup webhooks to ensure automated scans every-time you commit or merge a pull request. The scan is done asynchonously and the results are available only to the user who initiated the scan.
+ 
+ 
+ Raptor is a web-based (web-serivce + UI) github centric source-vulnerability scanner i.e. it scans a repository with just the github repo url. You can setup webhooks to ensure automated scans every-time you commit or merge a pull request. The scan is done asynchonously and the results are available only to the user who initiated the scan.
 
 Some of the features of the Raptor:
   - Plug-in architecture (plug and play external tools and generate unified reports)
