@@ -86,7 +86,7 @@
       "platform_version": "all",
       "enabled": "true",
       "logic": "Finds patterns of methods responsible for reading file inputs and executing the contents as trusted code.",
-      "signature": "KGluY2x1ZGV8aW5jbHVkZV9vbmNlfHBhcnNla2l0X2NvbXBpbGVfZmlsZXxwaHBfY2hlY2tfc3ludGF4fHJlcXVpcmV8cmVxdWlyZV9vbmNlfHJ1bmtpdF9pbXBvcnR8c2V0X2luY2x1ZGVfcGF0aHx2aXJ0dWFsKS4qKFxcXCRbXHddKnxcJFtcd10qKQ=="
+      "signature": "KGluY2x1ZGV8aW5jbHVkZV9vbmNlfHBhcnNla2l0X2NvbXBpbGVfZmlsZXxwaHBfY2hlY2tfc3ludGF4fHJlcXVpcmV8cmVxdWlyZV9vbmNlfHJ1bmtpdF9pbXBvcnR8c2V0X2luY2x1ZGVfcGF0aHx2aXJ0dWFsKVtcc1x0XSooXFxcJFtcd10qfFwkW1x3XSop"
     },
     {
       "id": "PHPCEXSI",
