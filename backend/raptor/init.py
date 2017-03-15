@@ -163,7 +163,10 @@ def clone(repo_name, internal):
             username = os.environ['int_git_user']
             password = os.environ['int_git_token']
             login_info = git.UserPass(username, password)
-            git_obj = git.clone_repository(repo_url, repo_path, credentials=login_info)
+            
+            #git_obj = git.clone_repository(repo_url, repo_path, credentials=login_info)
+            cb = git.RemoteCallbacks(credentials=login_info)
+            git_obj = git.clone_repository(repo_url, repo_path, callbacks=cb)
         else:
             #username = os.environ['ext_git_user']
             #password = os.environ['ext_git_token']
