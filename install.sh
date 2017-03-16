@@ -26,14 +26,14 @@ apt-get install -y libffi-dev
 apt-get install -y ruby
 apt-get install -y php5.6-cli
 apt-get install -y cmake
-apt-get install -y libssh-4
+apt-get install -y libssh-4	
 apt-get install -y libssl-dev
 apt-get install -y linux-headers-generic
 apt-get install -y build-essential
 apt-get install -y autoconf
 apt-get install -y libtool
 apt-get install -y pkg-config
-apt-get install -y python-pip
+#apt-get install -y python-pip
 apt-get install -y python-opengl
 apt-get install -y python-imaging
 apt-get install -y python-pyrex
@@ -69,6 +69,9 @@ apt-get install -y python-werkzeug
 apt-get install -y python-xlwt
 apt-get install -y python-yaml
 apt-get install -y python-zsi
+wget https://svn.apache.org/repos/asf/oodt/tools/oodtsite.publisher/trunk/distribute_setup.py
+python distribute_setup.py
+rm -rf distribute*
 pip install cffi
 wget https://codeload.github.com/libgit2/libgit2/tar.gz/v0.25.0 -O libgit2-0.25.0.tar.gz
 tar xzf libgit2-0.25.0.tar.gz
@@ -77,24 +80,15 @@ cmake .
 make install
 ldconfig
 cd ~
-pip install pygit2==0.25.0
-pip install keyring
-pip install flask
-pip install gunicorn
-pip install beautifulsoup
-pip install Django
-pip install hjson
-pip install requests
-pip install --upgrade pip
 curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
-sudo apt-get install -y nodejs
+apt-get install -y nodejs
 gem install brakeman
 cd $raptor_path
 rm -rf libgit2-0.25.0.tar.gz
 rm -rf libgit2-0.25.0/
 mkdir -p /var/raptor/scan_results
 chmod -R 777 /var/raptor/scan_results #development purpose only
-mkdir -p /var/raptor/log
+mkdir -p /var/raptor/log	
 chmod -R 777 /var/raptor/log #development purpose only
 mkdir -p /var/raptor/uploads
 chmod -R 777 /var/raptor/uploads #development purpose only
@@ -114,3 +108,13 @@ ln -s /etc/apache2/sites-available/raptor.conf /etc/apache2/sites-enabled/raptor
 ln -s /etc/nginx/sites-available/raptor /etc/nginx/sites-enabled/raptor
 service apache2 restart
 service nginx restart
+easy_install --upgrade pip
+pip install certifi
+pip install pygit2==0.25.0
+pip install keyring
+pip install flask
+pip install gunicorn
+pip install beautifulsoup
+pip install Django
+pip install hjson
+pip install requests
