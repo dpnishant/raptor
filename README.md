@@ -45,8 +45,8 @@ $ cd raptor-master
 $ sudo sh install.sh
 ```
 
-###Usage
-#####Scanner
+### Usage
+##### Scanner
 Installation Video: [YouTube Usage](https://www.youtube.com/v/0KneQwJiUFk?start=550)
 ```sh
 cd raptor-master
@@ -54,7 +54,7 @@ sudo sh start.sh #starts the backend web-service
 ```
 Now point your browser to [Raptor Home (http://localhost/raptor/)](http://localhost/raptor/)
 
-######Login
+###### Login
 Login with the username as registered on the corresponding github server you are connected to and *any* password (but remember the username to view scan history)
 
 For example: 
@@ -63,14 +63,14 @@ If you are registered as `foobar` on https://github.com, then use the same usern
 
 However, as of now password can be anything, since we have *NOT* implemented a database in the development version.
 
-#####Rules Editor
+##### Rules Editor
 You can use the bundled light-weight, GUI client-side rules editor for adding any new/custom rule(s) for your specific requirements(s) or any other plain-text editor as the rulepack files are just simple JSON structures. Use your browser to open rules located in 'backend/rules'. When you are done, save your new/modified rules file in same directory i.e. 'backend/rules'. All you need to do now is a minor edit, here: [Init Script](https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L12). Append your new rulepack filename to this array without the '.rulepack' extension and restart the backend server. You are all set! :thumbsup:
 
 You can access it here: [Rules Editor (http://localhost/raptor/editrules.php)](http://localhost/raptor/editrules.php)
 
 
-###Adding Rules
-####ignore_list.rulepack
+### Adding Rules
+#### ignore_list.rulepack
 Add a filename or directory name pattern to exclude from getting scanned. This is useful to ignore any known files like ```jquery.min.js``` etc. or say the entire ```/test/``` directory. For example in the sample content below, jquery means *jquery* and is case-sensitive, hence be careful. In the ```plugins``` section, ```name``` of the plugin is the name of the rulepack file without the ".rulepack" extension as available under the [rules/](https://github.com/dpnishant/raptor/tree/master/backend/rules) directory. The ```issue``` field is the ID of the issue mentioned in each rule of the rulepack files: [Example #1](https://github.com/dpnishant/raptor/blob/master/backend/rules/common.rulepack#L17), [Example #2](https://github.com/dpnishant/raptor/blob/master/backend/rules/fsb_injection.rulepack#L9). The ```match_type``` field value can be either ```regex``` or ```start``` or ```end```. The ```value``` field is the exact string to be matched in case the ```match_type``` is ```start``` or ```end```. In case the ```match_type``` field is  ```regex``` the ```value``` should contain the raw RegEx pattern which needs to be Base64 encoded to avoid any JSON syntax escaping related issues. ```regex``` is a Regular Expression based matching, ```start``` will match the at the beginning of the snippet and ```end``` will match at the end of the snippet.
 
 The way it works is when the scanner has finished scanning for issues, it will iterate through all the issues found and remove those that match the patterns (based on the type of match) of each plugin mentioned in the ```ignore_list.rulepack``` file.
@@ -119,7 +119,7 @@ The way it works is when the scanner has finished scanning for issues, it will i
   ]
 }
 ``` 
-####your_rule_name.rulepack
+#### your_rule_name.rulepack
 You may either create an entirely new rulepack and add it to the scanner or you may write your own scanner plugin and add it to the framework.
 A sample rulepack file is a very simple JSON structure.
 ``` 
@@ -150,7 +150,7 @@ A sample rulepack file is a very simple JSON structure.
 
 If you want more control or add more intelligence to your scanner rather than a simple RegExp search, you may write a quick scanner plugin like [this one](https://github.com/dpnishant/raptor/blob/master/backend/raptor/gitrob.py) and integrate the script [here](https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L52-L62) and append the script name [here](https://github.com/dpnishant/raptor/blob/master/backend/raptor/init.py#L13). That's it. That's pretty straight forward for anyone with basic Python scripting skills.
 
-#####Public/Private GitHub instance
+##### Public/Private GitHub instance
 You can use Raptor to scan your organization's private as well as public instances of GitHub by specifying the right server endpoints at [here](https://github.com/dpnishant/raptor/blob/master/start.sh#L9-L33) and [here](https://github.com/dpnishant/raptor/blob/master/frontend/session.php#L10-L11).
 
 ### Screenshots
